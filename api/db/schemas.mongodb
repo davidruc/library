@@ -1,0 +1,260 @@
+use("library_project");
+db.createCollection("Books", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: false,
+            required: [ "code", "title", "status", "editorial", "category", "dewey_clasification", "aviability", "date_admission","location"],
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                code: {
+                    bsonType: "number",
+                    description: "El dato code debe ser un número"
+                },
+                title: {
+                    bsonType: "string",
+                    description: "El titulo del libro debe ser un string"
+                },
+                author: {
+                    bsonType: "string",
+                    description: "El autor del libro debe ser un string"
+                },
+                status: {
+                    bsonType: "string",
+                    description: "El estado del libro debe ser un string. (esta propiedad habla de como se encuentra un libro  en específico, si está desgastado, si está nuevo, etc"
+                },
+                editorial: {
+                    bsonType: "string",
+                    description: "La editorial del libro debe ser un string"
+                },
+                category: {
+                    bsonType: "string",
+                    description: "La categoria del libro debe ser un string"
+                },
+                dewey_clasification: {
+                    bsonType: "number",
+                    maximum: 999,
+                    minimum: 0,
+                    description: "La clasificación de Dewey debe ser un número entre 000 y 999"
+                },
+                aviability: {
+                    bsonType: "bool",
+                    description: "la disponibilidad de un libro debe ser un booleano. (true si el libro se encuentra disponible para la entrega y false si no. /Todos los libros de reserva son false)"
+                },
+                book_version: {
+                    bsonType: "string",
+                    description: "la versión del libro puede ingresarse como un string."
+                },
+                date_admission: {
+                    bsonType: "date",
+                    description: "la fecha de ingreso del libro debe ser de tipo date."
+                },
+                descript: {
+                    bsonType: "string",
+                    maxLength: 300,
+                    description: "el parametro de la descripción del libro tiene un máximo de carácteres de 300"
+                },
+                location: {
+                    bsonType: "string",
+                    description: "este dato es el lugar en la biblioteca donde se encuentra esta referencia, ya sea en bodega, en exhibición el la ludoteca, en donde se encuentra normalmente este libro en específico."
+                }
+
+            }
+        }
+    }
+});
+db.createCollection("staff", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: true,
+            required: [ "employeeId", "full_name", "team", "email", "start_contract", "phone_number", "salary"],
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                employeeId: {
+                    bsonType: "number",
+                    description: "El id del empleado debe ser un número"
+                },
+                full_name: {
+                    bsonType: "string",
+                    description: "El nombre del empledo debe ser un string"
+                },
+                team: {
+                    bsonType: "string",
+                    description: "El team del empleado debe ser un string. (este dato habla de la sección de la empresa a la que pertenece el empleado)"
+                },
+                email: {
+                    bsonType: "string",
+                    description: "El email personal debe ser un string y seguir el patrón establecido." 
+                },
+                business_email: {
+                    bsonType: "string",
+                    description: "El email corporativo debe ser un string y seguir el patrón establecido."
+                },
+                phone_number: {
+                    bsonType: "number",
+                    maximum: 3999999999,
+                    minimum: 3000000000,
+                    description: "El número de teléfono del empleado es un número entre 3000000000 y 4000000000"
+                },
+                business_number: {
+                    bsonType: "number",
+                    maximum: 3999999999,
+                    minimum: 3000000000,
+                    description: "El número de teléfono empresarial del empleado es un número entre 3000000000 y 4000000000"
+                },
+                salary: {
+                    bsonType: "number",
+                    description: "el salario del empleado es un número en COP"
+                },
+                start_contract: {
+                    bsonType: "date",
+                    description: "la fecha de ingreso de un empleado debe tener un formato tipo date"
+                }
+            }
+        }
+    }
+});
+db.createCollection("users", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: true,
+            required: [ "document", "user_name", "email", "password"],
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                document: {
+                    bsonType: "number",
+                    description: "El documento del usuario debe ser un número"
+                },
+                user_name: {
+                    bsonType: "string",
+                    description: "El nombre del usuario debe ser un string"
+                },
+                address: {
+                    bsonType: "string",
+                    description: "La dirección del usuario debe ser un string."
+                },
+                email: {
+                    bsonType: "string",
+                    description: "El email usuario debe ser un string y seguir el patrón establecido." 
+                },
+                password: {
+                    bsonType: "string",
+                    description: "La contraseña es un dato obligatorio"
+                }
+                
+            }
+        }
+    }
+});
+db.createCollection("loans", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: false,
+            required: [ "loanId", "user_name", "book_code", "start_loan", "finish_loan"],
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                loanId: {
+                    bsonType: "number",
+                    description: "El codigo del préstamo debe ser un número"
+                },
+                book_code: {
+                    bsonType: "number",
+                    description: "El codigo del libro debe ser un número"
+                },
+                user_name: {
+                    bsonType: "string",
+                    description: "El nombre del usuario debe ser un string."
+                },
+                start_loan: {
+                    bsonType: "date",
+                    description: "El dato de inicio del prestamo debe ser de tipo fecha"
+                },
+                finish_loan: {
+                    bsonType: "date",
+                    description: "El dato de finalización del prestamo debe ser de tipo fecha. (este dato es una fecha dada por la biblioteca para el retorno oportuno)."
+                }
+            }
+        }
+    }
+});
+db.createCollection("reservations", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: true,
+            required: [ "reservationId", "user_name", "title_book", "reservation_date", "expected_delivery"],
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                reservationId: {
+                    bsonType: "number",
+                    description: "El codigo del préstamo debe ser un número"
+                },
+                title_book: {
+                    bsonType: "string",
+                    description: "El titulo del libro debe ser un string"
+                },
+                user_name: {
+                    bsonType: "string",
+                    description: "El nombre del usuario debe ser un string."
+                },
+                reservation_date: {
+                    bsonType: "date",
+                    description: "El dato de inicio de la reservación debe ser de tipo fecha"
+                },
+                expected_delivery: {
+                    bsonType: "date",
+                    description: "El dato de entrega del libro debe ser de tipo fecha. (este dato es una fecha dada por la biblioteca para la entrega oportuna)."
+                }
+            }
+        }
+    }
+});
+db.createCollection("returns", {
+    capped: false,
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            additionalProperties: false,
+            required: [ "book_code", "user_name", "return_date", "delayed_days"],
+            properties: {
+                _id: {
+                    bsonType: "objectId"
+                },
+                book_code: {
+                    bsonType: "number",
+                    description: "El codigo del libro retornado debe ser un número"
+                },
+                user_name: {
+                    bsonType: "string",
+                    description: "El nombre del usuario debe ser un string."
+                },
+                return_date: {
+                    bsonType: "date",
+                    description: "Este dato habla de la fecha de retorno del libro y debe ser de tipo fecha"
+                },
+                delayed_days: {
+                    bsonType: "number",
+                    description: "El número de día retrasada la entrega debe ser un número entero."
+                }
+            }
+        }
+    }
+})

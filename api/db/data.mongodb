@@ -1,0 +1,1064 @@
+use("library_project");
+db.Books.insertMany([
+    {
+        "code": 101,
+        "title": "Cien años de soledad",
+        "author": "Gabriel García Márquez",
+        "status": "Nuevo",
+        "editorial": "Editorial Sudamericana",
+        "category": "Ficción",
+        "dewey_clasification": 863,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-15"),
+        "descript": "Una obra maestra de la literatura latinoamericana que narra la historia de la familia Buendía en Macondo.",
+        "location": "Sección de Literatura Latinoamericana"
+    },
+    {
+        "code": 102,
+        "title": "La ciudad y los perros",
+        "author": "Mario Vargas Llosa",
+        "status": "Usado - Buen estado",
+        "editorial": "Alfaguara",
+        "category": "Novela",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición original",
+        "date_admission":  new Date("2023-09-14"),
+        "descript": "Una novela aclamada que aborda la vida de jóvenes en una academia militar en Lima, Perú.",
+        "location": "Sección de Literatura Peruana"
+    },  
+    {
+        "code": 103,
+        "title": "La casa de los espíritus",
+        "author": "Isabel Allende",
+        "status": "Usado - Buen estado",
+        "editorial": "Plaza & Janés",
+        "category": "Narrativa",
+        "dewey_clasification": 863.64,
+        "aviability": false,
+        "book_version": "Edición conmemorativa",
+        "date_admission":  new Date("2023-09-16"),
+        "descript": "Una novela mágica que sigue la historia de la familia Trueba en Chile a lo largo de varias generaciones.",
+        "location": "Sección de Literatura Chilena"
+    },
+    {
+        "code": 201,
+        "title": "El jardín de las delicias",
+        "author": "Laura Esquivel",
+        "status": "Nuevo",
+        "editorial": "Ediciones Mexicanas",
+        "category": "Novela",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-20"),
+        "descript": "Una historia mágica y sensorial sobre amor y comida en México.",
+        "location": "Sección de Literatura Mexicana"
+      },   
+      {
+        "code": 202,
+        "title": "Ficciones",
+        "author": "Jorge Luis Borges",
+        "status": "Usado - Buen estado",
+        "editorial": "Biblioteca Argentina",
+        "category": "Cuentos",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición clásica",
+        "date_admission":  new Date("2023-09-19"),
+        "descript": "Una colección de cuentos surrealistas y filosóficos por el maestro argentino.",
+        "location": "Sección de Literatura Argentina"
+      },
+      {
+        "code": 203,
+        "title": "Cronica de una muerte anunciada",
+        "author": "Gabriel García Márquez",
+        "status": "Usado - Buen estado",
+        "editorial": "Cien Años Editores",
+        "category": "Novela",
+        "dewey_clasification": 863.64,
+        "aviability": false,
+        "book_version": "Edición anotada",
+        "date_admission":  new Date("2023-09-18"),
+        "descript": "Una obra de suspense que explora el destino inevitable de un hombre en un pueblo colombiano.",
+        "location": "Sección de Literatura Latinoamericana"
+      },
+      {
+        "code": 204,
+        "title": "Pedro Páramo",
+        "author": "Juan Rulfo",
+        "status": "Nuevo",
+        "editorial": "Editorial Jalisco",
+        "category": "Narrativa",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición conmemorativa",
+        "date_admission":  new Date("2023-09-17"),
+        "descript": "Una novela mexicana que explora temas de soledad y muerte en el desierto.",
+        "location": "Sección de Literatura Mexicana"
+      },
+      {
+        "code": 205,
+        "title": "Los detectives salvajes",
+        "author": "Roberto Bolaño",
+        "status": "Nuevo",
+        "editorial": "Ediciones Chile",
+        "category": "Novela",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-16"),
+        "descript": "Una épica literaria que sigue a un grupo de jóvenes poetas latinoamericanos en sus aventuras.",
+        "location": "Sección de Literatura Chilena"
+      },
+      {
+        "code": 206,
+        "title": "Rayuela",
+        "author": "Julio Cortázar",
+        "status": "Usado - Buen estado",
+        "editorial": "Editorial Buenos Aires",
+        "category": "Novela experimental",
+        "dewey_clasification": 863.62,
+        "aviability": true,
+        "book_version": "Edición anotada",
+        "date_admission":  new Date("2023-09-15"),
+        "descript": "Una obra innovadora que desafía la estructura tradicional de las novelas.",
+        "location": "Sección de Literatura Argentina"
+      },
+      {
+        "code": 207,
+        "title": "La sombra del viento",
+        "author": "Carlos Ruiz Zafón",
+        "status": "Nuevo",
+        "editorial": "Ediciones Barcelona",
+        "category": "Misterio",
+        "dewey_clasification": 863.7,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-14"),
+        "descript": "Una novela que mezcla intriga, amor y secretos en la Barcelona postguerra.",
+        "location": "Sección de Literatura Española"
+      },
+      {
+        "code": 208,
+        "title": "La guerra del fin del mundo",
+        "author": "Mario Vargas Llosa",
+        "status": "Usado - Buen estado",
+        "editorial": "Editorial Lima",
+        "category": "Novela histórica",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-13"),
+        "descript": "Una recreación literaria de la guerra de Canudos en Brasil.",
+        "location": "Sección de Literatura Peruana"
+      },
+      {
+        "code": 209,
+        "title": "La fiesta ajena",
+        "author": "Liliana Heker",
+        "status": "Nuevo",
+        "editorial": "Editorial Buenos Aires",
+        "category": "Cuentos",
+        "dewey_clasification": 863.6,
+        "aviability": false,
+        "book_version": "Edición original",
+        "date_admission":  new Date("2023-09-12"),
+        "descript": "Una colección de cuentos que exploran la vida cotidiana en Buenos Aires.",
+        "location": "Sección de Literatura Argentina"
+      },
+      {
+        "code": 210,
+        "title": "El amor en los tiempos del cólera",
+        "author": "Gabriel García Márquez",
+        "status": "Usado - Buen estado",
+        "editorial": "Ediciones Colombianas",
+        "category": "Romance",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición clásica",
+        "date_admission":  new Date("2023-09-11"),
+        "descript": "Una historia de amor apasionada en el Caribe colombiano durante el siglo XIX.",
+        "location": "Sección de Literatura Latinoamericana"
+      },
+      {
+        "code": 301,
+        "title": "To Kill a Mockingbird",
+        "author": "Harper Lee",
+        "status": "Nuevo",
+        "editorial": "HarperCollins",
+        "category": "Ficción",
+        "dewey_clasification": 813.54,
+        "aviability": true,
+        "book_version": "Edición clásica",
+        "date_admission":  new Date("2023-09-25"),
+        "descript": "Una novela clásica que aborda temas de injusticia y racismo en el sur de Estados Unidos.",
+        "location": "Sección de Ficción Americana"
+      },
+      {
+        "code": 302,
+        "title": "The Art of War",
+        "author": "Sun Tzu",
+        "status": "Usado - Buen estado",
+        "editorial": "Oxford University Press",
+        "category": "Estrategia",
+        "dewey_clasification": 355.02,
+        "aviability": true,
+        "book_version": "Edición anotada",
+        "date_admission":  new Date("2023-09-24"),
+        "descript": "Un antiguo tratado chino sobre estrategia militar que sigue siendo relevante en la actualidad.",
+        "location": "Sección de Estrategia Militar"
+      },
+      {
+        "code": 303,
+        "title": "Mona Lisa: A Life Discovered",
+        "author": "Dianne Hales",
+        "status": "Nuevo",
+        "editorial": "Simon & Schuster",
+        "category": "Biografía",
+        "dewey_clasification": 759.5,
+        "aviability": true,
+        "book_version": "Edición ilustrada",
+        "date_admission":  new Date("2023-09-23"),
+        "descript": "Una biografía fascinante de la enigmática Mona Lisa de Leonardo da Vinci.",
+        "location": "Sección de Arte"
+      },
+      {
+        "code": 304,
+        "title": "1984",
+        "author": "George Orwell",
+        "status": "Usado - Buen estado",
+        "editorial": "Penguin Books",
+        "category": "Ciencia ficción",
+        "dewey_clasification": 823.91,
+        "aviability": false,
+        "book_version": "Edición anotada",
+        "date_admission":  new Date("2023-09-22"),
+        "descript": "Una distopía clásica que aborda temas de vigilancia y control totalitario.",
+        "location": "Sección de Ciencia Ficción"
+      },
+      {
+        "code": 305,
+        "title": "The Origins of Species",
+        "author": "Charles Darwin",
+        "status": "Nuevo",
+        "editorial": "Cambridge University Press",
+        "category": "Ciencia",
+        "dewey_clasification": 576.8,
+        "aviability": true,
+        "book_version": "Edición científica",
+        "date_admission":  new Date("2023-09-21"),
+        "descript": "El libro revolucionario que presenta la teoría de la evolución de Darwin.",
+        "location": "Sección de Ciencia"
+      },
+      {
+        "code": 306,
+        "title": "Pride and Prejudice",
+        "author": "Jane Austen",
+        "status": "Usado - Buen estado",
+        "editorial": "Vintage Books",
+        "category": "Novela clásica",
+        "dewey_clasification": 823.7,
+        "aviability": true,
+        "book_version": "Edición anotada",
+        "date_admission":  new Date("2023-09-20"),
+        "descript": "Una novela clásica que explora la sociedad y las relaciones en la Inglaterra del siglo XIX.",
+        "location": "Sección de Literatura Clásica"
+      },
+      {
+        "code": 307,
+        "title": "The Great Gatsby",
+        "author": "F. Scott Fitzgerald",
+        "status": "Nuevo",
+        "editorial": "Scribner",
+        "category": "Ficción",
+        "dewey_clasification": 813.52,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-19"),
+        "descript": "Una novela emblemática de la decadencia de los años 20 en Estados Unidos.",
+        "location": "Sección de Ficción Americana"
+      },
+      {
+        "code": 308,
+        "title": "The Universe in a Nutshell",
+        "author": "Stephen Hawking",
+        "status": "Nuevo",
+        "editorial": "Bantam Books",
+        "category": "Cosmología",
+        "dewey_clasification": 523.1,
+        "aviability": true,
+        "book_version": "Edición científica",
+        "date_admission":  new Date("2023-09-18"),
+        "descript": "Un libro que explora los misterios del universo y la física teórica.",
+        "location": "Sección de Ciencia"
+      },
+      {
+        "code": 309,
+        "title": "The Catcher in the Rye",
+        "author": "J.D. Salinger",
+        "status": "Usado - Buen estado",
+        "editorial": "Little, Brown and Company",
+        "category": "Ficción",
+        "dewey_clasification": 813.54,
+        "aviability": true,
+        "book_version": "Edición original",
+        "date_admission":  new Date("2023-09-17"),
+        "descript": "Una novela clásica que sigue las peripecias de un adolescente en Nueva York.",
+        "location": "Sección de Ficción Americana"
+      },
+      {
+        "code": 310,
+        "title": "The Da Vinci Code",
+        "author": "Dan Brown",
+        "status": "Nuevo",
+        "editorial": "Doubleday",
+        "category": "Misterio",
+        "dewey_clasification": 813.54,
+        "aviability": false,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-16"),
+        "descript": "Un thriller que sigue a un simbólogo en una búsqueda de misterios ocultos.",
+        "location": "Sección de Misterio"
+      },
+      {
+        "code": 401,
+        "title": "The Elements of Style",
+        "author": "William Strunk Jr.",
+        "status": "Nuevo",
+        "editorial": "Penguin Books",
+        "category": "Educación",
+        "dewey_clasification": 428,
+        "aviability": true,
+        "book_version": "Edición revisada",
+        "date_admission":  new Date("2023-09-25"),
+        "descript": "Un manual clásico sobre escritura y gramática en inglés.",
+        "location": "Sección de Educación"
+      },
+      {
+        "code": 402,
+        "title": "The History of Western Art",
+        "author": "H.W. Janson",
+        "status": "Usado - Buen estado",
+        "editorial": "Pearson",
+        "category": "Arte",
+        "dewey_clasification": 709,
+        "aviability": true,
+        "book_version": "Edición ilustrada",
+        "date_admission":  new Date("2023-09-24"),
+        "descript": "Un libro de referencia sobre la historia del arte occidental.",
+        "location": "Sección de Arte"
+      },
+      {
+        "code": 403,
+        "title": "The Oxford Companion to Music",
+        "author": "Alison Latham",
+        "status": "Nuevo",
+        "editorial": "Oxford University Press",
+        "category": "Música",
+        "dewey_clasification": 780,
+        "aviability": true,
+        "book_version": "Edición ampliada",
+        "date_admission":  new Date("2023-09-23"),
+        "descript": "Una enciclopedia completa sobre la música y sus compositores.",
+        "location": "Sección de Música"
+      },
+      {
+        "code": 404,
+        "title": "A Brief History of Time",
+        "author": "Stephen Hawking",
+        "status": "Nuevo",
+        "editorial": "Bantam Books",
+        "category": "Ciencia",
+        "dewey_clasification": 523.1,
+        "aviability": true,
+        "book_version": "Edición científica",
+        "date_admission":  new Date("2023-09-22"),
+        "descript": "Un libro que explora los conceptos del universo y la teoría del tiempo.",
+        "location": "Sección de Ciencia"
+      },
+      {
+        "code": 405,
+        "title": "The Power of Habit",
+        "author": "Charles Duhigg",
+        "status": "Nuevo",
+        "editorial": "Random House",
+        "category": "Autoayuda",
+        "dewey_clasification": 158,
+        "aviability": true,
+        "book_version": "Edición de bolsillo",
+        "date_admission":  new Date("2023-09-21"),
+        "descript": "Un libro que explora cómo los hábitos influyen en nuestras vidas.",
+        "location": "Sección de Autoayuda"
+      },
+      {
+        "code": 406,
+        "title": "The Immortal Life of Henrietta Lacks",
+        "author": "Rebecca Skloot",
+        "status": "Nuevo",
+        "editorial": "Crown Publishing",
+        "category": "Ciencia",
+        "dewey_clasification": 610,
+        "aviability": true,
+        "book_version": "Edición especial",
+        "date_admission":  new Date("2023-09-20"),
+        "descript": "Una historia real sobre células humanas inmortales y sus implicaciones.",
+        "location": "Sección de Ciencia"
+      },
+      {
+        "code": 407,
+        "title": "The Tipping Point",
+        "author": "Malcolm Gladwell",
+        "status": "Nuevo",
+        "editorial": "Little, Brown and Company",
+        "category": "Sociología",
+        "dewey_clasification": 302,
+        "aviability": true,
+        "book_version": "Edición revisada",
+        "date_admission":  new Date("2023-09-19"),
+        "descript": "Un libro que explora cómo pequeños cambios pueden tener un gran impacto.",
+        "location": "Sección de Sociología"
+      },
+      {
+        "code": 408,
+        "title": "The Innovator's Dilemma",
+        "author": "Clayton Christensen",
+        "status": "Usado - Buen estado",
+        "editorial": "HarperBusiness",
+        "category": "Negocios",
+        "dewey_clasification": 658,
+        "aviability": true,
+        "book_version": "Edición empresarial",
+        "date_admission":  new Date("2023-09-18"),
+        "descript": "Un libro sobre innovación y cómo las empresas pueden enfrentar desafíos.",
+        "location": "Sección de Negocios"
+      },
+      {
+        "code": 409,
+        "title": "Cosmos",
+        "author": "Carl Sagan",
+        "status": "Nuevo",
+        "editorial": "Random House",
+        "category": "Astronomía",
+        "dewey_clasification": 523,
+        "aviability": true,
+        "book_version": "Edición ampliada",
+        "date_admission":  new Date("2023-09-17"),
+        "descript": "Un viaje a través del cosmos y la exploración del espacio exterior.",
+        "location": "Sección de Astronomía"
+      },
+      {
+        "code": 410,
+        "title": "The Lean Startup",
+        "author": "Eric Ries",
+        "status": "Nuevo",
+        "editorial": "Crown Publishing",
+        "category": "Negocios",
+        "dewey_clasification": 658.4,
+        "aviability": false,
+        "book_version": "Edición emprendedora",
+        "date_admission":  new Date("2023-09-16"),
+        "descript": "Un enfoque innovador para lanzar y administrar startups de manera efectiva.",
+        "location": "Sección de Emprendimiento"
+      },
+      {
+        "code": 501,
+        "title": "Cien años de soledad",
+        "author": "Gabriel García Márquez",
+        "status": "Usado - Buen estado",
+        "editorial": "Editorial Latinoamericana",
+        "category": "Ficción",
+        "dewey_clasification": 863,
+        "aviability": true,
+        "book_version": "Edición de colección",
+        "date_admission":  new Date("2023-09-25"),
+        "descript": "Una obra maestra de la literatura latinoamericana que narra la historia de la familia Buendía en Macondo.",
+        "location": "Sección de Literatura Latinoamericana"
+      },
+      {
+        "code": 502,
+        "title": "La ciudad y los perros",
+        "author": "Mario Vargas Llosa",
+        "status": "Nuevo",
+        "editorial": "Ediciones Perú",
+        "category": "Novela",
+        "dewey_clasification": 863.64,
+        "aviability": false,
+        "book_version": "Edición especial numerada",
+        "date_admission":  new Date("2023-09-24"),
+        "descript": "Una novela aclamada que aborda la vida de jóvenes en una academia militar en Lima, Perú.",
+        "location": "Sección de Literatura Peruana"
+      },
+      {
+        "code": 503,
+        "title": "Crónica de una muerte anunciada",
+        "author": "Gabriel García Márquez",
+        "status": "Usado - Buen estado",
+        "editorial": "Cien Años Editores",
+        "category": "Novela",
+        "dewey_clasification": 863.64,
+        "aviability": true,
+        "book_version": "Edición anotada",
+        "date_admission":  new Date("2023-09-23"),
+        "descript": "Una obra de suspense que explora el destino inevitable de un hombre en un pueblo colombiano.",
+        "location": "Sección de Literatura Latinoamericana"
+      },
+      {
+        "code": 504,
+        "title": "Pedro Páramo",
+        "author": "Juan Rulfo",
+        "status": "Usado - Buen estado",
+        "editorial": "Ediciones Jalisco",
+        "category": "Novela",
+        "dewey_clasification": 863,
+        "aviability": false,
+        "book_version": "Edición conmemorativa",
+        "date_admission":  new Date("2023-09-22"),
+        "descript": "Una novela mexicana que explora temas de soledad y muerte en el desierto.",
+        "location": "Sección de Literatura Mexicana"
+      },
+      {
+        "code": 505,
+        "title": "Los detectives salvajes",
+        "author": "Roberto Bolaño",
+        "status": "Nuevo",
+        "editorial": "Ediciones Chile",
+        "category": "Novela",
+        "dewey_clasification": 863,
+        "aviability": true,
+        "book_version": "Edición de lujo",
+        "date_admission":  new Date("2023-09-21"),
+        "descript": "Una épica literaria que sigue a un grupo de jóvenes poetas latinoamericanos en sus aventuras.",
+        "location": "Sección de Literatura Chilena"
+      },
+      {
+        "code": 506,
+        "title": "Rayuela",
+        "author": "Julio Cortázar",
+        "status": "Usado - Buen estado",
+        "editorial": "Editorial Buenos Aires",
+        "category": "Novela experimental",
+        "dewey_clasification": 863.62,
+        "aviability": false,
+        "book_version": "Edición de bolsillo",
+        "date_admission":  new Date("2023-09-20"),
+        "descript": "Una obra innovadora que desafía la estructura tradicional de las novelas.",
+        "location": "Sección de Literatura Argentina"
+      },
+      {
+        "code": 507,
+        "title": "La sombra del viento",
+        "author": "Carlos Ruiz Zafón",
+        "status": "Nuevo",
+        "editorial": "Ediciones Barcelona",
+        "category": "Misterio",
+        "dewey_clasification": 863.7,
+        "aviability": true,
+        "book_version": "Edición especial de tapa dura",
+        "date_admission":  new Date("2023-09-19"),
+        "descript": "Una novela que mezcla intriga, amor y secretos en la Barcelona postguerra.",
+        "location": "Sección de Misterio"
+      },
+      {
+        "code": 508,
+        "title": "La guerra del fin del mundo",
+        "author": "Mario Vargas Llosa",
+        "status": "Nuevo",
+        "editorial": "Editorial Lima",
+        "category": "Novela histórica",
+        "dewey_clasification": 863.8,
+        "aviability": false,
+        "book_version": "Edición limitada",
+        "date_admission":  new Date("2023-09-18"),
+        "descript": "Una recreación literaria de la guerra de Canudos en Brasil.",
+        "location": "Sección de Literatura Peruana"
+      },
+      {
+        "code": 509,
+        "title": "La fiesta ajena",
+        "author": "Liliana Heker",
+        "status": "Nuevo",
+        "editorial": "Editorial Buenos Aires",
+        "category": "Cuentos",
+        "dewey_clasification": 863.01,
+        "aviability": true,
+        "book_version": "Edición de colección",
+        "date_admission":  new Date("2023-09-17"),
+        "descript": "Una colección de cuentos que exploran la intimidad y las relaciones humanas.",
+        "location": "Sección de Literatura Argentina"
+      },
+      {
+        "code": 510,
+        "title": "Ficciones",
+        "author": "Jorge Luis Borges",
+        "status": "Usado - Buen estado",
+        "editorial": "Editorial Buenos Aires",
+        "category": "Ficción breve",
+        "dewey_clasification": 863.01,
+        "aviability": true,
+        "book_version": "Edición con prólogo",
+        "date_admission":  new Date("2023-09-16"),
+        "descript": "Una colección de relatos breves que desafían la realidad y la ficción.",
+        "location": "Sección de Literatura Argentina"
+      }
+])
+db.staff.insertMany([
+    {
+      "employeeId": 201,
+      "full_name": "Luisa Pérez",
+      "team": "Dirección",
+      "email": "luisa.perez@biblioteca.com",
+      "business_email": "luisa.perez@biblioteca.com",
+      "phone_number": 3111111111,
+      "business_number": 3111111111,
+      "salary": 8000000,
+      "start_contract": new Date("2022-05-10")
+    },
+    {
+      "employeeId": 202,
+      "full_name": "Javier Martínez",
+      "team": "Abogados",
+      "email": "javier.martinez@biblioteca.com",
+      "business_email": "javier.martinez@biblioteca.com",
+      "phone_number": 3184565764,
+      "business_number": 3224569764,
+      "salary": 7500000,
+      "start_contract": new Date("2023-02-15")
+    },
+    {
+      "employeeId": 203,
+      "full_name": "Elena Gómez",
+      "team": "Organización de Libros",
+      "email": "elena.gomez@biblioteca.com",
+      "business_email": "elena.gomez@biblioteca.com",
+      "phone_number": 3124564534,
+      "business_number": 3184655764,
+      "salary": 6500000,
+      "start_contract": new Date("2021-09-05")
+    },
+    {
+      "employeeId": 204,
+      "full_name": "Ricardo Sánchez",
+      "team": "Reparto de Libros",
+      "email": "ricardo.sanchez@biblioteca.com",
+      "business_email": "ricardo.sanchez@biblioteca.com",
+      "phone_number": 3403212604,
+      "salary": 6000000,
+      "start_contract": new Date("2022-03-25")
+    },
+    {
+      "employeeId": 205,
+      "full_name": "María Rodríguez",
+      "team": "Abogados",
+      "email": "maria.rodriguez@biblioteca.com",
+      "business_email": "maria.rodriguez@biblioteca.com",
+      "phone_number": 3553243546,
+      "business_number": 3403212604,
+      "salary": 7200000,
+      "start_contract": new Date("2023-06-12")
+    },
+    {
+      "employeeId": 206,
+      "full_name": "Carlos López",
+      "team": "Organización de Libros",
+      "email": "carlos.lopez@biblioteca.com",
+      "business_email": "carlos.lopez@biblioteca.com",
+      "phone_number": 3553243546,
+      "business_number": 3553243546,
+      "salary": 6700000,
+      "start_contract": new Date("2022-08-20")
+    },
+    {
+      "employeeId": 207,
+      "full_name": "Luis Morales",
+      "team": "Reparto de Libros",
+      "email": "luis.morales@biblioteca.com",
+      "business_email": "luis.morales@biblioteca.com",
+      "phone_number": 3553243546,
+      "business_number": 3553243546,
+      "salary": 6200000,
+      "start_contract": new Date("2023-01-08")
+    },
+    {
+      "employeeId": 208,
+      "full_name": "Isabel García",
+      "team": "Dirección",
+      "email": "isabel.garcia@biblioteca.com",
+      "business_email": "isabel.garcia@biblioteca.com",
+      "phone_number": 3553243546,
+      "business_number": 3553243546,
+      "salary": 8500000,
+      "start_contract": new Date("2021-07-14")
+    },
+    {
+      "employeeId": 209,
+      "full_name": "Manuel Vargas",
+      "team": "Abogados",
+      "email": "manuel.vargas@biblioteca.com",
+      "business_email": "manuel.vargas@biblioteca.com",
+      "phone_number": 3553243546,
+      "business_number": 3553243546,
+      "salary": 7300000,
+      "start_contract": new Date("2023-04-30")
+    },
+    {
+      "employeeId": 210,
+      "full_name": "Ana González",
+      "team": "Organización de Libros",
+      "email": "ana.gonzalez@biblioteca.com",
+      "business_email": "ana.gonzalez@biblioteca.com",
+      "phone_number": 3552313546,
+      "business_number": 3553435746,
+      "salary": 6400000,
+      "start_contract": new Date("2022-11-03")
+    }
+]);
+db.users.insertMany([
+  {
+    "document": 101,
+    "user_name": "Luisa Pérez",
+    "address": "Calle 123, Ciudad",
+    "email": "luisa.perez@gmail.com",
+    "password": "contraseña123"
+  },
+  {
+    "document": 102,
+    "user_name": "Javier Martínez",
+    "address": "Avenida 456, Pueblo",
+    "email": "javier.martinez@gmail.com",
+    "password": "clave456"
+  },
+  {
+    "document": 103,
+    "user_name": "Elena Gómez",
+    "address": "Carrera 789, Villa",
+    "email": "elena.gomez@gmail.com",
+    "password": "clave789"
+  },
+  {
+    "document": 104,
+    "user_name": "Ricardo Sánchez",
+    "address": "Calle 1011, Ciudad",
+    "email": "ricardo.sanchez@gmail.com",
+    "password": "clave1011"
+  },
+  {
+    "document": 105,
+    "user_name": "María Rodríguez",
+    "address": "Avenida 1213, Pueblo",
+    "email": "maria.rodriguez@gmail.com",
+    "password": "contraseña1213"
+  },
+  {
+    "document": 106,
+    "user_name": "Carlos López",
+    "address": "Carrera 1415, Villa",
+    "email": "carlos.lopez@gmail.com",
+    "password": "contraseña1415"
+  },
+  {
+    "document": 107,
+    "user_name": "Luis Morales",
+    "address": "Calle 1617, Ciudad",
+    "email": "luis.morales@gmail.com",
+    "password": "clave1617"
+  },
+  {
+    "document": 108,
+    "user_name": "Isabel García",
+    "address": "Avenida 1819, Pueblo",
+    "email": "isabel.garcia@gmail.com",
+    "password": "clave1819"
+  },
+  {
+    "document": 109,
+    "user_name": "Manuel Vargas",
+    "address": "Carrera 2021, Villa",
+    "email": "manuel.vargas@gmail.com",
+    "password": "contraseña2021"
+  },
+  {
+    "document": 110,
+    "user_name": "Ana González",
+    "address": "Calle 2223, Ciudad",
+    "email": "ana.gonzalez@gmail.com",
+    "password": "contraseña2223"
+  }
+]);
+db.loans.insertMany([
+  {
+    "loanId": 1001,
+    "book_code": 501,
+    "user_name": "Luisa Pérez",
+    "start_loan": new Date("2023-08-01"),
+    "finish_loan": new Date("2023-08-15")
+  },
+  {
+    "loanId": 1002,
+    "book_code": 502,
+    "user_name": "Javier Martínez",
+    "start_loan": new Date("2023-08-02"),
+    "finish_loan": new Date("2023-08-16")
+  },
+  {
+    "loanId": 1003,
+    "book_code": 503,
+    "user_name": "Elena Gómez",
+    "start_loan": new Date("2023-08-03"),
+    "finish_loan": new Date("2023-08-17")
+  },
+  {
+    "loanId": 1004,
+    "book_code": 504,
+    "user_name": "Ricardo Sánchez",
+    "start_loan": new Date("2023-08-04"),
+    "finish_loan": new Date("2023-08-18")
+  },
+  {
+    "loanId": 1005,
+    "book_code": 505,
+    "user_name": "María Rodríguez",
+    "start_loan": new Date("2023-08-05"),
+    "finish_loan": new Date("2023-08-19")
+  },
+  {
+    "loanId": 1006,
+    "book_code": 506,
+    "user_name": "Carlos López",
+    "start_loan": new Date("2023-08-06"),
+    "finish_loan": new Date("2023-08-20")
+  },
+  {
+    "loanId": 1007,
+    "book_code": 507,
+    "user_name": "Luis Morales",
+    "start_loan": new Date("2023-08-07"),
+    "finish_loan": new Date("2023-08-21")
+  },
+  {
+    "loanId": 1008,
+    "book_code": 101,
+    "user_name": "Isabel García",
+    "start_loan": new Date("2023-08-08"),
+    "finish_loan": new Date("2023-08-22")
+  },
+  {
+    "loanId": 1009,
+    "book_code": 202,
+    "user_name": "Manuel Vargas",
+    "start_loan": new Date("2023-08-09"),
+    "finish_loan": new Date("2023-08-23")
+  },
+  {
+    "loanId": 1010,
+    "book_code": 207,
+    "user_name": "Ana González",
+    "start_loan": new Date("2023-08-10"),
+    "finish_loan": new Date("2023-08-24")
+  },
+  {
+    "loanId": 1011,
+    "book_code": 305,
+    "user_name": "Luisa Pérez",
+    "start_loan": new Date("2023-09-01"),
+    "finish_loan": new Date("2023-09-15")
+  },
+  {
+    "loanId": 1012,
+    "book_code": 402,
+    "user_name": "Javier Martínez",
+    "start_loan": new Date("2023-09-02"),
+    "finish_loan": new Date("2023-09-16")
+  },
+  {
+    "loanId": 1013,
+    "book_code": 406,
+    "user_name": "Elena Gómez",
+    "start_loan": new Date("2023-09-03"),
+    "finish_loan": new Date("2023-09-17")
+  },
+  {
+    "loanId": 1014,
+    "book_code": 409,
+    "user_name": "Ricardo Sánchez",
+    "start_loan": new Date("2023-09-04"),
+    "finish_loan": new Date("2023-09-18")
+  },
+  {
+    "loanId": 1015,
+    "book_code": 410,
+    "user_name": "María Rodríguez",
+    "start_loan": new Date("2023-09-05"),
+    "finish_loan": new Date("2023-09-19")
+  },
+  {
+    "loanId": 1016,
+    "book_code": 306,
+    "user_name": "Carlos López",
+    "start_loan": new Date("2023-09-06"),
+    "finish_loan": new Date("2023-09-20")
+  },
+  {
+    "loanId": 1017,
+    "book_code": 303,
+    "user_name": "Luis Morales",
+    "start_loan": new Date("2023-09-07"),
+    "finish_loan": new Date("2023-09-21")
+  },
+  {
+    "loanId": 1018,
+    "book_code": 210,
+    "user_name": "Isabel García",
+    "start_loan": new Date("2023-09-08"),
+    "finish_loan": new Date("2023-09-22")
+  },
+  {
+    "loanId": 1019,
+    "book_code": 208,
+    "user_name": "Manuel Vargas",
+    "start_loan": new Date("2023-09-09"),
+    "finish_loan": new Date("2023-09-23")
+  },
+  {
+    "loanId": 1020,
+    "book_code": 205,
+    "user_name": "Ana González",
+    "start_loan": new Date("2023-09-10"),
+    "finish_loan": new Date("2023-09-24")
+  }
+]);
+db.reservations.insertMany([
+  {
+    "reservationId": 2001,
+    "title_book": "Cien años de soledad",
+    "user_name": "Luisa Pérez",
+    "reservation_date": new Date("2023-09-01"),
+    "expected_delivery": new Date("2023-09-15")
+  },
+  {
+    "reservationId": 2002,
+    "title_book": "Don Quijote de la Mancha",
+    "user_name": "Javier Martínez",
+    "reservation_date": new Date("2023-09-02"),
+    "expected_delivery": new Date("2023-09-16")
+  },
+  {
+    "reservationId": 2003,
+    "title_book": "Rayuela",
+    "user_name": "Elena Gómez",
+    "reservation_date": new Date("2023-09-03"),
+    "expected_delivery": new Date("2023-09-17")
+  },
+  {
+    "reservationId": 2004,
+    "title_book": "Crimen y castigo",
+    "user_name": "Ricardo Sánchez",
+    "reservation_date": new Date("2023-09-04"),
+    "expected_delivery": new Date("2023-09-18")
+  },
+  {
+    "reservationId": 2005,
+    "title_book": "El amor en los tiempos del cólera",
+    "user_name": "María Rodríguez",
+    "reservation_date": new Date("2023-09-05"),
+    "expected_delivery": new Date("2023-09-19")
+  },
+  {
+    "reservationId": 2006,
+    "title_book": "Cien años de soledad",
+    "user_name": "Carlos López",
+    "reservation_date": new Date("2023-09-06"),
+    "expected_delivery": new Date("2023-09-20")
+  },
+  {
+    "reservationId": 2007,
+    "title_book": "Don Quijote de la Mancha",
+    "user_name": "Luis Morales",
+    "reservation_date": new Date("2023-09-07"),
+    "expected_delivery": new Date("2023-09-21")
+  },
+  {
+    "reservationId": 2008,
+    "title_book": "Rayuela",
+    "user_name": "Isabel García",
+    "reservation_date": new Date("2023-09-08"),
+    "expected_delivery": new Date("2023-09-22")
+  },
+  {
+    "reservationId": 2009,
+    "title_book": "Crimen y castigo",
+    "user_name": "Manuel Vargas",
+    "reservation_date": new Date("2023-09-09"),
+    "expected_delivery": new Date("2023-09-23")
+  },
+  {
+    "reservationId": 2010,
+    "title_book": "El amor en los tiempos del cólera",
+    "user_name": "Ana González",
+    "reservation_date": new Date("2023-09-10"),
+    "expected_delivery": new Date("2023-09-24")
+  }
+]);
+db.returns.insertMany([
+  {
+    "book_code": 203,
+    "user_name": "Luisa Pérez",
+    "return_date": new Date("2023-09-15"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 504,
+    "user_name": "Javier Martínez",
+    "return_date": new Date("2023-09-16"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 403,
+    "user_name": "Elena Gómez",
+    "return_date": new Date("2023-09-17"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 502,
+    "user_name": "Ricardo Sánchez",
+    "return_date": new Date("2023-09-18"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 104,
+    "user_name": "María Rodríguez",
+    "return_date": new Date("2023-09-19"),
+    "delayed_days": 4
+  },
+  {
+    "book_code": 110,
+    "user_name": "Carlos López",
+    "return_date": new Date("2023-09-20"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 410,
+    "user_name": "Luis Morales",
+    "return_date": new Date("2023-09-21"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 204,
+    "user_name": "Isabel García",
+    "return_date": new Date("2023-09-22"),
+    "delayed_days": 31
+  },
+  {
+    "book_code": 502,
+    "user_name": "Manuel Vargas",
+    "return_date": new Date("2023-09-23"),
+    "delayed_days": 0
+  },
+  {
+    "book_code": 310,
+    "user_name": "Ana González",
+    "return_date": new Date("2023-09-24"),
+    "delayed_days": 2
+  }
+]);

@@ -1,16 +1,16 @@
 import { collectionGen } from "../db/connection.js";
 
-class Books{
+class Returns{
     constructor(){};
     async connection(){
         try {
-            const result = await collectionGen("Books");
+            const result = await collectionGen("returns");
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async getAllBooks(){
+    async getAllReturns(){
         try {
             const connect = await this.connection();
             const result = await connect.find({}).toArray()
@@ -19,21 +19,21 @@ class Books{
             throw error;
         }
     };
-    async postBook(data){
+    async postReturn(data){
         try {
             const connect = await this.connection();
-            let body = { ...data, "date_admission": new Date() }
+            let body = { ...data, "return_date": new Date() }
             const result = await connect.postOne(body);
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async updateBook(code, data){
+    async updateReturn(code, data){
         try {
             const connect = await this.connection();
             const result = await connect.updateOne(
-                { "code": parseInt(code) },
+                { "return_code": parseInt(code) },
                 { $set: data }
             );
             return result;
@@ -41,10 +41,10 @@ class Books{
             throw error;
         }
     }; 
-    async deleteBook(code){
+    async deleteReturn(code){
         try {
             const connect = await this.connection();
-            const result = await connect.deleteOne({"code": parseInt(code)});
+            const result = await connect.deleteOne({"return_code": parseInt(code)});
             return result;
         } catch (error) {
             throw error;
@@ -52,4 +52,4 @@ class Books{
     }
 }
 
-export { Books }
+export { Returns }

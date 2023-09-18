@@ -151,8 +151,22 @@ db.createCollection("users", {
                 password: {
                     bsonType: "string",
                     description: "La contraseña es un dato obligatorio"
+                },
+                permisos: {
+                    bsonType: "object",
+                    description: "Ingrese los permisos",
+                    properties: {
+                        "/api": {
+                            bsonType: "array",
+                            items: {
+                                bsonType: "string"
+                            }
+                        }
+                    }
+                },
+                rol: {
+                    bsonType: "string"
                 }
-                
             }
         }
     }

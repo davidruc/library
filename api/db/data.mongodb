@@ -720,70 +720,110 @@ db.users.insertMany([
     "user_name": "Luisa Pérez",
     "address": "Calle 123, Ciudad",
     "email": "luisa.perez@gmail.com",
-    "password": "contraseña123"
+    "password": "contraseña123",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 102,
     "user_name": "Javier Martínez",
     "address": "Avenida 456, Pueblo",
     "email": "javier.martinez@gmail.com",
-    "password": "clave456"
+    "password": "clave456",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 103,
     "user_name": "Elena Gómez",
     "address": "Carrera 789, Villa",
     "email": "elena.gomez@gmail.com",
-    "password": "clave789"
+    "password": "clave789",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 104,
     "user_name": "Ricardo Sánchez",
     "address": "Calle 1011, Ciudad",
     "email": "ricardo.sanchez@gmail.com",
-    "password": "clave1011"
+    "password": "clave1011",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 105,
     "user_name": "María Rodríguez",
     "address": "Avenida 1213, Pueblo",
     "email": "maria.rodriguez@gmail.com",
-    "password": "contraseña1213"
+    "password": "contraseña1213",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 106,
     "user_name": "Carlos López",
     "address": "Carrera 1415, Villa",
     "email": "carlos.lopez@gmail.com",
-    "password": "contraseña1415"
+    "password": "contraseña1415",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 107,
     "user_name": "Luis Morales",
     "address": "Calle 1617, Ciudad",
     "email": "luis.morales@gmail.com",
-    "password": "clave1617"
+    "password": "clave1617",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 108,
     "user_name": "Isabel García",
     "address": "Avenida 1819, Pueblo",
     "email": "isabel.garcia@gmail.com",
-    "password": "clave1819"
+    "password": "clave1819",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 109,
     "user_name": "Manuel Vargas",
     "address": "Carrera 2021, Villa",
     "email": "manuel.vargas@gmail.com",
-    "password": "contraseña2021"
+    "password": "contraseña2021",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   },
   {
     "document": 110,
     "user_name": "Ana González",
     "address": "Calle 2223, Ciudad",
     "email": "ana.gonzalez@gmail.com",
-    "password": "contraseña2223"
+    "password": "contraseña2223",
+    "rol": "usuario",
+    "permisos": {
+      "/api": ["2.0.0", "GET", "POST"]
+    }
   }
 ]);
 db.loans.insertMany([

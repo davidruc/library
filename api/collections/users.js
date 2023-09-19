@@ -10,11 +10,11 @@ class Users{
             throw error;
         }
     };
-    async getAllUsers(){
+    async getAllUsers(id){
         try {
             const connect = await this.connection();
-            const result = await connect.find({}).toArray()
-            return result;
+            if(!id) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"document": parseInt(id)}}])
         } catch (error) {
             throw error;
         }
@@ -26,7 +26,7 @@ class Users{
                 "/api": ["2.0.0", "GET", "POST"]
             };
             let body = {...data, "rol": "usuario" ,"permisos": permiss }
-            const result = await connect.postOne(body);
+            const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;

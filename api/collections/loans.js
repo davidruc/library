@@ -10,11 +10,11 @@ class Loans{
             throw error;
         }
     };
-    async getAllLoans(){
+    async getAllLoans(id_loan){
         try {
             const connect = await this.connection();
-            const result = await connect.find({}).toArray()
-            return result;
+            if(!id_loan) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"loanId": parseInt(id_loan)}}])
         } catch (error) {
             throw error;
         }
@@ -24,7 +24,7 @@ class Loans{
             const connect = await this.connection();
             let body = { ...data, "start_loan": new Date(), "finish_loan": new Date(data.finish_loan) }
             console.log(body);
-            const result = await connect.postOne(body);
+            const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;

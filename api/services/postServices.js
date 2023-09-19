@@ -10,22 +10,22 @@ export const postBookService = async(data)=>{
     return await book.postBook(data);
 }
 export const postLoanService = async(data)=>{
-    const book = new Loans();
-    return await book.postLoan(data);
+    const loan = new Loans();
+    return await loan.postLoan(data);
 }
 export const postReservationService = async(data)=>{
-    const book = new Reservations();
-    return await book.postReservation(data);
+    const reservation = new Reservations();
+    return await reservation.postReservation(data);
 }
 export const postReturnService = async(data)=>{
-    const book = new Returns();
-    return await book.postReturn(data);
+    const returns = new Returns();
+    return await returns.postReturn(data);
 }
 export const postStaffService = async(data)=>{
-    const book = new Staff();
-    return await book.postStaff(data);
+    const staff = new Staff();
+    return await staff.postStaff(data);
 }
 export const postUserService = async(data)=>{
-    const book = new Users();
-    return await book.postUser(data);
+    const user = new Users();
+    return await user.postUser(data);
 }

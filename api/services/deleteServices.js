@@ -10,22 +10,22 @@ export const deleteBookService = async(code)=>{
     return await book.deleteBook(code);
 }
 export const deleteLoanService = async(id_loan)=>{
-    const book = new Loans();
-    return await book.deleteLoan(id_loan);
+    const loan = new Loans();
+    return await loan.deleteLoan(id_loan);
 }
 export const deleteReservationService = async(id_reservation)=>{
-    const book = new Reservations();
-    return await book.deleteReservation(id_reservation);
+    const reservation = new Reservations();
+    return await reservation.deleteReservation(id_reservation);
 }
 export const deleteReturnService = async(code)=>{
-    const book = new Returns();
-    return await book.deleteReturn(code);
+    const returns = new Returns();
+    return await returns.deleteReturn(code);
 }
 export const deleteStaffService = async(id_employee)=>{
-    const book = new Staff();
-    return await book.deleteStaff(id_employee);
+    const staff = new Staff();
+    return await staff.deleteStaff(id_employee);
 }
 export const deleteUserService = async(id)=>{
-    const book = new Users();
-    return await book.deleteUser(id);
+    const user = new Users();
+    return await user.deleteUser(id);
 }

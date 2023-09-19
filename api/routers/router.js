@@ -9,10 +9,10 @@ import passport from "../helpers/passportHelper.js";
 const initApiRoutes = ()=>{
     const router = Router();
     router.use(passport.authenticate("bearer", {session: false}));
-    router.use("/get", limitPetitions() ,getInitRoute());
-    router.use("/post", limitPetitions() ,postInitRoute());
-    router.use("/put", limitPetitions() ,putInitRoute());
-    router.use("/delete", limitPetitions() ,deleteInitRoute());
+    router.use("/use", limitPetitions() ,getInitRoute());
+    router.use("/use", limitPetitions() ,postInitRoute());
+    router.use("/use", limitPetitions() ,putInitRoute());
+    router.use("/use", limitPetitions() ,deleteInitRoute());
     return router;
 }
 

@@ -10,11 +10,11 @@ class Returns{
             throw error;
         }
     };
-    async getAllReturns(){
+    async getAllReturns(code){
         try {
             const connect = await this.connection();
-            const result = await connect.find({}).toArray()
-            return result;
+            if(!code) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"return_code": parseInt(code)}}])
         } catch (error) {
             throw error;
         }
@@ -23,7 +23,7 @@ class Returns{
         try {
             const connect = await this.connection();
             let body = { ...data, "return_date": new Date() }
-            const result = await connect.postOne(body);
+            const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;

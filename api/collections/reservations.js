@@ -10,11 +10,11 @@ class Reservations{
             throw error;
         }
     };
-    async getAllReservations(){
+    async getAllReservations(id_reservation){
         try {
             const connect = await this.connection();
-            const result = await connect.find({}).toArray()
-            return result;
+            if(!id_reservation) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"reservationId": parseInt(id_reservation)}}])
         } catch (error) {
             throw error;
         }
@@ -23,7 +23,7 @@ class Reservations{
         try {
             const connect = await this.connection();
             let body = { ...data, "reservation_date": new Date(), "expected_delivery": new Date(data.expected_delivery)}
-            const result = await connect.postOne(body);
+            const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;

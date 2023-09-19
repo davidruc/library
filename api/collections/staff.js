@@ -10,11 +10,11 @@ class Staff{
             throw error;
         }
     };
-    async getAllStaff(){
+    async getAllStaff(id_employee){
         try {
             const connect = await this.connection();
-            const result = await connect.find({}).toArray()
-            return result;
+            if(!id_employee) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"employeeId": parseInt(id_employee)}}])
         } catch (error) {
             throw error;
         }
@@ -23,7 +23,7 @@ class Staff{
         try {
             const connect = await this.connection();
             let body = { ...data, "start_contract": new Date(data.start_contract) }
-            const result = await connect.postOne(body);
+            const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;

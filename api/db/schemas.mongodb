@@ -190,6 +190,9 @@ db.createCollection("loans", {
                     bsonType: "number",
                     description: "El codigo del libro debe ser un número"
                 },
+                reservation_code: {
+                    bsonType: "number"
+                },
                 user_name: {
                     bsonType: "string",
                     description: "El nombre del usuario debe ser un string."
@@ -247,10 +250,13 @@ db.createCollection("returns", {
         $jsonSchema: {
             bsonType: "object",
             additionalProperties: false,
-            required: [ "book_code", "user_name", "return_date", "delayed_days"],
+            required: [ "return_code","book_code", "user_name", "return_date", "delayed_days"],
             properties: {
                 _id: {
                     bsonType: "objectId"
+                },
+                return_code: {
+                    bsonType: "number"
                 },
                 book_code: {
                     bsonType: "number",

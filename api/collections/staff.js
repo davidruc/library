@@ -1,39 +1,39 @@
 import { collectionGen } from "../db/connection.js";
 
-class Books{
+class Staff{
     constructor(){};
     async connection(){
         try {
-            const result = await collectionGen("Books");
+            const result = await collectionGen("staff");
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async getAllBooks(code){
+    async getAllStaff(id_employee){
         try {
             const connect = await this.connection();
-            if(!code) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"code": parseInt(code)}}])
+            if(!id_employee) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"employeeId": parseInt(id_employee)}}])
         } catch (error) {
             throw error;
         }
     };
-    async postBook(data){
+    async postStaff(data){
         try {
             const connect = await this.connection();
-            let body = { ...data, "date_admission": new Date() }
+            let body = { ...data, "start_contract": new Date(data.start_contract) }
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async updateBook(code, data){
+    async updateStaff(id_employee, data){
         try {
             const connect = await this.connection();
             const result = await connect.updateOne(
-                { "code": parseInt(code) },
+                { "employeeId": parseInt(id_employee) },
                 { $set: data }
             );
             return result;
@@ -41,10 +41,10 @@ class Books{
             throw error;
         }
     }; 
-    async deleteBook(code){
+    async deleteStaff(id_employee){
         try {
             const connect = await this.connection();
-            const result = await connect.deleteOne({"code": parseInt(code)});
+            const result = await connect.deleteOne({"employeeId": parseInt(id_employee)});
             return result;
         } catch (error) {
             throw error;
@@ -52,4 +52,4 @@ class Books{
     }
 }
 
-export { Books }
+export { Staff }

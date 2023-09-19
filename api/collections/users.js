@@ -1,39 +1,42 @@
 import { collectionGen } from "../db/connection.js";
 
-class Books{
+class Users{
     constructor(){};
     async connection(){
         try {
-            const result = await collectionGen("Books");
+            const result = await collectionGen("users");
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async getAllBooks(code){
+    async getAllUsers(id){
         try {
             const connect = await this.connection();
-            if(!code) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"code": parseInt(code)}}])
+            if(!id) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"document": parseInt(id)}}])
         } catch (error) {
             throw error;
         }
     };
-    async postBook(data){
+    async postUser(data){
         try {
             const connect = await this.connection();
-            let body = { ...data, "date_admission": new Date() }
+            let permiss = {
+                "/api": ["2.0.0", "GET", "POST"]
+            };
+            let body = {...data, "rol": "usuario" ,"permisos": permiss }
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async updateBook(code, data){
+    async updateUser(id, data){
         try {
             const connect = await this.connection();
             const result = await connect.updateOne(
-                { "code": parseInt(code) },
+                {"document": parseInt(id)},
                 { $set: data }
             );
             return result;
@@ -41,10 +44,10 @@ class Books{
             throw error;
         }
     }; 
-    async deleteBook(code){
+    async deleteUser(id){
         try {
             const connect = await this.connection();
-            const result = await connect.deleteOne({"code": parseInt(code)});
+            const result = await connect.deleteOne({"document": parseInt(id)});
             return result;
         } catch (error) {
             throw error;
@@ -52,4 +55,4 @@ class Books{
     }
 }
 
-export { Books }
+export { Users }

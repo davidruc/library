@@ -829,6 +829,7 @@ db.users.insertMany([
 db.loans.insertMany([
   {
     "loanId": 1001,
+    "reservation_code": 2001,
     "book_code": 501,
     "user_name": "Luisa Pérez",
     "start_loan": new Date("2023-08-01"),
@@ -851,6 +852,7 @@ db.loans.insertMany([
   {
     "loanId": 1004,
     "book_code": 504,
+    "reservation_code": 2003,
     "user_name": "Ricardo Sánchez",
     "start_loan": new Date("2023-08-04"),
     "finish_loan": new Date("2023-08-18")
@@ -886,6 +888,7 @@ db.loans.insertMany([
   {
     "loanId": 1009,
     "book_code": 202,
+    "reservation_code": 2006,
     "user_name": "Manuel Vargas",
     "start_loan": new Date("2023-08-09"),
     "finish_loan": new Date("2023-08-23")
@@ -1042,60 +1045,70 @@ db.reservations.insertMany([
 ]);
 db.returns.insertMany([
   {
+    "return_code": 1,
     "book_code": 203,
     "user_name": "Luisa Pérez",
     "return_date": new Date("2023-09-15"),
     "delayed_days": 0
   },
   {
+    "return_code": 2,
     "book_code": 504,
     "user_name": "Javier Martínez",
     "return_date": new Date("2023-09-16"),
     "delayed_days": 0
   },
   {
+    "return_code": 10,
     "book_code": 403,
     "user_name": "Elena Gómez",
     "return_date": new Date("2023-09-17"),
     "delayed_days": 0
   },
   {
+    "return_code": 3,
     "book_code": 502,
     "user_name": "Ricardo Sánchez",
     "return_date": new Date("2023-09-18"),
     "delayed_days": 0
   },
   {
+    "return_code": 4,
     "book_code": 104,
     "user_name": "María Rodríguez",
     "return_date": new Date("2023-09-19"),
     "delayed_days": 4
   },
   {
+    "return_code": 5,
     "book_code": 110,
     "user_name": "Carlos López",
     "return_date": new Date("2023-09-20"),
     "delayed_days": 0
   },
   {
+    "return_code": 6,
     "book_code": 410,
     "user_name": "Luis Morales",
     "return_date": new Date("2023-09-21"),
     "delayed_days": 0
   },
   {
+    "return_code": 7,
     "book_code": 204,
     "user_name": "Isabel García",
     "return_date": new Date("2023-09-22"),
     "delayed_days": 31
   },
   {
+    "return_code": 8,
     "book_code": 502,
     "user_name": "Manuel Vargas",
     "return_date": new Date("2023-09-23"),
     "delayed_days": 0
   },
   {
+    "return_code": 9,
     "book_code": 310,
     "user_name": "Ana González",
     "return_date": new Date("2023-09-24"),

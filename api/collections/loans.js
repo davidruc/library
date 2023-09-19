@@ -1,39 +1,40 @@
 import { collectionGen } from "../db/connection.js";
 
-class Books{
+class Loans{
     constructor(){};
     async connection(){
         try {
-            const result = await collectionGen("Books");
+            const result = await collectionGen("loans");
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async getAllBooks(code){
+    async getAllLoans(id_loan){
         try {
             const connect = await this.connection();
-            if(!code) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"code": parseInt(code)}}])
+            if(!id_loan) return await connect.find({}).toArray()
+            return await connect.aggragate([{$match: {"loanId": parseInt(id_loan)}}])
         } catch (error) {
             throw error;
         }
     };
-    async postBook(data){
+    async postLoan(data){
         try {
             const connect = await this.connection();
-            let body = { ...data, "date_admission": new Date() }
+            let body = { ...data, "start_loan": new Date(), "finish_loan": new Date(data.finish_loan) }
+            console.log(body);
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;
         }
     };
-    async updateBook(code, data){
+    async updateLoan(id_loan, data){
         try {
             const connect = await this.connection();
             const result = await connect.updateOne(
-                { "code": parseInt(code) },
+                { "loanId": parseInt(id_loan) },
                 { $set: data }
             );
             return result;
@@ -41,10 +42,10 @@ class Books{
             throw error;
         }
     }; 
-    async deleteBook(code){
+    async deleteLoan(id_loan){
         try {
             const connect = await this.connection();
-            const result = await connect.deleteOne({"code": parseInt(code)});
+            const result = await connect.deleteOne({ "loanId": parseInt(id_loan) });
             return result;
         } catch (error) {
             throw error;
@@ -52,4 +53,4 @@ class Books{
     }
 }
 
-export { Books }
+export { Loans }

@@ -1,4 +1,18 @@
 use("library_project");
+db.Books.insertOne(   {
+  "code": 305,
+  "title": "The Origins of Species",
+  "author": "Charles Darwin",
+  "status": "viejo",
+  "editorial": "Cambridge University Press",
+  "category": "Ciencia",
+  "dewey_clasification": 576.8,
+  "aviability": true,
+  "book_version": "Edición científica",
+  "date_admission":  new Date("2017-09-21"),
+  "descript": "El libro revolucionario que presenta la teoría de la evolución de Darwin.",
+  "location": "Sección de Ciencia"
+})
 db.Books.insertMany([
     {
         "code": 101,

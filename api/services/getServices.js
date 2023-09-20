@@ -30,8 +30,51 @@ export const getAllUsersService = async(id)=>{
     return await user.getAllUsers(id);
 }
 
+//todo: SERVICIOS ESPECIFICOS
 /* 1.  */
 export const getBookByTitleService = async(name)=>{
     const book = new Books();
     return await book.getBookByTitle(name);
+}
+/* 2.  */
+export const getBookByAuthorService = async(name)=>{
+    const book = new Books();
+    return await book.getBookByAuthor(name);
+}
+/* 3.  */
+export const getBooksAuthorService = async()=>{
+    const book = new Books();
+    return await book.getBooksAuthor();
+}
+/* 4.  */
+export const getBookByAviabilityService = async(state)=>{
+    const book = new Books();
+    return await book.getBookByAviability(state);
+}
+/* 5.  */
+export const getBookByDeweyService = async()=>{
+    const book = new Books();
+    return await book.getBookByDewey();
+}
+/* 6.  */
+export const getBookByLocationService = async(place)=>{
+    const book = new Books();
+    return await book.getBookByLocation(place);
+}
+/* 7.  */
+export const getBookByEditorialService = async(name)=>{
+    const book = new Books();
+    return await book.getBookByEditorial(name);
+}
+/* 8.  */
+//!
+/* 9.  */
+export const getBookByYearService = async(year)=>{
+    const book = new Books();
+    return await book.getBookByYear(year);
+}
+/* 10.  */
+export const getBookByStatusService = async(status)=>{
+    const book = new Books();
+    return await book.getBookByStatus(status);
 }

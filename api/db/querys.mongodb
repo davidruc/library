@@ -97,7 +97,6 @@ db.Books.aggregate([
     }
    }
 ]);
-
 /* 4. mostrar todos los libros por su disponibilidad. */
 //!Buscar por disponibilidad TRUE o FALSE
 use("library_project")
@@ -224,11 +223,9 @@ db.Books.aggregate([
     }
    }
 ]);
-
 /* 7. mostrar todos los libros de una editorial específica. */
-//! Busca por editorial
 use("library_project")
-db.Books.aggregate([
+db.Books.aggregate([    
     {
         $match: 
             {"editorial": {$regex: "Ediciones p", $options: "i"}}
@@ -266,3 +263,102 @@ db.Books.aggregate([
     }
    }
 ]);
+/* 8. mostrar todos los libros que tengan una antiguedad de más de N años */
+use("library_project")
+db.Books.aggregate([
+    {
+      $addFields: {
+        oldBooks: {
+          $dateFromParts: {
+            year: {$subtract: [{$year: "$$NOW"}, 5]},
+            month: {$month: "$$NOW"},
+            day: {$dayOfMonth: "$$NOW"}
+          }
+        }, 
+      }
+    }, 
+    {
+        $match: 
+            { date_admission: { $lt: "$oldBooks"}}
+    },
+    {
+        $project: {
+          _id: 0,
+          date_search: "$oldBooks",
+          codigo: "$code",
+          titulo: "$title",
+          author: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+]);
+/* 9. mostrar los libros ingresados por su año */
+//! Aqui se pone el año que se quiere buscar 
+use("library_project")
+db.Books.aggregate([
+  {
+    $addFields: {
+      year_admission: {$year: "$date_admission"}
+    }
+  },
+  {
+      $match: 
+          {year_admission: { $eq: 2017}}
+  },
+  {
+      $project: {
+        _id: 0,
+        date_search: "$oldBooks",
+        codigo: "$code",
+        titulo: "$title",
+        author: "$author",
+        estado: "$status",
+        editorial: "$editorial",
+        categoria: "$category",
+        clasificacion_Dewey: "$dewey_clasification",
+        disponibilidad: "$aviability",
+        version: "$book_version",
+        ingreso: "$date_admission",
+        descripcion: "$descript",
+        ubicacion: "$location"
+      }
+  },
+]);
+/* 10. mostrar los libros segun su estado. */
+//! Aqui se pone el nombre del estado
+use("library_project")
+db.Books.aggregate([
+  {
+      $match: 
+        {"status": {$regex: "mal", $options: "i"}}
+  },
+  {
+      $project: {
+        _id: 0,
+        date_search: "$oldBooks",
+        codigo: "$code",
+        titulo: "$title",
+        author: "$author",
+        estado: "$status",
+        editorial: "$editorial",
+        categoria: "$category",
+        clasificacion_Dewey: "$dewey_clasification",
+        disponibilidad: "$aviability",
+        version: "$book_version",
+        ingreso: "$date_admission",
+        descripcion: "$descript",
+        ubicacion: "$location"
+      }
+  },
+]);
+
+
+

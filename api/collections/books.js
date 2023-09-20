@@ -14,7 +14,7 @@ class Books{
         try {
             const connect = await this.connection();
             if(!code) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"code": parseInt(code)}}])
+            return await connect.aggragate([{$match: {"code": parseInt(code)}}]).toArray()
         } catch (error) {
             throw error;
         }
@@ -50,6 +50,21 @@ class Books{
             throw error;
         }
     }
+    /* 1. Endpoint que permita filtrar libros por titulo. */
+    async getBookByTitle(name){
+        try {
+            const connect = await this.connection();
+            const result = await connect.aggregate([
+                {
+                    $match: 
+                        {"title": {$regex: name, $options: "i"}}
+                }
+            ]).toArray()
+            return result
+        } catch (error) {
+            throw error;
+        }
+    };
 }
 
 export { Books }

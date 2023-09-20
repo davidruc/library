@@ -14,7 +14,7 @@ class Reservations{
         try {
             const connect = await this.connection();
             if(!id_reservation) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"reservationId": parseInt(id_reservation)}}])
+            return await connect.aggragate([{$match: {"reservationId": parseInt(id_reservation)}}]).toArray()
         } catch (error) {
             throw error;
         }

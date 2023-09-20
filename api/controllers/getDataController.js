@@ -54,3 +54,13 @@ export const getUsersController = async(req, res, next)=>{
         res.send(error);
     }
 }
+/* 1.  */
+export const getBookByTitleController = async(req, res, next)=>{
+    try {
+        const {name} = req.query;
+        const book = await service.getBookByTitleService(name);
+        res.status(200).send(book);
+    } catch (error) {
+        res.send(error);
+    }
+}

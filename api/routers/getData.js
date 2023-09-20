@@ -23,6 +23,10 @@ const getInitRoute = ()=>{
     router.get("/users", versions({
         "2.0.0":  controller.getUsersController
     }));
+    /* 1.  */
+    router.get("/bookTitle", versions({
+        "2.0.0":  controller.getBookByTitleController
+    }));
     return router;
 }
 export default getInitRoute;

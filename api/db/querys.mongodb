@@ -1,0 +1,268 @@
+/* 1. Endpoint que permita filtrar libros por titulo. */
+//! Busca por titulos del libro
+use("library_project")
+db.Books.aggregate([
+    {
+        $match: 
+            {"title": {$regex: "fiesta", $options: "i"}}
+    },
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          author: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+]);
+/* 2. Filtrar todos los libros por autor. */
+//! Busca por autor
+use("library_project")
+db.Books.aggregate([
+    {
+        $match: 
+            {"author": {$regex: "Gabriel", $options: "i"}}
+    },
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          autor: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+    {
+        $group: {
+          _id: "$autor",
+          libros: { $push: "$$ROOT" }
+        }
+       },
+       {
+        $project: {
+          _id: 0,
+          author: "$_id",
+          books: "$libros"
+        }
+       }
+]);
+/* 3. Mostrar los libros agrupados por autores, de forma que se puedan observar todos los libros que tiene cada autor. */
+use("library_project")
+db.Books.aggregate([
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          autor: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+    {
+    $group: {
+      _id: "$autor",
+      libros: { $push: "$$ROOT" }
+    }
+   },
+   {
+    $project: {
+      _id: 0,
+      author: "$_id",
+      books: "$libros"
+    }
+   }
+]);
+
+/* 4. mostrar todos los libros por su disponibilidad. */
+//!Buscar por disponibilidad TRUE o FALSE
+use("library_project")
+db.Books.aggregate([
+    {
+        $match: 
+            { aviability: false }
+    },
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          autor: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    }
+]);
+/* 5. Mostrar todos los libros agrupados por sus 10 grandes áreas de la clasificación de dewey. */
+use("library_project")
+db.Books.aggregate([
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          autor: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+    {
+        $bucket: {
+          groupBy: "$clasificacion_Dewey",
+          boundaries: [ 0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+          default: "Other",
+          output: {
+            "number": { $sum: 1 }, 
+            "books": { $push: "$$ROOT" }
+          }
+        }
+    },
+    {
+        $addFields: {
+          nombreRango: {
+            $switch: {
+              branches: [
+                { case: { $eq: ["$_id", 0] }, then: "Ciencias de la Computación, Información y Obras Generales." },
+                { case: { $eq: ["$_id", 100] }, then: "Filosofía y Psicología" },
+                { case: { $eq: ["$_id", 200] }, then: "Religión, Teología." },
+                { case: { $eq: ["$_id", 300] }, then: "Ciencias Sociales" },
+                { case: { $eq: ["$_id", 400] }, then: "Lenguas" },
+                { case: { $eq: ["$_id", 500] }, then: "Ciencias Básicas" },
+                { case: { $eq: ["$_id", 600] }, then: "Tecnología y Ciencias Aplicadas" },
+                { case: { $eq: ["$_id", 700] }, then: "Artes y recreación" },
+                { case: { $eq: ["$_id", 800] }, then: "Literatura." },
+                { case: { $eq: ["$_id", 900] }, then: "Historia y Geografía" },
+                { case: { $eq: ["$_id", "Otros"] }, then: "Otros" }
+              ],
+              default: "Desconocido"
+            }
+          }
+        }
+    },
+    
+    {
+        $project: {
+          _id: 0,
+          categoria :"$nombreRango",
+          Dewey_categoria: "$_id",
+          libros_categoria: "$number",
+          libros: "$books"
+        }
+    }
+])
+/* 6. Mostrar los libros agrupados por su ubicación en la biblioteca. */
+use("library_project")
+db.Books.aggregate([
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          autor: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+    {
+    $group: {
+      _id: "$ubicacion",
+      cantidad: { $sum: 1 },
+      libros: { $push: "$$ROOT" }
+    }
+   },
+   {
+    $project: {
+      _id: 0,
+      ubicacion: "$_id",
+      cantidad: "$cantidad",
+      books: "$libros"
+    }
+   }
+]);
+
+/* 7. mostrar todos los libros de una editorial específica. */
+//! Busca por editorial
+use("library_project")
+db.Books.aggregate([
+    {
+        $match: 
+            {"editorial": {$regex: "Ediciones p", $options: "i"}}
+    },
+    {
+        $project: {
+          _id: 0,
+          codigo: "$code",
+          titulo: "$title",
+          autor: "$author",
+          estado: "$status",
+          editorial: "$editorial",
+          categoria: "$category",
+          clasificacion_Dewey: "$dewey_clasification",
+          disponibilidad: "$aviability",
+          version: "$book_version",
+          ingreso: "$date_admission",
+          descripcion: "$descript",
+          ubicacion: "$location"
+        }
+    },
+    {
+    $group: {
+      _id: "$editorial",
+      cantidad: { $sum: 1 },
+      libros: { $push: "$$ROOT" }
+    }
+   },
+   {
+    $project: {
+      _id: 0,
+      editorial: "$_id",
+      cantidad: "$cantidad",
+      books: "$libros"
+    }
+   }
+]);

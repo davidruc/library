@@ -29,3 +29,9 @@ export const getAllUsersService = async(id)=>{
     const user = new Users();
     return await user.getAllUsers(id);
 }
+
+/* 1.  */
+export const getBookByTitleService = async(name)=>{
+    const book = new Books();
+    return await book.getBookByTitle(name);
+}

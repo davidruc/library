@@ -137,11 +137,179 @@ export const getBookByYearController = async(req, res, next)=>{
         res.send(error);
     }
 }
+/* 10. */
 export const getBookByStatusController = async(req, res, next)=>{
     try {
         const {status} = req.query;
         const book = await service.getBookByStatusService(status);
         res.status(200).send(book);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 11. */
+export const getRecervationByTitleController = async(req, res, next)=>{
+    try {
+        const {name} = req.query;
+        const reservartion = await service.getRecervationByTitleService(name);
+        res.status(200).send(reservartion);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 12. */
+export const getRecervationByMonthController = async(req, res, next)=>{
+    try {
+        const {month} = req.query;
+        const reservartion = await service.getRecervationByMonthService(month);
+        res.status(200).send(reservartion);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 13. */
+export const getRecervationByNameController = async(req, res, next)=>{
+    try {
+        const {name} = req.query;
+        const reservartion = await service.getRecervationByNameService(name);
+        res.status(200).send(reservartion);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 15. */
+export const getRecervationTopController = async(req, res, next)=>{
+    try {
+        const reservartion = await service.getRecervationTopService();
+        res.status(200).send(reservartion);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 16. */
+export const getRecervationBookTopController = async(req, res, next)=>{
+    try {
+        const reservartion = await service.getRecervationBookTopService();
+        res.status(200).send(reservartion);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 17. */
+export const getBookReservationFreeController = async(req, res, next)=>{
+    try {
+        const book = await service.getBookReservationFreeService();
+        res.status(200).send(book);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 19. */
+export const getLoansManyActiveController = async(req, res, next)=>{
+    try {
+        const loan = await service.getLoansManyActiveService();
+        res.status(200).send(loan);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 20. */
+export const getLoansLateController = async(req, res, next)=>{
+    try {
+        const loan = await service.getLoansLateService();
+        res.status(200).send(loan);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 21. */
+export const getLoansTopBookActiveController = async(req, res, next)=>{
+    try {
+        const loan = await service.getLoansTopBookActiveService();
+        res.status(200).send(loan);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 23. */
+export const getReturnsByTopBookController = async(req, res, next)=>{
+    try {
+        const returns = await service.getReturnsByTopBookService();
+        res.status(200).send(returns);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 24. */
+export const getReturnsTop10Controller = async(req, res, next)=>{
+    try {
+        const returns = await service.getReturnsTop10Service();
+        res.status(200).send(returns);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 25. */
+export const getReturnsLateOrderController = async(req, res, next)=>{
+    try {
+        const returns = await service.getReturnsLateOrderService();
+        res.status(200).send(returns);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 26. */
+export const getReturnsByMonthController = async(req, res, next)=>{
+    try {
+        const {month} = req.query;
+        const returns = await service.getReturnsByMonthService(month);
+        res.status(200).send(returns);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 27. */
+export const getUsersReservationOnController = async(req, res, next)=>{
+    try {
+        const {doc} = req.query;
+        const user = await service.getUsersReservationOnService(doc);
+        res.status(200).send(user);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 28. */
+export const getStaffByTeamsController = async(req, res, next)=>{
+    try {
+        const staff = await service.getStaffByTeamsService();
+        res.status(200).send(staff);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 29. */
+export const getStaffBySalaryController = async(req, res, next)=>{
+    try {
+        const staff = await service.getStaffBySalaryService();
+        res.status(200).send(staff);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 30. */
+export const getStaffBySeniorityController = async(req, res, next)=>{
+    try {
+        const staff = await service.getStaffBySeniorityService();
+        res.status(200).send(staff);
+    } catch (error) {
+        res.send(error);
+    }
+}
+/* 31. */
+export const getRecervationPendingController = async(req, res, next)=>{
+    try {
+        const reservations = await service.getRecervationPendingService();
+        res.status(200).send(reservations);
     } catch (error) {
         res.send(error);
     }

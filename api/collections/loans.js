@@ -146,7 +146,7 @@ class Loans {
         }
     };
     /* 21. mostrar cual es el libro con más prestamos activos. */
-    async getLoansManyActive() {
+    async getLoansTopBookActive() {
         try {
             const connect = await this.connection();
             const result = await connect.aggregate([

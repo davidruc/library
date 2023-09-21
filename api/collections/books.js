@@ -473,7 +473,7 @@ class Books{
         }
     };
     /* 17. listar todos los libros que no tienen ninguna reservación activa  */
-    async getBookReservationFree(name){
+    async getBookReservationFree(){
         try {
             const connect = await this.connection();
             const result = await connect.aggregate([

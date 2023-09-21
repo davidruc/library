@@ -145,7 +145,7 @@ class Returns {
         }
     };
     /* 25. Listar a todas las personas ordenadas desde la persona con más días de retraso en las entregas a la que menos tiene.  */
-    async getReturnsTop10() {
+    async getReturnsLateOrder() {
         try {
             const connect = await this.connection();
             const result = await connect.aggregate([

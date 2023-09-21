@@ -62,7 +62,80 @@ const getInitRoute = ()=>{
     router.get("/bookStatus", versions({
         "2.0.0":  controller.getBookByStatusController
     }));
-   
+    /* 11. param = name */
+    router.get("/reservationByTitle", versions({
+        "2.0.0":  controller.getRecervationByTitleController
+    }));
+    /* 12. param = month */
+    router.get("/reservationByMonth", versions({
+        "2.0.0":  controller.getRecervationByMonthController
+    }));
+    /* 13. param = name */
+    router.get("/reservationByName", versions({
+        "2.0.0":  controller.getRecervationByNameController
+    }));
+    /* 15.  */
+    router.get("/reservationTop", versions({
+        "2.0.0":  controller.getRecervationTopController
+    }));
+    /* 16.  */
+    router.get("/reservationBookTop", versions({
+        "2.0.0":  controller.getRecervationBookTopController
+    }));
+    /* 17. */
+    //! Esta consulta puede ser útil para buscar los libros disponibles en las otras consultas
+    router.get("/booksFree", versions({
+        "2.0.0":  controller.getBookReservationFreeController
+    }));
+    /* 19. */
+    router.get("/loansManyActive", versions({
+        "2.0.0":  controller.getLoansManyActiveController
+    }));
+    /* 20. */
+    router.get("/loanLate", versions({
+        "2.0.0":  controller.getLoansLateController
+    }));
+    /* 21.  */
+    router.get("/loanTopBook", versions({
+        "2.0.0":  controller.getLoansTopBookActiveController
+    }));
+    /* 23.  */
+    router.get("/returnTopBook", versions({
+        "2.0.0":  controller.getReturnsByTopBookController
+    }));
+    /* 24.  */
+    router.get("/returnUserTop", versions({
+        "2.0.0":  controller.getReturnsTop10Controller
+    }));
+    /* 25.  */
+    router.get("/returnLate", versions({
+        "2.0.0":  controller.getReturnsLateOrderController
+    }));
+    /* 26. param = month */
+    router.get("/returnByMonth", versions({
+        "2.0.0":  controller.getReturnsByMonthController
+    }));
+    /* 27. param = doc */
+    router.get("/userReservationON", versions({
+        "2.0.0":  controller.getUsersReservationOnController
+    }));
+    /* 28. */
+    router.get("/staffTeams", versions({
+        "2.0.0":  controller.getStaffByTeamsController
+    }));
+    /* 29.  */
+    router.get("/staffSalary", versions({
+        "2.0.0":  controller.getStaffBySalaryController
+    }));
+    /* 30. */
+    router.get("/staffSeniority", versions({
+        "2.0.0":  controller.getStaffBySeniorityController
+    }));
+    /* 31. param = status */
+    router.get("/reservationPending", versions({
+        "2.0.0":  controller.getRecervationPendingController
+    }));
+
     
    
     

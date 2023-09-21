@@ -244,7 +244,7 @@ db.createCollection("reservations", {
         }
     }
 });
-db.createCollection("returns", {
+/* db.createCollection("returns", {
     capped: false,
     validator: {
         $jsonSchema: {
@@ -277,4 +277,4 @@ db.createCollection("returns", {
             }
         }
     }
-})
+}) */

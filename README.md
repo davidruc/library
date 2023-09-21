@@ -31,8 +31,9 @@ Reservations:
 13. mostrar todas las reservaciones realizadas por una persona en específico
 14. *EndPoint que al hacer un post de una reservación de un libro verifique si existe algún libro con ese titulo disponible y que en caso de que haya alguno disponible retorne la información de esos libros disponibles.
 15. Mostrar la persona que tenga más reservaciones activas
-16. Mostrar el libro que tiene más reservaciones activas
+16. Mostrar el titulo de los libros con sus respectivas reservas ordenas de más reservas a menos reservas
 17. listar todos los libros que no tienen ninguna reservación activa
+
 
 Loans: 
 

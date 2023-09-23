@@ -1,5 +1,5 @@
 import { collectionGen } from "../db/connection.js";
-
+import siguienteId from "../helpers/autoIncrement.js";
 class Reservations{
     constructor(){};
     async connection(){
@@ -14,7 +14,10 @@ class Reservations{
         try {
             const connect = await this.connection();
             if(!id_reservation) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"reservationId": parseInt(id_reservation)}}]).toArray()
+            console.log("here");
+            const reservation = await connect.aggregate([{$match: {"reservationId": parseInt(id_reservation)}}]).toArray()
+            return reservation
+            
         } catch (error) {
             throw error;
         }
@@ -22,13 +25,25 @@ class Reservations{
     async postReservation(data){
         try {
             const connect = await this.connection();
-            let body = { ...data, "reservation_date": new Date(), "expected_delivery": new Date(data.expected_delivery)}
+            const newId = await siguienteId("reservations");
+            let body = { "reservationId": newId,...data, "reservation_date": new Date(), "expected_delivery": new Date(data.expected_delivery)}
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {
             throw error;
         }
     };
+    async postReservationEspecial(body){
+      try {
+          const connect = await this.connection();
+          const newId = await siguienteId("reservations");
+          let data = { "reservationId": newId,...body, "reservation_date": new Date()}
+          const result = await connect.insertOne(data);
+          return result;
+      } catch (error) {
+          throw error;
+      }
+  };
     async updateReservation(id_reservation, data){
         try {
             const connect = await this.connection();

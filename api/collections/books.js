@@ -200,6 +200,44 @@ class Books{
             throw error;
         }
     };
+    /* 4.1 */
+    async getBookAviable(title){
+      try {
+          const connect = await this.connection();
+          const result = await connect.aggregate([
+            {
+              $match: {
+                title: { $eq: title },
+                aviability: { $eq: true }
+              }
+            },
+            {
+              $limit: 1
+            },
+            {
+              $project: {
+                _id: 0,
+                codigo: "$code",
+                titulo: "$title",
+                autor: "$author",
+                estado: "$status",
+                editorial: "$editorial",
+                categoria: "$category",
+                clasificacion_Dewey: "$dewey_clasification",
+                disponibilidad: "$aviability",
+                version: "$book_version",
+                ingreso: "$date_admission",
+                descripcion: "$descript",
+                ubicacion: "$location"
+              }
+            },
+          ]).toArray()
+          return result
+      } catch (error) {
+          throw error;
+      }
+  };
+    
     /* 5. Mostrar todos los libros agrupados por sus 10 grandes áreas de la clasificación de dewey. */
     async getBookByDewey(){
         try {
@@ -473,55 +511,104 @@ class Books{
         }
     };
     /* 17. listar todos los libros que no tienen ninguna reservación activa  */
-    async getBookReservationFree(){
+    async getBookReservationFree(name){
         try {
             const connect = await this.connection();
-            const result = await connect.aggregate([
-                {
-                  $project: {
-                    _id: 0,
-                    codigo: "$code",
-                    titulo: "$title",
-                    autor: "$author",
-                    estado: "$status",
-                    editorial: "$editorial",
-                    categoria: "$category",
-                    clasificacion_Dewey: "$dewey_clasification",
-                    disponibilidad: "$aviability",
-                    version: "$book_version",
-                    ingreso: "$date_admission",
-                    descripcion: "$descript",
-                    ubicacion: "$location"
-                  }
-                },
-                {
-                  $group: {
-                    _id: "$titulo",
-                    libros: { $push: "$$ROOT" }
-                  }
-                },
-                {
-                  $lookup: {
-                    from: "reservations",
-                    localField: "_id",
-                    foreignField: "title_book",
-                    as: "reservas"
-                  }
-                },
-                { 
-                  $match: {
-                    reservas: {$eq: []}
-                  }
-                },
-                {
-                  $project: {
-                    _id: 0,
-                    libro: "$_id",
-                    books: "$libros"
-                  }
+            if(!name) return await connect.aggregate([
+              {
+                $project: {
+                  _id: 0,
+                  codigo: "$code",
+                  titulo: "$title",
+                  autor: "$author",
+                  estado: "$status",
+                  editorial: "$editorial",
+                  categoria: "$category",
+                  clasificacion_Dewey: "$dewey_clasification",
+                  disponibilidad: "$aviability",
+                  version: "$book_version",
+                  ingreso: "$date_admission",
+                  descripcion: "$descript",
+                  ubicacion: "$location"
                 }
-              ]).toArray()
-            return result
+              },
+              {
+                $group: {
+                  _id: "$titulo",
+                  libros: { $push: "$$ROOT" }
+                }
+              },
+              {
+                $lookup: {
+                  from: "reservations",
+                  localField: "_id",
+                  foreignField: "title_book",
+                  as: "reservas"
+                }
+              },
+              { 
+                $match: {
+                  reservas: {$eq: []}
+                }
+              },
+              {
+                $project: {
+                  _id: 0,
+                  libro: "$_id",
+                  books: "$libros"
+                }
+              }
+            ]).toArray();
+            return  await connect.aggregate([
+              {
+                $project: {
+                  _id: 0,
+                  codigo: "$code",
+                  titulo: "$title",
+                  autor: "$author",
+                  estado: "$status",
+                  editorial: "$editorial",
+                  categoria: "$category",
+                  clasificacion_Dewey: "$dewey_clasification",
+                  disponibilidad: "$aviability",
+                  version: "$book_version",
+                  ingreso: "$date_admission",
+                  descripcion: "$descript",
+                  ubicacion: "$location"
+                }
+              },
+              {
+                $group: {
+                  _id: "$titulo",
+                  libros: { $push: "$$ROOT" }
+                }
+              },
+              {
+                $lookup: {
+                  from: "reservations",
+                  localField: "_id",
+                  foreignField: "title_book",
+                  as: "reservas"
+                }
+              },
+              { 
+                $match: {
+                  reservas: {$eq: []}
+                }
+              },
+              {
+                $project: {
+                  _id: 0,
+                  libro: "$_id",
+                  books: "$libros"
+                }
+              },
+              {
+                $match: {
+                  libro: { $eq: name }
+                }
+              }
+            ]).toArray();
         } catch (error) {
             throw error;
         }

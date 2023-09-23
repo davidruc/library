@@ -1,4 +1,5 @@
 import { collectionGen } from "../db/connection.js";
+import siguienteId from "../helpers/autoIncrement.js";
 
 class Loans {
     constructor() { };
@@ -22,7 +23,8 @@ class Loans {
     async postLoan(data) {
         try {
             const connect = await this.connection();
-            let body = { ...data, "start_loan": new Date(), "finish_loan": new Date(data.finish_loan) }
+            const newId = await siguienteId("loans");
+            let body = { "loanId": newId , ...data, "start_loan": new Date(), "finish_loan": new Date(data.finish_loan) }
             console.log(body);
             const result = await connect.insertOne(body);
             return result;
@@ -192,6 +194,49 @@ class Loans {
                     $limit: 1
                 }
             ]).toArray()
+            return result
+        } catch (error) {
+            throw error;
+        }
+    };
+    /* 32. Traer el prestamo más proximo a entregar de un libro en específico */
+     async getLoansNextOneActive(title) {
+        try {
+            const connect = await this.connection();
+            const result = await connect.aggregate([
+                {
+                  $lookup: {
+                    from: "Books",
+                    localField: "book_code",
+                    foreignField: "code",
+                    as: "book"
+                  }
+                },
+                {
+                  $project: {
+                    _id: 0,
+                    id: "$loanId",
+                    titulo: { $arrayElemAt: ["$book.title", 0] },
+                    usuario: "$user_name",
+                    fecha_reservacion: "$start_loan",
+                    fecha_entrega: "$finish_loan"
+                  }
+                },
+                {
+                  $match: {
+                    titulo: { $eq: title}
+                  }
+                },
+                {
+                  $sort: {
+                    fecha_entrega: 1
+                  }
+                },
+                {
+                  $limit: 1
+                }
+              
+              ]).toArray()
             return result
         } catch (error) {
             throw error;

@@ -1,5 +1,5 @@
 import { collectionGen } from "../db/connection.js";
-
+import siguienteId from "../helpers/autoIncrement.js";
 class Returns {
     constructor() { };
     async connection() {

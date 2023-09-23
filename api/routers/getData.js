@@ -83,7 +83,7 @@ const getInitRoute = ()=>{
         "2.0.0":  controller.getRecervationBookTopController
     }));
     /* 17. */
-    //! Esta consulta puede ser útil para buscar los libros disponibles en las otras consultas
+    //todo:  Esta consulta puede ser útil para buscar los libros disponibles en las otras consultas
     router.get("/booksFree", versions({
         "2.0.0":  controller.getBookReservationFreeController
     }));

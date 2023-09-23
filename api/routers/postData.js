@@ -23,6 +23,9 @@ const postInitRoute = ()=>{
     router.post("/users", versions({
         "2.0.0":  controller.postUserController
     }));
+    router.post("/loansReal", versions({
+        "2.0.0":  controller.postLoanRealShitController
+    }));
     return router;
 }
 export default postInitRoute;

@@ -51,6 +51,11 @@ export const getBookByAviabilityService = async (state) => {
     const book = new Books();
     return await book.getBookByAviability(state);
 }
+/* 4.1  */
+export const getBookByAviableTitleService = async (title) => {
+    const book = new Books();
+    return await book.getBookAviable(title);
+}
 /* 5.  */
 export const getBookByDeweyService = async () => {
     const book = new Books();
@@ -107,9 +112,9 @@ export const getRecervationBookTopService = async () => {
     return await reservation.getRecervationBookTop();
 }
 /* 17. */
-export const getBookReservationFreeService = async () => {
+export const getBookReservationFreeService = async (name) => {
     const book = new Books();
-    return await book.getBookReservationFree();
+    return await book.getBookReservationFree(name);
 }
 /* 18. */
 //!!
@@ -176,4 +181,10 @@ export const getStaffBySeniorityService = async () => {
 export const getRecervationPendingService = async () => {
     const reservation = new Reservations();
     return await reservation.getRecervationPending();
+}
+/* 32.  */
+
+export const getLoansNextOneActiveService = async (title) => {
+    const loan = new Loans();
+    return await loan.getLoansNextOneActive(title);
 }

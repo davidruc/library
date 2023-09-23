@@ -548,10 +548,40 @@ db.Books.aggregate([
       libro: "$_id",
       books: "$libros"
     }
-  }
+  },
 ]);
 /* 18. Al realizar un post en loans verifica si el cuerpo contiene una reservación asignada & se verifica que existan libros disponibles con ese titulo. Se verifica si esta reservación existe: Si existe se realiza el post y elimina inmediatamente el registro de reservaciones además cambia el estado del libro a ocupado. Si en el cuerpo no se envía una reservesión_id y no hay libros disponibles manda todos los pestamos de ese libro y un mensaje diciendo que no hay libros disponibles y que recomienda realizar la reservación del mismo */
 
+//!! Verifica si existe un libro con ese título disponible
+use("library_project")
+db.Books.aggregate([
+  {
+    $match: {
+      title: { $eq: "The Origins of Species" },
+      aviability: { $eq: true }
+    }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+]);
 //? recibe: 
 /* {
     "loanId": 1001,
@@ -1030,4 +1060,41 @@ db.reservations.aggregate([
     }
   },
   { $sort: { fecha_entrega_esperada: 1 } },
+]);
+
+/* 32. Traer el prestamo más proximo a entregar de un libro en específico */
+use("library_project")
+db.loans.aggregate([
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$loanId",
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user_name",
+      fecha_reservacion: "$start_loan",
+      fecha_entrega: "$finish_loan"
+    }
+  },
+  {
+    $match: {
+      titulo: { $eq: "La ciudad y los perros"}
+    }
+  },
+  {
+    $sort: {
+      fecha_entrega: 1
+    }
+  },
+  {
+    $limit: 1
+  }
+
 ]);

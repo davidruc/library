@@ -840,6 +840,13 @@ db.users.insertMany([
     }
   }
 ]);
+db.loans.insertOne({
+   "loanId": 102,
+    "book_code": 103,
+    "user_name": "Javier Martínez",
+    "start_loan": new Date("2023-08-02"),
+    "finish_loan": new Date("2023-08-16")
+})
 db.loans.insertMany([
   {
     "loanId": 1001,
@@ -1078,6 +1085,16 @@ db.reservations.insertMany([
     "expected_delivery": new Date("2023-09-15")
   }
 ]);
+db.reservations.insertOne(
+  {
+    "reservationId": 143,
+    "title_book": "Cronica de una muerte anunciada",
+    "user_name": "Luisa Pérez",
+    "reservation_date": new Date("2023-09-01"),
+    "expected_delivery": new Date("2023-09-15")
+})
+
+
 db.returns.insertMany([
   {
     "loanID": 1001, 

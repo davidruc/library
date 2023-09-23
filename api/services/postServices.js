@@ -17,6 +17,11 @@ export const postReservationService = async(data)=>{
     const reservation = new Reservations();
     return await reservation.postReservation(data);
 }
+/* especial case of reservation */
+export const postReservationInLoansService = async(body)=>{
+    const reservation = new Reservations();
+    return await reservation.postReservationEspecial(body);
+}
 export const postReturnService = async(data)=>{
     const returns = new Returns();
     return await returns.postReturn(data);

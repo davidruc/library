@@ -196,14 +196,17 @@ export const getRecervationBookTopController = async(req, res, next)=>{
     }
 }
 /* 17. */
+//Todo: libros disponibles
 export const getBookReservationFreeController = async(req, res, next)=>{
     try {
-        const book = await service.getBookReservationFreeService();
+        const { name } = req.query
+        const book = await service.getBookReservationFreeService(name);
         res.status(200).send(book);
     } catch (error) {
         res.send(error);
     }
 }
+
 /* 19. */
 export const getLoansManyActiveController = async(req, res, next)=>{
     try {

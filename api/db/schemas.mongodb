@@ -1,4 +1,12 @@
 use("library_project");
+db.counters.insertMany([
+    { counter: "BooksId", sequence_value: 0 },
+    { counter: "staffId", sequence_value: 0 },
+    { counter: "usersId", sequence_value: 0 },
+    { counter: "loansId", sequence_value: 0 },
+    { counter: "reservationsId", sequence_value: 0 },
+    { counter: "returnsId", sequence_value: 0 }
+]);
 db.createCollection("Books", {
     capped: false,
     validator: {

@@ -14,7 +14,7 @@ class Returns {
         try {
             const connect = await this.connection();
             if (!code) return await connect.find({}).toArray()
-            return await connect.aggragate([{ $match: { "return_code": parseInt(code) } }]).toArray()
+            return await connect.aggregate([{ $match: { "return_code": parseInt(code) } }]).toArray()
         } catch (error) {
             throw error;
         }

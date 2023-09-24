@@ -14,7 +14,7 @@ class Books{
         try {
             const connect = await this.connection();
             if(!code) return await connect.find({}).toArray()
-            return await connect.aggragate([{$match: {"code": parseInt(code)}}]).toArray()
+            return await connect.aggregate([{$match: {"code": parseInt(code)}}]).toArray()
         } catch (error) {
             throw error;
         }

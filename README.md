@@ -29,7 +29,7 @@ Reservations:
 11. Mostrar todas las reservaciones agendadas que hay para un libro con un titulo en específico 
 12. mostrar todas las reservaciones que llevan más de 2 meses en espera
 13. mostrar todas las reservaciones realizadas por una persona en específico
-14. *EndPoint que al hacer un post de una reservación, verifica si existe algún libro con ese titulo disponible. En caso de que haya alguno disponible realice el prestamo inmediatamente (y cambie la disponibilidad del libro).  Si no existe ningún libro disponible, busca el prestamo cuya entrega esté más proxima y le asigna esa fecha de entrega.
+14.  EndPoint que al hacer un post de una reservación, verifica si existe algún libro con ese titulo disponible. En caso de que haya alguno disponible realice el prestamo inmediatamente (y cambie la disponibilidad del libro).  Si no existe ningún libro disponible, busca el prestamo cuya entrega esté más proxima y le asigna esa fecha de entrega.
 15. Mostrar la persona que tenga más reservaciones activas
 16. Mostrar el titulo de los libros con sus respectivas reservas ordenas de más reservas a menos reservas
 17. listar todos los libros que no tienen ninguna reservación activa
@@ -37,7 +37,7 @@ Reservations:
 
 Loans: 
 
-18. *Al realizar un post en loans verifica si el cuerpo contiene una reservación asignada & se verifica que existan libros disponibles con ese titulo. Se verifica si esta reservación existe: Si existe se realiza el post y elimina inmediatamente el registro de reservaciones además cambia el estado del libro a ocupado. Si en el cuerpo no se envía una reservesión_id y no hay libros disponibles manda todos los pestamos de ese libro y un mensaje diciendo que no hay libros disponibles y que recomienda realizar la reservación del mismo.
+18.  Este endPoint valida el cuerpo de la solicitud. Si es una solicitud que contiene una reservacion o no. Valida la disponibilidad del libro y dependiendo de si se encuentra o no disponible realiza el prestamos, realiza una reserva o envía un mensaje en caso de ya tener una. (En sus subprocesos valida si el codigo de reservación es válido) También se encarga de eliminar las reservas cuando se realiza un prestamo y de modificar los estados del libro a ocupado.
 19. Endpoint que permita listar a todas las personas que tengan más de dos prestamos a la vez
 20. Listar los prestamos que están atrasados en su entrega.
 21. mostrar cual es el libro con más prestamos activos.

@@ -15,7 +15,7 @@ class Loans {
         try {
             const connect = await this.connection();
             if (!id_loan) return await connect.find({}).toArray()
-            return await connect.aggragate([{ $match: { "loanId": parseInt(id_loan) } }]).toArray()
+            return await connect.aggregate([{ $match: { "loanId": parseInt(id_loan) } }]).toArray()
         } catch (error) {
             throw error;
         }

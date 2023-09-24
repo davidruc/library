@@ -29,6 +29,9 @@ const postInitRoute = ()=>{
     router.post("/reservationReal", versions({
         "2.0.0":  controller.postRealReservationController
     }));
+    router.post("/returnReal", versions({
+        "2.0.0":  controller.postReturnRealController
+    }));
     return router;
 }
 export default postInitRoute;

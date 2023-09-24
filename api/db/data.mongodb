@@ -1093,8 +1093,6 @@ db.reservations.insertOne(
     "reservation_date": new Date("2023-09-01"),
     "expected_delivery": new Date("2023-09-15")
 })
-
-
 db.returns.insertMany([
   {
     "loanID": 1001, 

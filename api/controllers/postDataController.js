@@ -60,6 +60,12 @@ export const postUserController = async (req, res, next) => {
 /* 14. EndPoint que al hacer un post de una reservación, verifica si existe algún libro con ese titulo disponible. En caso de que haya alguno disponible realice el prestamo inmediatamente (y cambie la disponibilidad del libro).  Si no existe ningún libro disponible, busca el prestamo cuya entrega esté más proxima y le asigna esa fecha de entrega */
 
 export const postRealReservationController = async (req, res, next) => {
+    /* Cuerpo de la solicitud
+        {
+            "title": "The Origins of Species",
+            "user_name": "Luisa Pérez"
+        } 
+    */
     try {
         const { title, user_name } = req.body;
         // Hago una búsqueda de disponibilidad
@@ -68,7 +74,7 @@ export const postRealReservationController = async (req, res, next) => {
         if (!aviability[0]) {
             // Revisa cuando es la fecha de entrega más proxima para la entrega de un prestamo
             const aproxDelivery = await getServices.getLoansNextOneActiveService(title);
-            const { titulo,fecha_entrega } = aproxDelivery[0];
+            const { titulo, fecha_entrega } = aproxDelivery[0];
             // Creo el cuerpo para realizar una reservación automática del libro
             const body = {
                 "title_book": titulo, "user_name": user_name, "expected_delivery": fecha_entrega
@@ -90,7 +96,7 @@ export const postRealReservationController = async (req, res, next) => {
             // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
             const newEstate = { "aviability": false }
             const updateBook = await updateServices.updateBookService(aviability[0].codigo, newEstate)
-            
+
             //Envío el cuerpo y realizo el prestamo
             const loan = await service.postLoanService(data);
             return res.status(201).send({ loan: loan, changeState: updateBook, message: `El libro ${aviability[0].titulo} se encuentra disponible, por lo que se realizó de manera automáticamente el prestamo` })
@@ -99,7 +105,6 @@ export const postRealReservationController = async (req, res, next) => {
         res.status(error.status).send(error)
     }
 }
-
 
 /* 18. Este endPoint valida el cuerpo de la solicitud. Si es una solicitud que contiene una reservacion o no. Valida la disponibilidad del libro y dependiendo de si se encuentra o no disponible realiza el prestamos, realiza una reserva o envía un mensaje en caso de ya tener una. (En sus subprocesos valida si el codigo de reservación es válido) También se encarga de eliminar las reservas cuando se realiza un prestamo y de modificar los estados del libro a ocupado. */
 
@@ -187,8 +192,7 @@ export const postLoanRealShitController = async (req, res, next) => {
                     }
                     // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
                     const newEstate = { "aviability": false }
-                    const updateBook = await updateServices.updateBookService(aviabilityReservation[0].codigo, newEstate)
-                    console.log(updateBook);
+                    const updateBook = await updateServices.updateBookService(aviabilityReservation[0].codigo, newEstate);
                     // ELIMINO LA RESERVA
                     const deleteReservation = await deleteServices.deleteReservationService(id_reservation)
                     //Envío el cuerpo y realizo el prestamo
@@ -199,5 +203,29 @@ export const postLoanRealShitController = async (req, res, next) => {
         }
     } catch (error) {
         res.send(error);
+    }
+}
+
+/* 22. Al realizar el post de un return es obligatorio que exista un prestamo activo relacionado, por lo que antes se verifica que esta condición se cumpla. Si no existe ningún prestamo activo manda un mensaje de alerta mencionando que no es posible realizar un retorno de un libro que no tenía ningún prestamo activo. Si existe el prestamo activo inserta el dato y elimina el registro de la colección de prestamos. Inmediatamente modifica el estado del libro que se encontraba en prestamo */
+
+export const postReturnRealController = async (req, res, next) => {
+    try {
+        const { loanID } = req.body;
+        const loan = await getServices.getAllLoansService(loanID);
+        if (!loan[0]) {
+            res.send({ message: `No hay ningún prestamo activo para el código ${loanID}` })
+        }
+        else {
+            const code = loan[0].book_code
+            const data = { "loanID": loanID, "book_code": code, "user": loan[0].user_name, "finish_loan": loan[0].finish_loan }
+            const returns = await service.postReturnService(data);
+            const deleteLoan = await deleteServices.deleteLoanService(loanID);
+            const newEstate = { "aviability": true }
+            const updateBook = await updateServices.updateBookService(code, newEstate)
+            res.send({ return: returns, deleteLoan: deleteLoan, bookState: updateBook ,message: `Se realizó con éxito la entrega y la eliminación del prestamo No:${loanID} (La disponibilidad del libro ${code} es disponible ahora).` });
+
+        }
+    } catch (error) {
+        res.status(error.status).send(error)
     }
 }

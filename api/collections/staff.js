@@ -14,7 +14,7 @@ class Staff {
         try {
             const connect = await this.connection();
             if (!id_employee) return await connect.find({}).toArray()
-            return await connect.aggragate([{ $match: { "employeeId": parseInt(id_employee) } }]).toArray()
+            return await connect.aggregate([{ $match: { "employeeId": parseInt(id_employee) } }]).toArray()
         } catch (error) {
             throw error;
         }

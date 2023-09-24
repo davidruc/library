@@ -1,0 +1,1100 @@
+/* 1. Endpoint que permita filtrar libros por titulo. */
+//! Busca por titulos del libro
+use("library_project")
+db.Books.aggregate([
+  {
+    $match:
+      { "title": { $regex: "fiesta", $options: "i" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      author: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+]);
+/* 2. Filtrar todos los libros por autor. */
+//! Busca por autor
+use("library_project")
+db.Books.aggregate([
+  {
+    $match:
+      { "author": { $regex: "Gabriel", $options: "i" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+  {
+    $group: {
+      _id: "$autor",
+      libros: { $push: "$$ROOT" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      author: "$_id",
+      books: "$libros"
+    }
+  }
+]);
+/* 3. Mostrar los libros agrupados por autores, de forma que se puedan observar todos los libros que tiene cada autor. */
+use("library_project")
+db.Books.aggregate([
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+  {
+    $group: {
+      _id: "$autor",
+      libros: { $push: "$$ROOT" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      author: "$_id",
+      books: "$libros"
+    }
+  }
+]);
+/* 4. mostrar todos los libros por su disponibilidad. */
+//!Buscar por disponibilidad TRUE o FALSE
+use("library_project")
+db.Books.aggregate([
+  {
+    $match:
+      { aviability: false }
+  },
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  }
+]);
+/* 5. Mostrar todos los libros agrupados por sus 10 grandes áreas de la clasificación de dewey. */
+use("library_project")
+db.Books.aggregate([
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+  {
+    $bucket: {
+      groupBy: "$clasificacion_Dewey",
+      boundaries: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000],
+      default: "Other",
+      output: {
+        "number": { $sum: 1 },
+        "books": { $push: "$$ROOT" }
+      }
+    }
+  },
+  {
+    $addFields: {
+      nombreRango: {
+        $switch: {
+          branches: [
+            { case: { $eq: ["$_id", 0] }, then: "Ciencias de la Computación, Información y Obras Generales." },
+            { case: { $eq: ["$_id", 100] }, then: "Filosofía y Psicología" },
+            { case: { $eq: ["$_id", 200] }, then: "Religión, Teología." },
+            { case: { $eq: ["$_id", 300] }, then: "Ciencias Sociales" },
+            { case: { $eq: ["$_id", 400] }, then: "Lenguas" },
+            { case: { $eq: ["$_id", 500] }, then: "Ciencias Básicas" },
+            { case: { $eq: ["$_id", 600] }, then: "Tecnología y Ciencias Aplicadas" },
+            { case: { $eq: ["$_id", 700] }, then: "Artes y recreación" },
+            { case: { $eq: ["$_id", 800] }, then: "Literatura." },
+            { case: { $eq: ["$_id", 900] }, then: "Historia y Geografía" },
+            { case: { $eq: ["$_id", "Otros"] }, then: "Otros" }
+          ],
+          default: "Desconocido"
+        }
+      }
+    }
+  },
+
+  {
+    $project: {
+      _id: 0,
+      categoria: "$nombreRango",
+      Dewey_categoria: "$_id",
+      libros_categoria: "$number",
+      libros: "$books"
+    }
+  }
+])
+/* 6. Mostrar los libros agrupados por su ubicación en la biblioteca. */
+use("library_project")
+db.Books.aggregate([
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+  {
+    $group: {
+      _id: "$ubicacion",
+      cantidad: { $sum: 1 },
+      libros: { $push: "$$ROOT" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      ubicacion: "$_id",
+      cantidad: "$cantidad",
+      books: "$libros"
+    }
+  }
+]);
+/* 7. mostrar todos los libros de una editorial específica. */
+use("library_project")
+db.Books.aggregate([
+  {
+    $match:
+      { "editorial": { $regex: "Ediciones p", $options: "i" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+  {
+    $group: {
+      _id: "$editorial",
+      cantidad: { $sum: 1 },
+      libros: { $push: "$$ROOT" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      editorial: "$_id",
+      cantidad: "$cantidad",
+      books: "$libros"
+    }
+  }
+]);
+/* 8. mostrar todos los libros que tengan una antiguedad de más de N años */
+use("library_project")
+db.Books.aggregate([
+  {
+    $addFields: {
+      oldBooks: {
+        $dateFromParts: {
+          year: { $subtract: [{ $year: "$$NOW" }, 5] },
+          month: { $month: "$$NOW" },
+          day: { $dayOfMonth: "$$NOW" }
+        }
+      },
+    }
+  },
+  {
+    $match:
+      { date_admission: { $lt: "$oldBooks" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      date_search: "$oldBooks",
+      codigo: "$code",
+      titulo: "$title",
+      author: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+]);
+/* 9. mostrar los libros ingresados por su año */
+//! Aqui se pone el año que se quiere buscar 
+use("library_project")
+db.Books.aggregate([
+  {
+    $addFields: {
+      year_admission: { $year: "$date_admission" }
+    }
+  },
+  {
+    $match:
+      { year_admission: { $eq: 2017 } }
+  },
+  {
+    $project: {
+      _id: 0,
+      date_search: "$oldBooks",
+      codigo: "$code",
+      titulo: "$title",
+      author: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+]);
+/* 10. mostrar los libros segun su estado. */
+//! Aqui se pone el nombre del estado
+use("library_project")
+db.Books.aggregate([
+  {
+    $match:
+      { "status": { $regex: "mal", $options: "i" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      date_search: "$oldBooks",
+      codigo: "$code",
+      titulo: "$title",
+      author: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+]);
+/* 11. Mostrar todas las reservaciones agendadas que hay para un libro con un titulo en específico */
+//! Aquí se pasa como parámetro el nombre del libro
+use("library_project")
+db.reservations.aggregate([
+  {
+    $match:
+      { "title_book": { $regex: "cien", $options: "i" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$reservationId",
+      titulo: "$title_book",
+      usuario: "$user_name",
+      fecha_reservacion: "$reservation_date",
+      fecha_entrega: "$expected_delivery"
+    }
+  },
+]);
+/* 12. mostrar todas las reservaciones que llevan más de N meses en espera  */
+//! Aqui se pasa como parámetro el numero de meses
+use("library_project")
+db.reservations.aggregate([
+  {
+    $addFields: {
+      differenceInMonths: {
+        $divide: [
+          { $subtract: ["$$NOW", "$reservation_date"] },
+          1000 * 60 * 60 * 24 * 30
+        ]
+      }
+    }
+  },
+  {
+    $match: {
+      differenceInMonths: { $gte: 2 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$reservationId",
+      titulo: "$title_book",
+      usuario: "$user_name",
+      fecha_reservacion: "$reservation_date",
+      fecha_entrega: "$expected_delivery"
+    }
+  },
+]);
+/* 13. mostrar todas las reservaciones realizadas por una persona en específico */
+//! Aquí se pasa como parámetro el nombre del de la persona
+use("library_project")
+db.reservations.aggregate([
+  {
+    $match:
+      { "user_name": { $regex: "luis", $options: "i" } }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$reservationId",
+      titulo: "$title_book",
+      usuario: "$user_name",
+      fecha_reservacion: "$reservation_date",
+      fecha_entrega: "$expected_delivery"
+    }
+  },
+  {
+    $group: {
+      _id: "$usuario",
+      reservas: { $push: "$$ROOT" }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      usuario: "$_id",
+      reservas_activas: "$reservas"
+    }
+  }
+]);
+/* 14. !! */
+/* 15. Mostrar la persona que tenga más reservaciones activas */
+use("library_project")
+db.reservations.aggregate([
+  {
+    $project: {
+      _id: 0,
+      id: "$reservationId",
+      titulo: "$title_book",
+      usuario: "$user_name",
+      fecha_reservacion: "$reservation_date",
+      fecha_entrega: "$expected_delivery"
+    }
+  },
+  {
+    $group: {
+      _id: "$usuario",
+      reservas: { $push: "$$ROOT" },
+      num_reservas: { $sum: 1 }
+    }
+  },
+  { $sort: { num_reservas: -1 } },
+  { $limit: 1 },
+  {
+    $project: {
+      _id: 0,
+      usuario: "$_id",
+      num_reservas: "$num_reservas",
+      reservas_activas: "$reservas"
+    }
+  }
+]);
+
+/* 16. Mostrar el titulo de los libros con sus respectivas reservas ordenas de más reservas a menos reservas */
+use("library_project")
+db.reservations.aggregate([
+  {
+    $project: {
+      _id: 0,
+      id: "$reservationId",
+      titulo: "$title_book",
+      usuario: "$user_name",
+      fecha_reservacion: "$reservation_date",
+      fecha_entrega: "$expected_delivery"
+    }
+  },
+  {
+    $group: {
+      _id: "$titulo",
+      reservas: { $push: "$$ROOT" },
+      num_reservas: { $sum: 1 }
+    }
+  },
+  { $sort: { num_reservas: -1 } },
+  {
+    $project: {
+      _id: 0,
+      libro: "$_id",
+      num_reservas: "$num_reservas",
+      reservas_activas: "$reservas"
+    }
+  }
+]);
+/* 17. listar todos los libros que no tienen ninguna reservación activa */
+use("library_project")
+db.Books.aggregate([
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+  {
+    $group: {
+      _id: "$titulo",
+      libros: { $push: "$$ROOT" }
+    }
+  },
+  {
+    $lookup: {
+      from: "reservations",
+      localField: "_id",
+      foreignField: "title_book",
+      as: "reservas"
+    }
+  },
+  {
+    $match: {
+      reservas: { $eq: [] }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      libro: "$_id",
+      books: "$libros"
+    }
+  },
+]);
+/* 18. Al realizar un post en loans verifica si el cuerpo contiene una reservación asignada & se verifica que existan libros disponibles con ese titulo. Se verifica si esta reservación existe: Si existe se realiza el post y elimina inmediatamente el registro de reservaciones además cambia el estado del libro a ocupado. Si en el cuerpo no se envía una reservesión_id y no hay libros disponibles manda todos los pestamos de ese libro y un mensaje diciendo que no hay libros disponibles y que recomienda realizar la reservación del mismo */
+
+//!! Verifica si existe un libro con ese título disponible
+use("library_project")
+db.Books.aggregate([
+  {
+    $match: {
+      title: { $eq: "The Origins of Species" },
+      aviability: { $eq: true }
+    }
+  },
+  {
+    $limit: 1
+  },
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      autor: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  },
+]);
+//? recibe: 
+/* {
+    "loanId": 1001,
+    "reservation_code": 2001,
+    "book_code": 501,
+    "user_name": "Luisa Pérez",
+    "start_loan": new Date("2023-08-01"),
+    "finish_loan": new Date("2023-08-15")
+} */
+//? SI la data contiene reservation_code, BUSCA en reservation si existe un dato relacionado. * Si lo encuentra lo borra, Hace el POST y buscar el libro con el código 2001 y edita el primero que encuentra a reservado. * Si no la encuentra cambia la data enviada y elimina el reservation_code y pasa a lo siguiente
+
+//? Si la data no contiene reservation_code, BUSCA en libros si existe una unidad del título disponible. Si no hay una disponible manda un mensaje diciendo que realice una reserva del libro, y le muestra la fecha del proximo libro que se entrega.
+
+//? Si hay una unidad disponible le cambia el estado del primer libro que encuentre a ocupado y luego realiza el préstamo. 
+
+//! Voy a hacer 2 controladores para este endPoint, en uno se asigna automática la finish-loan con un plazo de 2 semana. Este será para el usuario promedio
+//! Para la versión o endPoint del STAFF tiene la opción de asignar una fecha manualmente, aunque si no lo hace también se asignan 2 semanas automáticamente.
+
+
+/* 19.  Endpoint que permita listar a todas las personas que tengan más de dos prestamos a la vez  */
+
+use("library_project")
+db.loans.aggregate([
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$loanId",
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user_name",
+      fecha_reservacion: "$start_loan",
+      fecha_entrega: "$finish_loan"
+    }
+  },
+  {
+    $group: {
+      _id: "$usuario",
+      prestamos: { $push: "$$ROOT" },
+      num_prestamos: { $sum: 1 }
+    }
+  },
+  {
+    $match: {
+      num_prestamos: { $gte: 2 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      usuario: "$_id",
+      num_prestamos: "$num_prestamos",
+      prestamos_activos: "$prestamos"
+    }
+  }
+]);
+
+/* 20. Listar los prestamos que están atrasados en su entrega. */
+
+use("library_project")
+db.loans.aggregate([
+  {
+    $addFields: {
+      daysLate: {
+        $divide: [
+          { $subtract: ["$finish_loan", "$$NOW"] },
+          1000 * 60 * 60 * 24
+        ]
+      }
+    }
+  },
+  {
+    $match: {
+      daysLate: { $lte: 0 }
+    }
+  },
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user_name",
+      dia_retraso: { $multiply: [{ $toInt: "$daysLate" }, -1] },
+      inicio_prestamo: "$start_loan",
+      fin_prestamo: "$finish_loan"
+    }
+  },
+  { $sort: { fin_prestamo: 1 } },
+]);
+
+/* 21. mostrar cual es el libro con más prestamos activos. */
+use("library_project")
+db.loans.aggregate([
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$loanId",
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user_name",
+      fecha_reservacion: "$start_loan",
+      fecha_entrega: "$finish_loan"
+    }
+  },
+  {
+    $group: {
+      _id: "$titulo",
+      prestamos: { $push: "$$ROOT" },
+      num_prestamos: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: "$_id",
+      num_prestamos: "$num_prestamos",
+      prestamos_activos: "$prestamos"
+    }
+  },
+  {
+    $sort: {
+      num_prestamos: -1
+    }
+  },
+  {
+    $limit: 1
+  }
+]);
+
+/* 22. !! */
+
+/* 23.  Traer el top 3 de los libros más prestados con el número de prestamos */
+
+use("library_project")
+db.returns.aggregate([
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: "$book.title"
+    },
+  },
+  {
+    $group: {
+      _id: "$titulo",
+      returns: { $push: "$$ROOT" },
+      num_returns: { $sum: 1 }
+    }
+  },
+  { $sort: { num_returns: -1 } },
+  {
+    $project: {
+      _id: 0,
+      libro: { $arrayElemAt: ["$_id", 0] },
+      num_prestamos: "$num_returns"
+    }
+  },
+  {
+    $limit: 3
+  }
+]);
+
+/* 24. Obtener las 10 personas que más prestamos han hecho a la biblioteca */
+
+use("library_project")
+db.returns.aggregate([
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: "$book.title",
+      usuario: "$user"
+    },
+  },
+  {
+    $group: {
+      _id: "$usuario",
+      returns: { $push: "$$ROOT" },
+      num_returns: { $sum: 1 }
+    }
+  },
+  { $sort: { num_returns: -1 } },
+  {
+    $project: {
+      _id: 0,
+      nombre_usuario: "$_id",
+      num_prestamos: "$num_returns",
+      libros_prestados: {
+        $reduce: {
+          input: "$returns.titulo",
+          initialValue: [],
+          in: { $concatArrays: ["$$value", "$$this"] }
+        }
+      }
+    }
+  },
+  {
+    $limit: 10
+  }
+]);
+
+/* 25. Listar a todas las personas ordenadas desde la persona con más días de retraso en las entregas a la que menos tiene.  */
+
+use("library_project")
+db.returns.aggregate([
+  {
+    $addFields: {
+      daysLate: {
+        $divide: [
+          { $subtract: ["$return_date", "$finish_loan"] },
+          1000 * 60 * 60 * 24
+        ]
+      }
+    }
+  },
+  {
+    $match: {
+      daysLate: { $gte: 1 }
+    }
+  },
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user",
+      dias_retrasado: { $toInt: "$daysLate" },
+      dia_entregada: "$return_date",
+      dia_esperado: "$finish_loan"
+    }
+  },
+  {
+    $group: {
+      _id: "$usuario",
+      dias_atraso: {
+        $sum: "$dias_retrasado"
+      },
+      info_prestamos: {
+        $push: "$$ROOT"
+      }
+    }
+  },
+  { $sort: { dias_atraso: -1 } },
+  {
+    $project: {
+      _id: 0,
+      nombre: "$_id",
+      dias_acumulados: "$dias_atraso",
+      prestamos_retrasados: "$info_prestamos"
+    }
+  },
+]);
+
+/* 26. Traer todos los retornos realizados por un mes específico */
+//! HAy que ingresar el parámetros del mes, en números de 1-12
+use("library_project")
+db.returns.aggregate([
+  {
+    $match: {
+      $expr: {
+        $eq: [{ $month: "$return_date" }, 9]
+      }
+    }
+  },
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user",
+      fecha_entrega: "$return_date",
+      dia_esperado: "$finish_loan"
+    }
+  },
+  {
+    $sort: {
+      fecha_entrega: 1
+    }
+  }
+])
+
+/* 27. Traer información de los usuarios que tienen una reservación activa (traer por documento) */
+use("library_project")
+db.users.aggregate([
+  {
+    $match: {
+      document: { $eq: 101 }
+    }
+  },
+  {
+    $lookup: {
+      from: "reservations",
+      localField: "user_name",
+      foreignField: "user_name",
+      pipeline: [
+        {
+          $project: {
+            _id: 0,
+            titulo: "$title_book",
+            fecha_reservacion: "$reservation_date",
+            entrega_esperada: "$expected_delivery"
+          }
+        }
+      ],
+      as: "reservations"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      documento: "$document",
+      nombre: "$user_name",
+      direccion_entregas: "$address",
+      correo: "$email",
+      reservas: "$reservations"
+    }
+  }
+]);
+
+/* 28. Mostrar los empleados ordenados por sus áreas de trabajos. */
+use("library_project")
+db.staff.aggregate([
+  {
+    $project: {
+      _id: 0,
+      id: "$employeeId",
+      nombre: "$full_name",
+      equipo: "$team",
+      correo: "$email",
+      correo_empresarial: "$business_email",
+      numero: "$phone_number",
+      numero_empresarial: "$business_number",
+      salario: "$salary",
+      incio_contrato: "$start_contract",
+    }
+  },
+  {
+    $group: {
+      _id: "$equipo",
+      numero_empleados: {
+        $sum: 1
+      },
+      empleados: { $push: "$$ROOT" }
+
+    }
+  }
+])
+
+/* 29. Traer ordenados los empleados por salario */
+use("library_project")
+db.staff.aggregate([
+
+  {
+    $sort: {
+      salary: -1
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$employeeId",
+      nombre: "$full_name",
+      equipo: "$team",
+      correo: "$email",
+      correo_empresarial: "$business_email",
+      numero: "$phone_number",
+      numero_empresarial: "$business_number",
+      salario: "$salary",
+      incio_contrato: "$start_contract",
+    }
+  }
+])
+
+/* 30. Traer al empleado más antiguo de la biblioteca. */
+use("library_project")
+db.staff.aggregate([
+
+  {
+    $sort: {
+      start_contract: 1
+    }
+  },
+  { $limit: 1 },
+  {
+    $project: {
+      _id: 0,
+      id: "$employeeId",
+      nombre: "$full_name",
+      equipo: "$team",
+      correo: "$email",
+      correo_empresarial: "$business_email",
+      numero: "$phone_number",
+      numero_empresarial: "$business_number",
+      salario: "$salary",
+      incio_contrato: "$start_contract",
+    }
+  }
+])
+
+/* 31. Listar las reservas que están pendientes en su entrega. */
+
+use("library_project")
+db.reservations.aggregate([
+  {
+    $addFields: {
+      daysLate: {
+        $divide: [
+          { $subtract: ["$expected_delivery", "$$NOW"] },
+          1000 * 60 * 60 * 24
+        ]
+      }
+    }
+  },
+  {
+    $match: {
+      daysLate: { $lte: 0 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$reservationId",
+      titulo: "$title_book",
+      usuario: "$user_name",
+      dia_retraso: { $multiply: [{ $toInt: "$daysLate" }, -1] },
+      fecha_reservacion: "$reservation_date",
+      fecha_entrega_esperada: "$expected_delivery"
+    }
+  },
+  { $sort: { fecha_entrega_esperada: 1 } },
+]);
+
+/* 32. Traer el prestamo más proximo a entregar de un libro en específico */
+use("library_project")
+db.loans.aggregate([
+  {
+    $lookup: {
+      from: "Books",
+      localField: "book_code",
+      foreignField: "code",
+      as: "book"
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      id: "$loanId",
+      titulo: { $arrayElemAt: ["$book.title", 0] },
+      usuario: "$user_name",
+      fecha_reservacion: "$start_loan",
+      fecha_entrega: "$finish_loan"
+    }
+  },
+  {
+    $match: {
+      titulo: { $eq: "La ciudad y los perros"}
+    }
+  },
+  {
+    $sort: {
+      fecha_entrega: 1
+    }
+  },
+  {
+    $limit: 1
+  }
+
+]);

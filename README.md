@@ -29,7 +29,7 @@ Reservations:
 11. Mostrar todas las reservaciones agendadas que hay para un libro con un titulo en específico 
 12. mostrar todas las reservaciones que llevan más de 2 meses en espera
 13. mostrar todas las reservaciones realizadas por una persona en específico
-14. *EndPoint que al hacer un post de una reservación de un libro verifique si existe algún libro con ese titulo disponible y que en caso de que haya alguno disponible retorne la información de esos libros disponibles.
+14. *EndPoint que al hacer un post de una reservación, verifica si existe algún libro con ese titulo disponible. En caso de que haya alguno disponible realice el prestamo inmediatamente (y cambie la disponibilidad del libro).  Si no existe ningún libro disponible, busca el prestamo cuya entrega esté más proxima y le asigna esa fecha de entrega.
 15. Mostrar la persona que tenga más reservaciones activas
 16. Mostrar el titulo de los libros con sus respectivas reservas ordenas de más reservas a menos reservas
 17. listar todos los libros que no tienen ninguna reservación activa

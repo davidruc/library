@@ -37,7 +37,7 @@ class Reservations{
       try {
           const connect = await this.connection();
           const newId = await siguienteId("reservations");
-          let data = { "reservationId": newId,...body, "reservation_date": new Date()}
+          let data = { "reservationId": newId, ...body, "reservation_date": new Date()}
           const result = await connect.insertOne(data);
           return result;
       } catch (error) {

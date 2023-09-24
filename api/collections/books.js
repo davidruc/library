@@ -207,7 +207,7 @@ class Books{
           const result = await connect.aggregate([
             {
               $match: {
-                title: { $eq: title },
+                title: { $regex: title, $options: "i" } ,
                 aviability: { $eq: true }
               }
             },

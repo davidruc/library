@@ -224,7 +224,7 @@ class Loans {
                 },
                 {
                   $match: {
-                    titulo: { $eq: title}
+                    titulo: { $regex: title, $options: "i" } 
                   }
                 },
                 {

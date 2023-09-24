@@ -1,6 +1,7 @@
 import * as service from "../services/postServices.js";
 import * as getServices from "../services/getServices.js";
-import * as deleteServices from "../services/deleteServices.js"
+import * as deleteServices from "../services/deleteServices.js";
+import * as updateServices from "../services/putServices.js"
 export const postBookController = async (req, res, next) => {
     try {
         const data = req.body;
@@ -13,7 +14,6 @@ export const postBookController = async (req, res, next) => {
 export const postLoanController = async (req, res, next) => {
     try {
         const data = req.body;
-        console.log(data);
         const loan = await service.postLoanService(data);
         res.status(200).send(loan);
     } catch (error) {
@@ -103,10 +103,13 @@ export const postLoanRealShitController = async (req, res, next) => {
                 const data = {
                     "book_code": aviability[0].codigo, "user_name": user_name, "finish_loan": finish_loan
                 }
-                //! CAMBIO EL ESTADO DEL LIBRO
+                // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
+                const newEstate = { "aviability": false }
+                const updateBook = await updateServices.updateBookService(aviability[0].codigo, newEstate)
+                console.log(updateBook);
                 //Envío el cuerpo y realizo el prestamo
                 const loan = await service.postLoanService(data);
-                return res.status(201).send({ loan: loan, message: `no tenias una reserva asignada pero el libro ${aviability[0].titulo} se encontraba disponible` })
+                return res.status(201).send({ loan: loan, changeState: updateBook,message: `no tenias una reserva asignada pero el libro ${aviability[0].titulo} se encontraba disponible` })
             }
         }
         // Si envío el código de una reserva:
@@ -115,31 +118,33 @@ export const postLoanRealShitController = async (req, res, next) => {
             let id_reservation = data.reservation_code;
             const reservacion = await getServices.getAllReservationsService(id_reservation);
             // Si no hay una reservación asignada para el codigo ingresado envía un mensaje
-            console.log(data);
             if (!reservacion[0]) {
                 return res.status(200).send({ message: `No existe ningúna reservación asignada al código que enviaste.` })
             }
             // Si existe una reservación asignada para este código
             else {
-                let {finish_loan} = req.body;
+                let { finish_loan } = req.body;
                 let title = reservacion[0].title_book;
                 const aviabilityReservation = await getServices.getBookByAviableTitleService(title);
                 // Si el libro aún no está disponible simplemente manda un mensaje diciendo que no está disponible aún
                 if (!aviabilityReservation[0]) {
                     return res.status(201).send({ message: `estas solicitando el libro  ${reservacion[0].title_book} el cual no se encuentra disponible aún.` })
-                } 
+                }
                 // Si está disponible elimina la reserva y genera el prestamo.
                 else {
                     //Defino el cuerpo para el preestamo
                     const data = {
                         "book_code": aviabilityReservation[0].codigo, "user_name": reservacion[0].user_name, "finish_loan": finish_loan
                     }
-                    //! CAMBIO EL ESTADO DEL LIBRO
+                      // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
+                    const newEstate = { "aviability": false }
+                    const updateBook = await updateServices.updateBookService(aviabilityReservation[0].codigo, newEstate)
+                    console.log(updateBook);
                     // ELIMINO LA RESERVA
                     const deleteReservation = await deleteServices.deleteReservationService(id_reservation)
                     //Envío el cuerpo y realizo el prestamo
                     const loan = await service.postLoanService(data);
-                    return res.status(201).send({postloan: loan, deleteReservation: deleteReservation, message: "Se agregó con exito el prestamo y eliminó la reservación asignada" });
+                    return res.status(201).send({ postloan: loan, changeState: updateBook, deleteReservation: deleteReservation, message: `Se agregó con exito el prestamo, se eliminó la reservación asignada y se modificó el estado del libro ${reservacion[0].title_book}` });
                 }
             }
         }

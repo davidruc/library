@@ -10,6 +10,11 @@ app.use(express.json());
 
 app.use("/api", initApiRoutes());
 app.use("/login", loginDTO, ValidateSession, appLogin);
-app.listen(config.server, ()=>{
-    console.log(`El servidor está activo: http://${config.server.hostname}:${config.server.port}`);
-})
+
+const configuration = {
+    port: config.portBack,
+    host: config.host
+}
+app.listen(configuration, ()=>{
+    console.log(`El servidor está activo: http://${config.host}:${config.portBack}`);
+});

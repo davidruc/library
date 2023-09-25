@@ -317,3 +317,13 @@ export const getRecervationPendingController = async(req, res, next)=>{
         res.send(error);
     }
 }
+/* 32. */
+export const getLoansNextOneActiveController = async(req,res,next)=>{
+    try {
+        const {title} = req.query;
+        const loan = await service.getLoansNextOneActiveService(title);
+        res.status(200).send(loan);
+    } catch (error) {
+        res.send(error)
+    }
+}

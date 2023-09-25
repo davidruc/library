@@ -175,7 +175,7 @@ class Books{
             const result = await connect.aggregate([
                 {
                     $match: 
-                        { aviability: false }
+                        { aviability: state }
                 },
                 {
                     $project: {

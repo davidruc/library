@@ -4,9 +4,11 @@ import config from "./utils/config.js";
 import express from "express";
 import { loginDTO } from "./middleware/dtoLogin.js";
 import { ValidateSession } from "./middleware/verifyData.js";
+import cors from 'cors';
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.use("/api", initApiRoutes());
 app.use("/login", loginDTO, ValidateSession, appLogin);

@@ -8,11 +8,15 @@ export default function Welcome(){
     const login = ()=>{
         navigate("/login")
     }
+    const singUp = ()=>{
+        navigate("/SingUp")
+    }
     return(
         <div>
             <h1>Bienvenido</h1>
             <br></br>
             <button onClick={login}> Ingresar </button>
+            <button onClick={singUp}> Registrar </button>
         </div>
     )
 }

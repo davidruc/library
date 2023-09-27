@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "todo": "concurrently \"vite\" \"nodemon --quiet ./server/app.js\"",
+    "todo": "concurrently \"vite\" \"nodemon --quiet ./api/app.js\"",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",

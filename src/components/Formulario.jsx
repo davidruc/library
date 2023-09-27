@@ -8,14 +8,14 @@ export default function Formulary() {
     
     const [info, setInfo] = useState({
         correo: "",
-        Contraseña: ""
+        contraseña: ""
     });
 
     const home = ()=>{
         navigate("/login/home")
     }
     const back = ()=>{
-        navigate("/notFound")
+        navigate("/")
     }
 
     const handleUsername = (e) =>{
@@ -28,7 +28,7 @@ export default function Formulary() {
     const handleContraseña = (e) => {
         setInfo({
             ...info,
-            Contraseña : e.target.value
+            contraseña : e.target.value
         })
     }
     
@@ -46,12 +46,15 @@ export default function Formulary() {
     async function enviar(e){
         e.preventDefault();
         const info_res = await gettoken();
-        setInfo(info_res);
-        if(!info_res.mesaage){
+        if(info_res.status === 200){
+            setInfo(info_res);
             home();
             setShowFormulary(false);
         }else {
-            back();
+            if(info_res.mesaage){alert(info_res.mesaage)}
+            else if(info_res.error){
+                info_res.error.map((val)=>{ alert(`ERROR: ${val.msg}.`)})
+                }
         }
     }
     return (
@@ -62,7 +65,8 @@ export default function Formulary() {
                 <input type="text" name="user" placeholder="ingrese el correo" onChange={handleUsername} /><br></br>
                 <input type="text" name="pass" onChange={handleContraseña} placeholder="ingrese la contraseña" /><br></br>
                 <div id="info">
-                    <button type="submit" onClick={(e)=>{enviar(e); console.log(info);}}>Click</button>
+                    <button type="submit" onClick={(e)=>{enviar(e);}}>Click</button>
+                    <button onClick={back}>volver</button>
                 </div>
             </div>
             )}

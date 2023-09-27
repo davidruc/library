@@ -19,13 +19,31 @@ class Users {
             throw error;
         }
     };
+    async getUserByEmail(correo){
+        try {
+            const connect = await this.connection();
+            const result = await connect.aggregate([{$match: { email: correo }}]).toArray();
+            return result;
+        } catch (error) {
+         throw error;   
+        }
+    }
     async postUser(data) {
         try {
+            /* 
+            {
+                "document": 12312324343,
+                "user_name": "pepo",
+                "address": "algun lugar",
+                "email": "correo@gmaiñ.com",
+                "password": claveSegura
+            } 
+            */
             const connect = await this.connection();
             let permiss = {
                 "/api": ["2.0.0", "GET", "POST"]
             };
-            let body = { ...data, "rol": "usuario", "permisos": permiss }
+            let body = {  ...data, "document": parseInt(data.document), "rol": "usuario", "permisos": permiss }
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {

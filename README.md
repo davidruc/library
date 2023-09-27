@@ -229,3 +229,9 @@ GET http://192.168.129.72:5108/api/use/reservationPending
 GET http://192.168.129.72:5108/api/use/reservationNextActive?title=...
 ```
 Este endPoint necesita el envío de un parámetro: *param: title*.
+
+33. Traer un usuario por correo electronico
+```http
+GET http://192.168.129.72:5108/api/use/userByEmail?correo=...
+```
+Este endPoint necesita el envío de un parámetro: *param: correo*.

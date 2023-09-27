@@ -188,3 +188,8 @@ export const getLoansNextOneActiveService = async (title) => {
     const loan = new Loans();
     return await loan.getLoansNextOneActive(title);
 }
+/* 33. */
+export const getUserByEmailService = async (correo) => {
+    const user = new Users();
+    return await user.getUserByEmail(correo);
+}

@@ -1,23 +1,29 @@
 import { check } from 'express-validator';
 
 const register = {
-    document: "ID",
-    user_name: "full_name",
-    address: "full_adress",
+    document: "documento",
+    user_name: "nombre",
+    address: "direccion",
     email: "correo",
     password: "contraseña"
 }
+parseInt(register.document);
 export const registerDTO = [
     check(`${register.document}`)
-    .notEmpty().isNumeric(),
+    .notEmpty().withMessage("El valor del documento debe ser enviado")
+    .isNumeric(),
     check(`${register.user_name}`)
-    .notEmpty().isString(),
+    .notEmpty().withMessage("El valor del nombre debe ser enviado")
+    .isString(),
     check(`${register.address}`)
-    .notEmpty().isString(),
+    .notEmpty().withMessage("El valor de la direccion debe ser enviado")
+    .isString(),
     check(`${register.email}`)
-    .notEmpty().isString(),
+    .notEmpty().withMessage("El valor del correo debe ser enviado")
+    .isString(),
     check(`${register.password}`)
-    .notEmpty().isString(),
+    .notEmpty().withMessage("El valor de la contraseña debe ser enviado")
+    .isString(),
 ]
 
 const login = {
@@ -25,8 +31,10 @@ const login = {
     password: "contraseña"
 }
 export const loginDTO = [
-    check(`${register.email}`)
-    .notEmpty().isString(),
-    check(`${register.password}`)
-    .notEmpty().isString(),
+    check(`${login.email}`)
+    .notEmpty().withMessage("El valor del correo debe ser enviado")
+    .isString().withMessage("El valor del correo es de tipo string"),
+    check(`${login.password}`)
+    .notEmpty().withMessage("El valor de la clave debe ser enviado")
+    .isString().withMessage("La clave es un string"),
 ]

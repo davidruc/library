@@ -31,7 +31,6 @@ class Books{
     };
     async updateBook(code, data){
         try {
-            console.log(code, data);
             const connect = await this.connection();
             const result = await connect.updateMany(
                 { "code": parseInt(code) },

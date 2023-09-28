@@ -34,7 +34,7 @@ class Staff {
             const connect = await this.connection();
             const result = await connect.updateOne(
                 { "employeeId": parseInt(id_employee) },
-                { $set: data }
+                { $set: { ...data, "start_contract": new Date(data.start_contract) } }
             );
             return result;
         } catch (error) {

@@ -93,7 +93,6 @@ export const postRealReservationController = async (req, res, next) => {
             const data = {
                 "book_code": aviability[0].codigo, "user_name": user_name, "finish_loan": finish_loan
             };
-            console.log(aviability);
             // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
             const newEstate = { "aviability": false }
             const updateBook = await updateServices.updateBookService(aviability[0].codigo, newEstate)
@@ -158,7 +157,6 @@ export const postLoanRealShitController = async (req, res, next) => {
                 // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
                 const newEstate = { "aviability": false }
                 const updateBook = await updateServices.updateBookService(aviability[0].codigo, newEstate)
-                console.log(updateBook);
                 //Envío el cuerpo y realizo el prestamo
                 const loan = await service.postLoanService(data);
                 return res.status(201).send({ loan: loan, changeState: updateBook, message: `no tenias una reserva asignada pero el libro ${aviability[0].titulo} se encontraba disponible` })

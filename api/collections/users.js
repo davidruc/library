@@ -30,15 +30,6 @@ class Users {
     }
     async postUser(data) {
         try {
-            /* 
-            {
-                "document": 12312324343,
-                "user_name": "pepo",
-                "address": "algun lugar",
-                "email": "correo@gmaiñ.com",
-                "password": claveSegura
-            } 
-            */
             const connect = await this.connection();
             let permiss = {
                 "/api": ["2.0.0", "GET", "POST"]

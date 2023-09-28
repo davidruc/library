@@ -34,7 +34,7 @@ class Returns {
             const connect = await this.connection();
             const result = await connect.updateOne(
                 { "loanID": parseInt(code) },
-                { $set: data }
+                { $set: { ...data, "finish_loan": new Date(data.finish_loan) } }
             );
             return result;
         } catch (error) {

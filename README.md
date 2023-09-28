@@ -12,12 +12,33 @@ La organización del trabajo se está realizando en el siguiente notion:
 ## Diagrama de la base de datos:
 ![imagenMer](uml/dataBase.png)
 
+## Creación de un nuevo usuario (SingUp)
+
+Para la creación de un nuevo usuario en la base de datos se debe acceder a esta ruta: 
+```http
+POST http://192.168.129.72:5108/singUp
+```
+* Para la correcta creación se debe enviar el siguiente cuerpo:
+```json
+{
+    "documento": 1005343533,
+    "nombre": "Usuario Nuevo",
+    "direccion": "Direccion 123",
+    "correo": "correo123@gmail.com",
+    "contraseña": "contraseña"
+}
+```
+Este endPoint valida que el correo que se está ingresando no exista o no exista ningún documento con dicho dato. 
+
+Al crear el usuario también devuelve el token de acceso, por lo que puede utilizarlo para realizar las consultas siguientes.
+
+
 ## Creación del token de acceso
 Para la generación del token de acceso se debe usar esta ruta:
 ```http
 POST http://192.168.129.72:5108/login
 ```
-* Se debe enviar el siguiente cuerpo: 
+* Se debe enviar el siguiente cuerpo (debe enviar un dato que ya haya sido creado anteriormente en la base de datos): 
     ```json
     {
         "correo": "davidarueda18@gmail.com",
@@ -26,6 +47,137 @@ POST http://192.168.129.72:5108/login
     ```
 
 ## Consultas específicas del proyecto: 
+
+###
+
+**Crud**
+
+1. Crud de la colección de libros: 
+```http
+ALL http://192.168.129.72:5108/api/use/books?code=...
+```
+Para lo métodos PUT, DELETE y GET by Code se debe enviar como pará metro el valor del códgi del libro al que se le desea realizar la consulta.
+
+El cuerpo para realizar el ingreso de los datos es el siguiente:
+```json 
+{ 
+    "codigo": 1234,
+    "titulo": "Reina de picas",
+    "author": "Isador",
+    "estado": "Antiguo",
+    "editorial": "Norma",
+    "categoria": "Drama",
+    "clasificacion_Dewey": 820,
+    "disponibilidad": true,
+    "version": "version especial",
+    "ingreso": "2015-06-31",
+    "descripcion": "Es un libro sobre estrategis del poker",
+    "ubicacion": "Literatura general"
+} 
+```
+Para el método PUT no es necesario enviar todo el cuerpo si no unicamete los datos que se requieren modificar (usando la misma notación el JSON de arriba).
+
+
+
+2. Crud de la colección de Loans (prestamos): 
+
+*Se recomienda NO utilizar este endPoint para realizar los prestamos ya que hay un método que realiza transacciones internas y permite un mejor ingreso de prestamos.*
+```http
+ALL http://192.168.129.72:5108/api/use/loans?id_loan=...
+```
+Para lo métodos PUT, DELETE y GET by id_loan se debe enviar como pará metro el valor del códgi del libro al que se le desea realizar la consulta.
+
+El cuerpo para realizar el ingreso de los datos es el siguiente:
+```json 
+
+/* Obligatorios */
+  { 
+      "codigo_libro": 1234,
+      "nombre_usuario": "David Andrés Rueda",
+      "finalizacion_prestamo": "2023-10-21"
+  } 
+/* Con valores opcionales */
+
+  { 
+      "reservationId": 21,
+      "codigo_libro": 1234,
+      "nombre_usuario": "David Andrés Rueda",
+      "finalizacion_prestamo": "2023-10-21"
+  } 
+
+```
+Para el método PUT no es necesario enviar todo el cuerpo si no unicamete los datos que se requieren modificar (usando la misma notación el JSON de arriba).
+
+3. Crud de la colección de Reservations: 
+
+*Se recomienda NO utilizar este endPoint para realizar las reservaciones ya que hay un método que realiza transacciones internas y permite un mejor ingreso de las reservas.*
+```http
+ALL http://192.168.129.72:5108/api/use/reservations?id_reservation=...
+```
+Para lo métodos PUT, DELETE y GET by id_reservation se debe enviar como pará metro el valor del id del prestamo libro al que se le desea realizar la consulta.
+
+El cuerpo para realizar el ingreso de los datos es el siguiente:
+```json 
+{ 
+
+    "titulo": "rey de picas",
+    "nombre_usuario": "David Andrés Rueda",
+    "entrega_esperada": "2023-10-21"
+  
+} 
+```
+Para el método PUT no es necesario enviar todo el cuerpo si no unicamete los datos que se requieren modificar (usando la misma notación el JSON de arriba).
+
+4. Crud de la colección de Returns: 
+
+*Se recomienda PARA NADA utilizar este endPoint para realizar las retornos ya que hay un método que realiza transacciones internas VERIFICANDO DATOS y permite un mejor ingreso de los retornos.*
+```http
+ALL http://192.168.129.72:5108/api/use/returns?code=...
+```
+Para lo métodos PUT, DELETE y GET by code se debe enviar como parámetro el valor del id del prestamo al que se le desea realizar la consulta.
+
+El cuerpo para realizar el ingreso de los datos es el siguiente:
+```json 
+  { 
+      "id": 54,
+      "codigo_libro": 1,
+      "nombre_usuario": "David Andrés Rueda",
+      "finalizacion_prestamo": "2023-10-21"
+  } 
+```
+Para el método PUT no es necesario enviar todo el cuerpo si no unicamete los datos que se requieren modificar (usando la misma notación el JSON de arriba).
+
+5. Crud de la colección de Users: 
+```http
+ALL http://192.168.129.72:5108/api/use/users?id=...
+```
+
+Para el cuerpo de la consulta se recomienda observar el otorgado para el singUp. (se recomienda usar el endPoint del singUp para el post de usuarios ya que valida y evita que se repitan correos).
+
+
+6. Crud de la colección de Staff: 
+
+```http
+ALL http://192.168.129.72:5108/api/use/staff?id_employee=...
+```
+Para lo métodos PUT, DELETE y GET by id_employee se debe enviar como parámetro el valor del id_employee del staff al que se le desea realizar la consulta.
+
+El cuerpo para realizar el ingreso de los datos es el siguiente:
+```json 
+{
+    "id_staff": 212,
+    "nombre": "Pepo",
+    "equipo": "Equipo De Abogados",
+    "correo": "correo@gmail.com",
+    "correo_corporativo": "correodfdsf@gmail.com",
+    "telefono": 3023400000,
+    "telefono_corporativo": 3120000000,
+    "salario": 6000000,
+    "inicio_contrato": "2021-09-23"
+}
+```
+Para el método PUT no es necesario enviar todo el cuerpo si no unicamete los datos que se requieren modificar (usando la misma notación el JSON de arriba).
+
 
 ### Consultas:
 
@@ -114,8 +266,8 @@ POST http://192.168.129.72:5108/api/use/reservationReal
 * El cuerpo que se debe enviar es el siguiente: 
     ```json
     {
-        "title": "The Origins of Species", //Titulo del libro que se desea buscar. 
-        "user_name": "Luisa Pérez" // Usuario que desea hacer la reservación
+        "titulo": "The Origins of Species", //Titulo del libro que se desea buscar. 
+        "nombre_usuario": "Luisa Pérez" // Usuario que desea hacer la reservación
     }
     ```
 Hay cierta flexibilidad con el nombre del libro, se pueden escribir sin mayusculas y la consulta retornará el libro que más se parezca. Por ejemplo, si busco el libro "cien añ" va a encontrar el libro "cien años de soledad".
@@ -144,14 +296,14 @@ El cuerpo que se debe enviar es el siguiente:
 * Si hay una reservación activa:
     ```json
     {
-        "reservation_code": 12 //codigo de la reservación
+        "reservationId": 12 //codigo de la reservación
     }
     ```
 * Si no hay una reservación activa: 
     ```json
     {
-         "title": "The Origins of Species", //Titulo del libro que se desea buscar. 
-         "user_name": "Luisa Pérez" // Usuario que desea hacer la reservación
+         "titulo": "The Origins of Species", //Titulo del libro que se desea buscar. 
+         "nombre_usuario": "Luisa Pérez" // Usuario que desea hacer la reservación
     }
     ```
 19. Endpoint que permita listar a todas las personas que tengan más de dos prestamos a la vez
@@ -176,7 +328,7 @@ POST http://192.168.129.72:5108/api/use/returnReal
 * El cuerpo que se debe enviar es el siguiente: 
     ```json
     {
-        "loanID": 12 //codigo del prestamo que se retorna
+        "id": 12 //codigo del prestamo que se retorna
     }
     ```
 23. Traer el top 3 de los libros más prestados con el número de prestamos

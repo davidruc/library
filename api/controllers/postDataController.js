@@ -62,18 +62,18 @@ export const postUserController = async (req, res, next) => {
 export const postRealReservationController = async (req, res, next) => {
     /* Cuerpo de la solicitud
         {
-            "title": "The Origins of Species",
+            "title_book": "The Origins of Species",
             "user_name": "Luisa Pérez"
         } 
     */
     try {
-        const { title, user_name } = req.body;
+        const { title_book, user_name } = req.body;
         // Hago una búsqueda de disponibilidad
-        const aviability = await getServices.getBookByAviableTitleService(title);
+        const aviability = await getServices.getBookByAviableTitleService(title_book);
         // Si no hay ningun libro disponible entra aquí
         if (!aviability[0]) {
             // Revisa cuando es la fecha de entrega más proxima para la entrega de un prestamo
-            const aproxDelivery = await getServices.getLoansNextOneActiveService(title);
+            const aproxDelivery = await getServices.getLoansNextOneActiveService(title_book);
             const { titulo, fecha_entrega } = aproxDelivery[0];
             // Creo el cuerpo para realizar una reservación automática del libro
             const body = {
@@ -93,6 +93,7 @@ export const postRealReservationController = async (req, res, next) => {
             const data = {
                 "book_code": aviability[0].codigo, "user_name": user_name, "finish_loan": finish_loan
             };
+            console.log(aviability);
             // CAMBIO EL ESTADO DEL LIBRO a OCUPADO
             const newEstate = { "aviability": false }
             const updateBook = await updateServices.updateBookService(aviability[0].codigo, newEstate)
@@ -120,7 +121,7 @@ export const postLoanRealShitController = async (req, res, next) => {
         //? Si no hay una reservación asignada 
         /*
         {
-            "title": "The Origins of Species",
+            "title_book": "The Origins of Species",
             "user_name": "Luisa Pérez"
         } */
         //Todo: si por algún motivo se envía el título y el user name cuando mando el codigo de reservación simplemente no los va a tomar en cuenta.
@@ -128,18 +129,17 @@ export const postLoanRealShitController = async (req, res, next) => {
         // Si no envío código de reservación hago lo siguiente:
         if (!data.reservation_code) {
             // Primero desestructuro los datos de entrada
-            const { title, user_name } = data;
+            const { title_book, user_name } = data;
             // Hago una búsqueda de disponibilidad
-            const aviability = await getServices.getBookByAviableTitleService(title);
-            console.log(aviability);
+            const aviability = await getServices.getBookByAviableTitleService(title_book);
             // Si no hay ningun libro disponible entra aquí
             if (!aviability[0]) {
                 // Revisa cuando es la fecha de entrega más proxima para la entrega de un prestamo
-                const aproxDelivery = await getServices.getLoansNextOneActiveService(title);
+                const aproxDelivery = await getServices.getLoansNextOneActiveService(title_book);
                 const { fecha_entrega } = aproxDelivery[0];
                 // Creo el cuerpo para realizar una reservación automática del libro
                 const body = {
-                    "title_book": title, "user_name": user_name, "expected_delivery": fecha_entrega
+                    "title_book": title_book, "user_name": user_name, "expected_delivery": fecha_entrega
                 }
                 // Envia los datos para la reservación al servicio
                 const reservation = await service.postReservationEspecialService(body);

@@ -24,8 +24,7 @@ class Loans {
         try {
             const connect = await this.connection();
             const newId = await siguienteId("loans");
-            let body = { "loanId": newId , ...data, "start_loan": new Date(), "finish_loan": new Date(data.finish_loan) }
-            console.log(body);
+            let body = { "loanId": newId , ...data, "start_loan": new Date(), "finish_loan": new Date(data.finish_loan) };
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {
@@ -37,7 +36,7 @@ class Loans {
             const connect = await this.connection();
             const result = await connect.updateOne(
                 { "loanId": parseInt(id_loan) },
-                { $set: data }
+                { $set:  { "loanId": newId , ...data, "finish_loan": new Date(data.finish_loan) } }
             );
             return result;
         } catch (error) {

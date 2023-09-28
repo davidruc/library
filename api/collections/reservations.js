@@ -13,8 +13,7 @@ class Reservations{
     async getAllReservations(id_reservation){
         try {
             const connect = await this.connection();
-            if(!id_reservation) return await connect.find({}).toArray()
-            console.log("here");
+            if(!id_reservation) return await connect.find({}).toArray();
             const reservation = await connect.aggregate([{$match: {"reservationId": parseInt(id_reservation)}}]).toArray()
             return reservation
             
@@ -49,7 +48,7 @@ class Reservations{
             const connect = await this.connection();
             const result = await connect.updateOne(
                 { "reservationId": parseInt(id_reservation) },
-                { $set: data }
+                { $set: { "reservationId": newId,...data, "expected_delivery": new Date(data.expected_delivery)} }
             );
             return result;
         } catch (error) {

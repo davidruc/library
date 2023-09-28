@@ -69,7 +69,10 @@ export default function SingUp(){
             home();
             setShowFormulary(false);
         } else {
-            alert(info_res.message);
+            if(info_res.mesaage){alert(info_res.mesaage)}
+            else if(info_res.error){
+                info_res.error.map((val)=>{ alert(`ERROR: ${val.msg}.`)})
+            }
         }
     }
     return(

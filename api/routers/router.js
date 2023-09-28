@@ -6,6 +6,7 @@ import putInitRoute from "./putData.js";
 import deleteInitRoute from "./deleteData.js";
 import passport from "../helpers/passportHelper.js";
 
+
 const initApiRoutes = ()=>{
     const router = Router();
     router.use(passport.authenticate("bearer", {session: false}));

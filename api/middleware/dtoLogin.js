@@ -14,16 +14,20 @@ export const registerDTO = [
     .isNumeric(),
     check(`${register.user_name}`)
     .notEmpty().withMessage("El valor del nombre debe ser enviado")
-    .isString(),
+    .isString()
+    .matches(/^[\s\S]*$/),
     check(`${register.address}`)
     .notEmpty().withMessage("El valor de la direccion debe ser enviado")
-    .isString(),
+    .isString()
+    .matches(/^[\s\S]*$/),
     check(`${register.email}`)
     .notEmpty().withMessage("El valor del correo debe ser enviado")
-    .isString(),
+    .isString()
+    .matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
     check(`${register.password}`)
     .notEmpty().withMessage("El valor de la contraseña debe ser enviado")
-    .isString(),
+    .isString()
+    .matches(/^[\s\S]*$/),
 ]
 
 const login = {

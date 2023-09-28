@@ -32,7 +32,7 @@ class Books{
     async updateBook(code, data){
         try {
             const connect = await this.connection();
-            const result = await connect.updateOne(
+            const result = await connect.updateMany(
                 { "code": parseInt(code) },
                 { $set: data }
             );

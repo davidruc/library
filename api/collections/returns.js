@@ -14,7 +14,7 @@ class Returns {
         try {
             const connect = await this.connection();
             if (!code) return await connect.find({}).toArray()
-            return await connect.aggregate([{ $match: { "return_code": parseInt(code) } }]).toArray()
+            return await connect.aggregate([{ $match: { "loanID": parseInt(code) } }]).toArray()
         } catch (error) {
             throw error;
         }
@@ -22,7 +22,7 @@ class Returns {
     async postReturn(data) {
         try {
             const connect = await this.connection();
-            let body = { ...data, "return_date": new Date() }
+            let body = { ...data, "return_date": new Date(), "finish_loan": new Date(data.finish_loan) }
             const result = await connect.insertOne(body);
             return result;
         } catch (error) {
@@ -33,8 +33,8 @@ class Returns {
         try {
             const connect = await this.connection();
             const result = await connect.updateOne(
-                { "return_code": parseInt(code) },
-                { $set: data }
+                { "loanID": parseInt(code) },
+                { $set: { ...data, "finish_loan": new Date(data.finish_loan) } }
             );
             return result;
         } catch (error) {

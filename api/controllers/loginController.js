@@ -2,6 +2,7 @@ import * as service from "../services/postServices.js";
 import { crearToken } from "../token/JWTcreation.js";
 import {getUserByEmailService} from "../services/getServices.js"
 export const Userlogin = (req, res, next)=>{
+    console.log(req.data);
     res.status(200).json(req.data)
 } 
 

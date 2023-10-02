@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
+import { useToken } from "./tokenProvaider";
 export default function Formulary() {
     const navigate = useNavigate();
+    const {setAuth} = useToken();
 
     const [showFormulary, setShowFormulary] = useState(true);
     
@@ -12,7 +14,7 @@ export default function Formulary() {
     });
 
     const home = ()=>{
-        navigate("/login/home")
+        navigate("/")
     }
     const back = ()=>{
         navigate("/")
@@ -47,7 +49,8 @@ export default function Formulary() {
         e.preventDefault();
         const info_res = await gettoken();
         if(info_res.status === 200){
-            setInfo(info_res);
+            // setInfo(info_res);
+            setAuth(info_res.message, info_res.data.nombre)
             home();
             setShowFormulary(false);
         }else {

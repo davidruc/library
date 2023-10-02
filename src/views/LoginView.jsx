@@ -1,5 +1,5 @@
 import React from "react";
-import Formulary from "../components/Formulario";
+import Formulary from "../components/singIn";
 
 export default function LoginView(){
     return(

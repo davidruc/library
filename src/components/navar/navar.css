@@ -1,0 +1,51 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+
+*{
+    padding: 0 ;
+    margin: 0;
+}
+
+.logo-pagina{
+    margin-left: 10px;
+    width: 200px;
+    padding: 10px;
+}
+.MuiAppBar-root {
+    background-color: #9381FF; 
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.conteiner{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.login{
+    height: 45%;
+    border: none;
+    border-radius: 6px;
+    padding: 5% 10%;
+    margin: 5%;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    cursor: pointer;   
+}
+.newBook{
+    padding-top: 2%;
+}
+
+

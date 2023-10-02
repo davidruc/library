@@ -1,0 +1,29 @@
+@font-face {
+    font-family: 'Quando Regular';
+    src: url('./fonts/Quando-Regular.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.pencilBook{
+    width: 160px;
+    padding: 2%;
+}
+.titulo{
+    font-family: "Quando Regular";
+    text-align: center;
+    font-size: 4.5vh;
+}
+.texto{
+    margin: 0 4% ;
+}
+@media (min-width: 900px) {
+    .titulo{
+        text-align: start;
+        font-size: 4.5vh;
+    }
+    .texto{
+        margin: 0;
+    }
+}

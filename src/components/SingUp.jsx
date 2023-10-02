@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, Outlet } from "react-router-dom";
+import { useToken } from "./tokenProvaider";
 export default function SingUp(){
     const navigate = useNavigate();
-
+    const {setAuth} = useToken()
     const [showFormulary, setShowFormulary] = useState(true);
     
     const [info, setInfo]= useState({
@@ -14,7 +15,7 @@ export default function SingUp(){
         contraseña: ""
     })
     const home = ()=>{
-        navigate("/singUp/home")
+        navigate("/")
     }
     const back = ()=>{
         navigate("/")
@@ -64,8 +65,8 @@ export default function SingUp(){
         e.preventDefault();
         const info_res = await singUpData();
         if(info_res.status === 200){
-            //Aqui obtengo todo, la data y todo 
-            setInfo(info_res);
+            setAuth(info_res.message, info_res.data.nombre)
+         /*    setInfo(info_res); */
             home();
             setShowFormulary(false);
         } else {

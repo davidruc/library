@@ -99,9 +99,7 @@ const getInitRoute = () => {
         "2.0.0": controller.getLoansTopBookActiveController
     }));
     /* 23.  */
-    router.get("/returnTopBook", versions({
-        "2.0.0": controller.getReturnsByTopBookController
-    }));
+    
     /* 24.  */
     router.get("/returnUserTop", versions({
         "2.0.0": controller.getReturnsTop10Controller

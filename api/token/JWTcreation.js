@@ -29,7 +29,7 @@ export const crearToken = async(req, res, next)=>{
     const jwtConstructor = await new SignJWT({ id: id})
         .setProtectedHeader({ alg: 'HS256', typ: 'JWT' })
         .setIssuedAt()
-        .setExpirationTime('3h')
+        .setExpirationTime('3d')
         .sign(encoder.encode(config.key));
     req.data = {status: 200, message: jwtConstructor, data: result };
     next(); 

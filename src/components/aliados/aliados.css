@@ -1,0 +1,34 @@
+@font-face {
+    font-family: 'Quando Regular';
+    src: url('./fonts/Quando-Regular.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+
+.pencilBook{
+    width: 145px;
+    padding: 5.5%;
+}
+.tituloSomos{
+    hyphens: auto;
+    font-family: "Quando Regular";
+    text-align: center;
+    font-size: 4.5vh;
+}
+.texto{
+    margin: 0 4% ;
+}
+.editionTitle{
+    font-size: 3.3vh;
+    font-weight: normal;
+}
+@media (min-width: 900px) {
+    .tituloSomos{
+        text-align: start;
+        font-size: 4.5vh;
+    }
+    .texto{
+        margin: 0;
+    }
+}

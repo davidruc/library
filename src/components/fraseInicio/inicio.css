@@ -1,0 +1,123 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.container {
+    background-color: #9381FF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    height: 350px;
+    border-radius: 0 0 10% 10%  ;
+}
+
+.title {
+    margin-top: 2%;
+    color: #F8F7FF;
+    font-size: 4vh;
+    font-weight: normal;
+    text-align: center;
+}
+
+.booksImg {
+    width: 300px;  
+    position: absolute;
+    top: 60%
+}
+
+.newBook{ 
+    padding-top: 5%;
+}
+.reservations{
+    position: absolute;
+    display: flex;
+    top: 53%;
+    flex-direction: column;
+}
+.reservations p {
+    color: #F8F7FF;
+}
+.boton{
+    border: none;
+    border-radius: 18px;
+    padding: 19px;
+    margin: 1.2%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 4px 4px 8px #6255aa;
+}
+.boton2{
+    margin-left: 15px;
+    border: none;
+    background-color: transparent;
+    color: #F8F7FF;
+    cursor: pointer;
+}
+@media (min-width: 900px) {
+    .title {
+        font-size: 4.5vh;
+    }
+    .booksImg {
+        width: 350px;  
+        position: absolute;
+        top: 35%;
+        left: 10%;
+    }
+    .container {
+        background-color: #9381FF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        height: 350px;
+        border-radius: 0 0 10% 10%  ;
+    }
+}
+/* Cambiar el tamaño del título en pantallas extra grandes (≥1200px) */
+@media (min-width: 1200px) {
+    .title {
+        margin-top: 0%;
+        font-size: 7vh;
+        /* Ajusta el tamaño para pantallas extra grandes */
+    }
+    .booksImg {
+        width: 420px;  
+        position: absolute;
+        top: 47%;
+        left: 15%;
+    }
+    .container {
+        background-color: #9381FF;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        height: 350px;
+        border-radius: 0 0 40px 40px  ;
+    }
+}
+
+/* Cambiar el tamaño del título en pantallas extra grandes (≥1200px) */
+@media (min-width: 1500px) {
+    .title {
+        font-size: 5.5vh;
+    }
+    .booksImg {
+        top: 40%;
+        left: 20%;
+    }
+    .reservations{
+        padding-top: 0;
+    }
+}

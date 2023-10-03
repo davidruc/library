@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Quando Regular';
+    src: url('./fonts/Quando-Regular.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+p{
+    font-size: 20px;
+}
+.libros{
+    width: 300px;
+    padding: 1.5%;
+}
+.other h4{
+    font-family: 'Quando Regular' ;
+    font-weight: normal;
+    font-size: 5.5vh;
+}
+.popular{
+    font-size: 12px;
+}
+.Huellas h3{
+    font-family: 'Quando Regular' ;
+    font-size: 4.5vh;
+    font-weight: normal;
+    margin: 0 7% 0 10%;
+}
+.buttonReservas{
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #9381FF;
+    box-shadow: 4px 4px 8px #6255aa;
+}
+.lista{
+    padding: 0% 6%;
+}
+@media (min-width: 800px) {
+    .popular{
+        font-size: 15px;
+    }
+}
+
+@media (min-width: 1500px) {
+    .libros{
+        width: 450px;
+    }
+}

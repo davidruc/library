@@ -225,43 +225,47 @@ db.Books.aggregate([
 ]);
 /* 7. mostrar todos los libros de una editorial específica. */
 use("library_project")
-db.Books.aggregate([
+db.Books.aggregate([    
   {
-    $match:
-      { "editorial": { $regex: "Ediciones p", $options: "i" } }
+      $project: {
+        _id: 0,
+        codigo: "$code",
+        titulo: "$title",
+        autor: "$author",
+        estado: "$status",
+        editorial: "$editorial",
+        categoria: "$category",
+        clasificacion_Dewey: "$dewey_clasification",
+        disponibilidad: "$aviability",
+        version: "$book_version",
+        ingreso: "$date_admission",
+        descripcion: "$descript",
+        ubicacion: "$location"
+      }
   },
   {
-    $project: {
-      _id: 0,
-      codigo: "$code",
-      titulo: "$title",
-      autor: "$author",
-      estado: "$status",
-      editorial: "$editorial",
-      categoria: "$category",
-      clasificacion_Dewey: "$dewey_clasification",
-      disponibilidad: "$aviability",
-      version: "$book_version",
-      ingreso: "$date_admission",
-      descripcion: "$descript",
-      ubicacion: "$location"
-    }
-  },
-  {
-    $group: {
-      _id: "$editorial",
-      cantidad: { $sum: 1 },
-      libros: { $push: "$$ROOT" }
-    }
-  },
-  {
-    $project: {
-      _id: 0,
-      editorial: "$_id",
-      cantidad: "$cantidad",
-      books: "$libros"
-    }
+  $group: {
+    _id: "$editorial",
+    cantidad: { $sum: 1 },
+    libros: { $push: "$$ROOT" }
   }
+ },
+ {
+  $sort: {
+    cantidad: -1
+  }
+ },
+ {
+  $limit: 4
+ },
+ {
+  $project: {
+    _id: 0,
+    editorial: "$_id",
+    cantidad: "$cantidad",
+    books: "$libros"
+  }
+ }
 ]);
 /* 8. mostrar todos los libros que tengan una antiguedad de más de N años */
 use("library_project")

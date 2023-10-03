@@ -394,6 +394,51 @@ class Books{
     async getBookByEditorial(name){
         try {
             const connect = await this.connection();
+            if(!name){
+              const result = await connect.aggregate([    
+                {
+                    $project: {
+                      _id: 0,
+                      codigo: "$code",
+                      titulo: "$title",
+                      autor: "$author",
+                      estado: "$status",
+                      editorial: "$editorial",
+                      categoria: "$category",
+                      clasificacion_Dewey: "$dewey_clasification",
+                      disponibilidad: "$aviability",
+                      version: "$book_version",
+                      ingreso: "$date_admission",
+                      descripcion: "$descript",
+                      ubicacion: "$location"
+                    }
+                },
+                {
+                $group: {
+                  _id: "$editorial",
+                  cantidad: { $sum: 1 },
+                  libros: { $push: "$$ROOT" }
+                }
+               },
+               {
+                $sort: {
+                  cantidad: -1
+                }
+               },
+               {
+                $limit: 4
+               },
+               {
+                $project: {
+                  _id: 0,
+                  editorial: "$_id",
+                  cantidad: "$cantidad",
+                  books: "$libros"
+                }
+               }
+              ]).toArray()
+            return result; 
+            }
             const result = await connect.aggregate([    
                 {
                     $match: 

@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: 'Josefin Sans';
+    width: 100%;
+}
+.titulo {
+    font-family: 'Josefin Sans';
+    color: #FFEEDD;
+    font-size: 5.2vh;
+    font-weight: lighter;
+}
+.inputs {
+    margin: 4% 0;
+    padding: 6%;
+    width: 300px;
+    height: 30px;
+    border: none;
+    border-radius: 16px;
+    background-color: #FFEEDD;
+}
+.buttonBack{
+    border: none;
+    padding: 3%;
+    background-color: transparent;
+}
+.buttonNew{
+    border: none;
+    color: #FFEEDD;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 3%;
+}
+.buttonSubmit{
+  border: none;
+  font-weight: normal;
+  border-radius: 12px;
+  font-size: 1rem;
+  padding: 12px 40px;
+  margin-top: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: #FFEEDD;
+  box-shadow: 4px 4px 8px #6255aa;
+
+}
+.logo{
+    width: 300px;
+}

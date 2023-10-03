@@ -1,11 +1,11 @@
 import React from "react";
-import Formulary from "../components/singIn";
+import Login from "../components/ingresar/ingresar";
 
 export default function LoginView(){
     return(
         <>
             <main>
-                <Formulary />
+                <Login />
             </main>
         </>
     );

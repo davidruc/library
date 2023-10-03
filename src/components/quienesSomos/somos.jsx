@@ -28,10 +28,10 @@ export default function Somos() {
                     return response;
                 }
                 else{
-                    console.log("error trayendo los datos");
+                    alert("error trayendo los datos");
                 } 
             } catch (error) {
-                console.log("error");
+                alert("error");
             } finally {
                 setLoading(false);
             }

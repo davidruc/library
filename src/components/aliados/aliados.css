@@ -7,10 +7,11 @@
 }
 
 .pencilBook{
-    width: 160px;
-    padding: 2%;
+    width: 145px;
+    padding: 5.5%;
 }
-.titulo{
+.tituloSomos{
+    hyphens: auto;
     font-family: "Quando Regular";
     text-align: center;
     font-size: 4.5vh;
@@ -18,8 +19,12 @@
 .texto{
     margin: 0 4% ;
 }
+.editionTitle{
+    font-size: 3.3vh;
+    font-weight: normal;
+}
 @media (min-width: 900px) {
-    .titulo{
+    .tituloSomos{
         text-align: start;
         font-size: 4.5vh;
     }

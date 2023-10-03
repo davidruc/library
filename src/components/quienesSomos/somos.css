@@ -49,6 +49,15 @@ p{
     background-color: #9381FF;
     box-shadow: 4px 4px 8px #6255aa;
 }
+.lista{
+    padding: 0% 6%;
+}
+@media (min-width: 800px) {
+    .popular{
+        font-size: 15px;
+    }
+}
+
 @media (min-width: 1500px) {
     .libros{
         width: 450px;

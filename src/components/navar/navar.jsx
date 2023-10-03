@@ -115,7 +115,7 @@ function ResponsiveAppBar() {
                 <button onClick={singIn} className='login'>Ingresar</button>
               </Box>
               <Box sx={{ flexGrow: 0.2, display: { lg: 'none', xs: 'flex' }, alignItems: 'center', justifyContent: 'center' }}>
-                <button onClick={singUp} className='login'>Registrar</button>
+                <button onClick={singIn} className='login'>Ingresar</button>
               </Box>
               </>
             }

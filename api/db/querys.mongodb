@@ -1,3 +1,24 @@
+use("library_project")
+db.Books.aggregate([
+  {
+    $project: {
+      _id: 0,
+      codigo: "$code",
+      titulo: "$title",
+      author: "$author",
+      estado: "$status",
+      editorial: "$editorial",
+      categoria: "$category",
+      clasificacion_Dewey: "$dewey_clasification",
+      disponibilidad: "$aviability",
+      version: "$book_version",
+      ingreso: "$date_admission",
+      descripcion: "$descript",
+      ubicacion: "$location"
+    }
+  }
+])
+
 /* 1. Endpoint que permita filtrar libros por titulo. */
 //! Busca por titulos del libro
 use("library_project")

@@ -18,3 +18,10 @@ body{
 .titleBooks{
     padding: 0% 5%;
 }
+.imagenbook{
+    width: 240px;
+    height: 340px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 20px;
+}

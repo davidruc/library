@@ -4,15 +4,11 @@ import ResponsiveAppBar from "../components/navar/navar";
 import { useToken } from "../components/tokenProvaider";
 import Books from "../components/books/books";
 export default function BooksView() {
-
     const {token} = useToken();
-
     useEffect(()=>{},[token])
-
     return (
         <>
-            <main>
-                
+            <main>              
                 <Box sx={{backgroundColor: '#F8F7FF'}}>
                     <ResponsiveAppBar />
                     <Books/>

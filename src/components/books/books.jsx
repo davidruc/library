@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import DrawerMobileNavigation from "../Drawer/drawer";
 import { useToken } from '../tokenProvaider';
 import { useNavigate } from 'react-router-dom';
+import defaultImage from "../../assets/bookDefault.png"
 import "./books.css";
 export default function Books() {
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function Books() {
                 });
                 if (res.status === 200) {
                     const response = await res.json();
+                    console.log(response);
                     setDatos(response);
                     return response;
                 }
@@ -70,8 +72,10 @@ export default function Books() {
                                                         <Box sx={{ margin: '3%', textAlign: 'center', display: 'flex', alignItems: 'center', height: '40px' }}>
                                                             <p>Editorial: {book.editorial}</p>
                                                         </Box>
-                                                        <Box sx={{ backgroundColor: '#B8B8FF', borderRadius: '20px', height: '355px' }}>
-                                                            <img src="" alt="" />
+                                                        <Box sx={{ backgroundColor: '#B8B8FF', display: 'flex', justifyContent: 'center', alignItems: 'center',  borderRadius: '20px', height: '355px' }}>
+                                                        {
+                                                            book.imagen == '' ? (<img className='imagenbook' src={defaultImage} alt="" />) : (  <img className='imagenbook' src={book.imagen} alt="" />)
+                                                        }
                                                         </Box>
                                                         <Box className="informacion" sx={{ padding: '5% 5% 2% 10% ' }}>{
                                                             book.disponibilidad ? (<><Box sx={{ backgroundColor: '#02970278', borderRadius: '20px', padding: '2%', textAlign: 'center', width: '24%' }}><p>Disponible</p></Box></>) : (<><Box sx={{ backgroundColor: '#ff5b5b9e', borderRadius: '20px', padding: '2%', textAlign: 'center', width: '24%' }}><p>Ocupado</p></Box></>)
@@ -90,8 +94,11 @@ export default function Books() {
                                 ) : (
                                     <>
                                         <Box sx={{ backgroundColor: '#FFEEDD', borderRadius: '20px', width: '330px', height: '494px', margin: '3% 2% 0% 2%' }}>
-                                            <Box sx={{ backgroundColor: '#B8B8FF', borderRadius: '20px', height: '355px' }}>
-                                                <img src="" alt="" />
+                                            <Box sx={{ backgroundColor: '#B8B8FF', borderRadius: '20px', height: '355px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                                                {
+                                                    info.imagen == '' ? (<img className='imagenbook' src={defaultImage} alt="" />) : (  <img className='imagenbook' src={info.imagen} alt="" />)
+                                                }
+                                               
                                             </Box>
                                             <Box className="informacion" sx={{ padding: '5% 5% 2% 10% ' }}>{
                                                 info.disponibilidad ? (<><Box sx={{ backgroundColor: '#02970278', borderRadius: '20px', padding: '2%', textAlign: 'center', width: '24%' }}><p>Disponible</p></Box></>) : (<><Box sx={{ backgroundColor: '#ff5b5b9e', borderRadius: '20px', padding: '2%', textAlign: 'center', width: '24%' }}><p>Ocupado</p></Box></>)

@@ -26,6 +26,10 @@ db.createCollection("Books", {
                     bsonType: "string",
                     description: "El titulo del libro debe ser un string"
                 },
+                imagen: {
+                    bsonType: "string",
+                    description: "la imagen del libro debe ser un string"
+                },
                 author: {
                     bsonType: "string",
                     description: "El autor del libro debe ser un string"

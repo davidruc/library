@@ -193,3 +193,16 @@ export const getUserByEmailService = async (correo) => {
     const user = new Users();
     return await user.getUserByEmail(correo);
 }
+//
+
+export const getLoansByUserService = async (user) => {
+    const loan = new Loans();
+    return await loan.getLoansByUser(user);
+}
+
+//
+
+export const getReturnsByUserService = async (user) => {
+    const returns = new Returns();
+    return await returns.getReturnsByUser(user);
+}

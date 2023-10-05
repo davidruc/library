@@ -3,7 +3,7 @@ import rateLimit from "express-rate-limit";
 export let limitPetitions = ()=>{
     return rateLimit({
         windowMs: 30*1000, //Se reinicia cada 30 segundos
-        max: 5,
+        max: 100,
         standardHeaders: false,
         legacyHeaders: false,
         skip: (req, res)=>{

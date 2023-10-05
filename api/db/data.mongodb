@@ -3,6 +3,7 @@ db.Books.insertMany([
       {
         "code": 305,
         "title": "The Origins of Species",
+        "imagen": "https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781645178644/on-the-origin-of-species-9781645178644_hr.jpg",
         "author": "Charles Darwin",
         "status": "viejo",
         "editorial": "Cambridge University Press",
@@ -17,6 +18,7 @@ db.Books.insertMany([
       {
         "code": 101,
         "title": "Cien años de soledad",
+        "imagen": "https://www.penguinlibros.com/co/1694229/cien-anos-de-soledad-edicion-ilustrada.jpg",
         "author": "Gabriel García Márquez",
         "status": "Nuevo",
         "editorial": "Editorial Sudamericana",
@@ -31,6 +33,7 @@ db.Books.insertMany([
     {
         "code": 102,
         "title": "La ciudad y los perros",
+        "imagen": "https://images.cdn2.buscalibre.com/fit-in/360x360/04/97/0497843aaba916128e3617a02b9a7583.jpg",
         "author": "Mario Vargas Llosa",
         "status": "Usado - Buen estado",
         "editorial": "Alfaguara",
@@ -45,6 +48,7 @@ db.Books.insertMany([
     {
         "code": 103,
         "title": "La casa de los espíritus",
+        "imagen": "https://phantom-expansion.unidadeditorial.es/09499b67cbad39667373e9326077177e/crop/0x31/1677x2548/assets/multimedia/imagenes/2022/07/21/16583909817374.jpg",
         "author": "Isabel Allende",
         "status": "Usado - Buen estado",
         "editorial": "Plaza & Janés",
@@ -58,7 +62,8 @@ db.Books.insertMany([
     },
     {
         "code": 201,
-        "title": "El jardín de las delicias",
+        "title": "El diario de Tita",
+        "imagen": "https://imgv2-2-f.scribdassets.com/img/document/521444435/original/f63a11b234/1695778274?v=1",
         "author": "Laura Esquivel",
         "status": "Nuevo",
         "editorial": "Ediciones Mexicanas",
@@ -73,6 +78,7 @@ db.Books.insertMany([
       {
         "code": 202,
         "title": "Ficciones",
+        "imagen": "https://images.cdn3.buscalibre.com/fit-in/360x360/46/85/4685286dbc1ec2013245afe1d537acfb.jpg",
         "author": "Jorge Luis Borges",
         "status": "Usado - Buen estado",
         "editorial": "Biblioteca Argentina",
@@ -87,6 +93,7 @@ db.Books.insertMany([
       {
         "code": 203,
         "title": "Cronica de una muerte anunciada",
+        "imagen": "https://www.polifemo.com/static/img/portadas/_visd_0000JPG0255Y.jpg",
         "author": "Gabriel García Márquez",
         "status": "Usado - Buen estado",
         "editorial": "Cien Años Editores",
@@ -101,6 +108,7 @@ db.Books.insertMany([
       {
         "code": 204,
         "title": "Pedro Páramo",
+        "imagen": "https://www.libreriacasatomada.com/imagenes/9788493/978849344260.GIF",
         "author": "Juan Rulfo",
         "status": "Nuevo",
         "editorial": "Editorial Jalisco",
@@ -115,6 +123,7 @@ db.Books.insertMany([
       {
         "code": 205,
         "title": "Los detectives salvajes",
+        "imagen": "",
         "author": "Roberto Bolaño",
         "status": "Nuevo",
         "editorial": "Ediciones Chile",
@@ -129,6 +138,7 @@ db.Books.insertMany([
       {
         "code": 206,
         "title": "Rayuela",
+        "imagen": "",
         "author": "Julio Cortázar",
         "status": "Usado - Buen estado",
         "editorial": "Editorial Buenos Aires",
@@ -143,6 +153,7 @@ db.Books.insertMany([
       {
         "code": 207,
         "title": "La sombra del viento",
+        "imagen": "",
         "author": "Carlos Ruiz Zafón",
         "status": "Nuevo",
         "editorial": "Ediciones Barcelona",
@@ -157,6 +168,7 @@ db.Books.insertMany([
       {
         "code": 208,
         "title": "La guerra del fin del mundo",
+        "imagen": "",
         "author": "Mario Vargas Llosa",
         "status": "Usado - Buen estado",
         "editorial": "Editorial Lima",
@@ -171,6 +183,7 @@ db.Books.insertMany([
       {
         "code": 209,
         "title": "La fiesta ajena",
+        "imagen": "",
         "author": "Liliana Heker",
         "status": "Nuevo",
         "editorial": "Editorial Buenos Aires",
@@ -185,6 +198,7 @@ db.Books.insertMany([
       {
         "code": 210,
         "title": "El amor en los tiempos del cólera",
+        "imagen": "",
         "author": "Gabriel García Márquez",
         "status": "Usado - Buen estado",
         "editorial": "Ediciones Colombianas",
@@ -199,6 +213,7 @@ db.Books.insertMany([
       {
         "code": 301,
         "title": "To Kill a Mockingbird",
+        "imagen": "",
         "author": "Harper Lee",
         "status": "Nuevo",
         "editorial": "HarperCollins",
@@ -213,6 +228,7 @@ db.Books.insertMany([
       {
         "code": 302,
         "title": "The Art of War",
+        "imagen": "",
         "author": "Sun Tzu",
         "status": "Usado - Buen estado",
         "editorial": "Oxford University Press",
@@ -227,6 +243,7 @@ db.Books.insertMany([
       {
         "code": 303,
         "title": "Mona Lisa: A Life Discovered",
+        "imagen": "",
         "author": "Dianne Hales",
         "status": "Nuevo",
         "editorial": "Simon & Schuster",
@@ -241,6 +258,7 @@ db.Books.insertMany([
       {
         "code": 304,
         "title": "1984",
+        "imagen": "",
         "author": "George Orwell",
         "status": "Usado - Buen estado",
         "editorial": "Penguin Books",
@@ -255,6 +273,7 @@ db.Books.insertMany([
       {
         "code": 305,
         "title": "The Origins of Species",
+        "imagen": "",
         "author": "Charles Darwin",
         "status": "Nuevo",
         "editorial": "Cambridge University Press",
@@ -269,6 +288,7 @@ db.Books.insertMany([
       {
         "code": 306,
         "title": "Pride and Prejudice",
+        "imagen": "",
         "author": "Jane Austen",
         "status": "Usado - Buen estado",
         "editorial": "Vintage Books",
@@ -283,6 +303,7 @@ db.Books.insertMany([
       {
         "code": 307,
         "title": "The Great Gatsby",
+        "imagen": "",
         "author": "F. Scott Fitzgerald",
         "status": "Nuevo",
         "editorial": "Scribner",
@@ -297,6 +318,7 @@ db.Books.insertMany([
       {
         "code": 308,
         "title": "The Universe in a Nutshell",
+        "imagen": "",
         "author": "Stephen Hawking",
         "status": "Nuevo",
         "editorial": "Bantam Books",
@@ -311,6 +333,7 @@ db.Books.insertMany([
       {
         "code": 309,
         "title": "The Catcher in the Rye",
+        "imagen": "",
         "author": "J.D. Salinger",
         "status": "Usado - Buen estado",
         "editorial": "Little, Brown and Company",
@@ -325,6 +348,7 @@ db.Books.insertMany([
       {
         "code": 310,
         "title": "The Da Vinci Code",
+        "imagen": "",
         "author": "Dan Brown",
         "status": "Nuevo",
         "editorial": "Doubleday",
@@ -339,6 +363,7 @@ db.Books.insertMany([
       {
         "code": 401,
         "title": "The Elements of Style",
+        "imagen": "",
         "author": "William Strunk Jr.",
         "status": "Nuevo",
         "editorial": "Penguin Books",
@@ -353,6 +378,7 @@ db.Books.insertMany([
       {
         "code": 402,
         "title": "The History of Western Art",
+        "imagen": "",
         "author": "H.W. Janson",
         "status": "Usado - Buen estado",
         "editorial": "Pearson",
@@ -367,6 +393,7 @@ db.Books.insertMany([
       {
         "code": 403,
         "title": "The Oxford Companion to Music",
+        "imagen": "",
         "author": "Alison Latham",
         "status": "Nuevo",
         "editorial": "Oxford University Press",
@@ -381,6 +408,7 @@ db.Books.insertMany([
       {
         "code": 404,
         "title": "A Brief History of Time",
+        "imagen": "",
         "author": "Stephen Hawking",
         "status": "Nuevo",
         "editorial": "Bantam Books",
@@ -395,6 +423,7 @@ db.Books.insertMany([
       {
         "code": 405,
         "title": "The Power of Habit",
+        "imagen": "",
         "author": "Charles Duhigg",
         "status": "Nuevo",
         "editorial": "Random House",
@@ -409,6 +438,7 @@ db.Books.insertMany([
       {
         "code": 406,
         "title": "The Immortal Life of Henrietta Lacks",
+        "imagen": "",
         "author": "Rebecca Skloot",
         "status": "Nuevo",
         "editorial": "Crown Publishing",
@@ -423,6 +453,7 @@ db.Books.insertMany([
       {
         "code": 407,
         "title": "The Tipping Point",
+        "imagen": "",
         "author": "Malcolm Gladwell",
         "status": "Nuevo",
         "editorial": "Little, Brown and Company",
@@ -437,6 +468,7 @@ db.Books.insertMany([
       {
         "code": 408,
         "title": "The Innovator's Dilemma",
+        "imagen": "",
         "author": "Clayton Christensen",
         "status": "Usado - Buen estado",
         "editorial": "HarperBusiness",
@@ -451,6 +483,7 @@ db.Books.insertMany([
       {
         "code": 409,
         "title": "Cosmos",
+        "imagen": "",
         "author": "Carl Sagan",
         "status": "Nuevo",
         "editorial": "Random House",
@@ -465,6 +498,7 @@ db.Books.insertMany([
       {
         "code": 410,
         "title": "The Lean Startup",
+        "imagen": "",
         "author": "Eric Ries",
         "status": "Nuevo",
         "editorial": "Crown Publishing",
@@ -479,6 +513,7 @@ db.Books.insertMany([
       {
         "code": 501,
         "title": "Cien años de soledad",
+        "imagen": "",
         "author": "Gabriel García Márquez",
         "status": "Usado - Buen estado",
         "editorial": "Editorial Latinoamericana",
@@ -493,6 +528,7 @@ db.Books.insertMany([
       {
         "code": 502,
         "title": "La ciudad y los perros",
+        "imagen": "",
         "author": "Mario Vargas Llosa",
         "status": "Nuevo",
         "editorial": "Ediciones Perú",
@@ -507,6 +543,7 @@ db.Books.insertMany([
       {
         "code": 503,
         "title": "Crónica de una muerte anunciada",
+        "imagen": "",
         "author": "Gabriel García Márquez",
         "status": "Usado - Buen estado",
         "editorial": "Cien Años Editores",
@@ -521,6 +558,7 @@ db.Books.insertMany([
       {
         "code": 504,
         "title": "Pedro Páramo",
+        "imagen": "",
         "author": "Juan Rulfo",
         "status": "Usado - Buen estado",
         "editorial": "Ediciones Jalisco",
@@ -535,6 +573,7 @@ db.Books.insertMany([
       {
         "code": 505,
         "title": "Los detectives salvajes",
+        "imagen": "",
         "author": "Roberto Bolaño",
         "status": "Nuevo",
         "editorial": "Ediciones Chile",
@@ -549,6 +588,7 @@ db.Books.insertMany([
       {
         "code": 506,
         "title": "Rayuela",
+        "imagen": "",
         "author": "Julio Cortázar",
         "status": "Usado - Buen estado",
         "editorial": "Editorial Buenos Aires",
@@ -563,6 +603,7 @@ db.Books.insertMany([
       {
         "code": 507,
         "title": "La sombra del viento",
+        "imagen": "",
         "author": "Carlos Ruiz Zafón",
         "status": "Nuevo",
         "editorial": "Ediciones Barcelona",
@@ -577,6 +618,7 @@ db.Books.insertMany([
       {
         "code": 508,
         "title": "La guerra del fin del mundo",
+        "imagen": "",
         "author": "Mario Vargas Llosa",
         "status": "Nuevo",
         "editorial": "Editorial Lima",
@@ -591,6 +633,7 @@ db.Books.insertMany([
       {
         "code": 509,
         "title": "La fiesta ajena",
+        "imagen": "",
         "author": "Liliana Heker",
         "status": "Nuevo",
         "editorial": "Editorial Buenos Aires",
@@ -605,6 +648,7 @@ db.Books.insertMany([
       {
         "code": 510,
         "title": "Ficciones",
+        "imagen": "",
         "author": "Jorge Luis Borges",
         "status": "Usado - Buen estado",
         "editorial": "Editorial Buenos Aires",

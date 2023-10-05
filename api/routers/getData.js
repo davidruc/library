@@ -136,7 +136,14 @@ const getInitRoute = () => {
     router.get("/reservationNextActive", versions({
         "2.0.0": controller.getLoansNextOneActiveController
     }));
-
+    //
+    router.get("/loanByName", versions({
+        "2.0.0": controller.getLoansByUserServiceController
+    }));
+    //
+    router.get("/reservationsByName", versions({
+        "2.0.0": controller.getReturnsByUserController
+    }));
 
 
 

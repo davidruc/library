@@ -58,7 +58,7 @@ export default function Login() {
         const info_res = await gettoken();
         if (info_res.status === 200) {
             // setInfo(info_res);
-            setAuth(info_res.message, info_res.data.nombre)
+            setAuth(info_res.message, info_res.data.nombre, info_res.data.documento)
             home();
             setShowFormulary(false);
         } else {

@@ -1,0 +1,59 @@
+
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-color: #F8F7FF;
+    font-family: 'Josefin Sans', sans-serif;
+}
+.buttonOptions{
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px;
+    margin-top: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #9381FF;
+    box-shadow: 4px 4px 8px #6255aa;
+}
+.botonDelDrawer{
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    padding: 2%;
+    margin: 1%;
+    height: 80px;
+    width: 180px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #9381FF;
+   
+}
+.inputDrawer{
+    margin: 4% 0;
+    padding: 6%;
+    width: 210px;
+    height: 15px;
+    border: none;
+    border-radius: 16px;
+    background-color: #FFEEDD;
+}
+.loop{
+    background-color: transparent;
+    border: none;
+    padding: 4%;
+    cursor: pointer;
+}
+.pInDrawer{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 16px;
+}

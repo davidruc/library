@@ -15,7 +15,52 @@ class Loans {
         try {
             const connect = await this.connection();
             if (!id_loan) return await connect.find({}).toArray()
-            return await connect.aggregate([{ $match: { "loanId": parseInt(id_loan) } }]).toArray()
+            return await connect.aggregate([{ $match: { "loanId": parseInt(id_loan) } }, {
+                $lookup: {
+                    from: "Books",
+                    localField: "book_code",
+                    foreignField: "code",
+                    as: "book"
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    id: "$loanId",
+                    titulo: { $arrayElemAt: ["$book.title", 0] },
+                    imagen: { $arrayElemAt: ["$book.imagen", 0] },
+                    usuario: "$user_name",
+                    fecha_reservacion: "$start_loan",
+                    fecha_entrega: "$finish_loan"
+                }
+            }]).toArray()
+        } catch (error) {
+            throw error;
+        }
+    };
+    // 
+    async getLoansByUser(user) {
+        try {
+            const connect = await this.connection();
+            return await connect.aggregate([{ $match: { "user_name": user } },{
+                $lookup: {
+                    from: "Books",
+                    localField: "book_code",
+                    foreignField: "code",
+                    as: "book"
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    id: "$loanId",
+                    titulo: { $arrayElemAt: ["$book.title", 0] },
+                    imagen: { $arrayElemAt: ["$book.imagen", 0] },
+                    usuario: "$user_name",
+                    fecha_reservacion: "$start_loan",
+                    fecha_entrega: "$finish_loan"
+                }
+            }]).toArray()
         } catch (error) {
             throw error;
         }
@@ -227,6 +272,11 @@ class Loans {
                   }
                 },
                 {
+                    $match: {
+                      fecha_entrega: { $gte: new Date() } // Filtra las fechas de entrega mayores o iguales a la fecha actual
+                    }
+                },
+                {
                   $sort: {
                     fecha_entrega: 1
                   }
@@ -234,7 +284,6 @@ class Loans {
                 {
                   $limit: 1
                 }
-              
               ]).toArray()
             return result
         } catch (error) {

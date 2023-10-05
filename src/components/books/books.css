@@ -1,0 +1,27 @@
+
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    /* Ajusta la ruta según la ubicación de tus archivos de fuente */
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-color: #F8F7FF;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.informacion p{
+    font-size: 12px;
+}
+.titleBooks{
+    padding: 0% 5%;
+}
+.imagenbook{
+    width: 240px;
+    height: 340px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 20px;
+}

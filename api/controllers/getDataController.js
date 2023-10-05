@@ -327,3 +327,24 @@ export const getLoansNextOneActiveController = async(req,res,next)=>{
         res.send(error)
     }
 }
+
+export const getLoansByUserServiceController = async(req,res,next)=>{
+    try {
+        const {user} = req.query;
+        const loan = await service.getLoansByUserService(user);
+        res.status(200).send(loan);
+    } catch (error) {
+        res.send(error)
+    }
+}
+//
+
+export const getReturnsByUserController = async(req, res, next)=>{
+    try {
+        const {user} = req.query;
+        const returns = await service.getReturnsByUserService(user);
+        res.status(200).send(returns);
+    } catch (error) {
+        res.send(error);
+    }
+}

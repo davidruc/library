@@ -20,6 +20,7 @@ body {
     margin-left: 10px;
     width: 200px;
     padding: 10px;
+    cursor: pointer;
 }
 .MuiAppBar-root {
     background-color: #9381FF; 

@@ -101,7 +101,7 @@ export default function SingUp(){
                  <input  className='inputs' type="text" name="user" onChange={handleUser} placeholder="ingrese el usuario" />
                  <input  className='inputs' type="text" name="place" onChange={handleAddress} placeholder="ingrese la direccion" />
                  <input  className='inputs' type="text" name="email" placeholder="ingrese el correo" onChange={handleEmail} />
-                 <input className='inputs'  type="text" name="pass" onChange={handlePassword} placeholder="ingrese la contraseña" />
+                 <input className='inputs'  type="password" name="pass" onChange={handlePassword} placeholder="ingrese la contraseña" />
                      <Box sx={{ display: 'flex', justifyContent: 'end', width: '70%' }}><button onClick={login} className="buttonNew">Ya tienes una cuenta?</button></Box>
                  </Box>
                  <Box sx={{ margin: { xs: '12% 0', sm: '6% 0', md: '3% 0', lg: '1% 0' } }}>

@@ -84,7 +84,7 @@ export default function Login() {
                         </Box>
                         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <input className="inputs" type="text" name="user" placeholder="Ingrese su correo" onChange={handleUsername} />
-                            <input className="inputs" type="text" name="pass" onChange={handleContraseña} placeholder="Ingrese su contraseña" />
+                            <input className="inputs" type="password" name="pass" onChange={handleContraseña} placeholder="Ingrese su contraseña" />
                             <Box sx={{ display: 'flex', justifyContent: 'end', width: '70%' }}><button onClick={register} className="buttonNew">Eres nuevo aquí?</button></Box>
                         </Box>
                         <Box sx={{ margin: { xs: '18% 0', sm: '12% 0', md: '5% 0', lg: '3% 0' } }}>

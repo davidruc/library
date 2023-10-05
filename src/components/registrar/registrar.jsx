@@ -104,7 +104,7 @@ export default function SingUp(){
                      <Box sx={{ display: 'flex', justifyContent: 'end', width: '70%' }}><button onClick={login} className="buttonNew">Ya tienes una cuenta?</button></Box>
                  </Box>
                  <Box sx={{ margin: { xs: '12% 0', sm: '6% 0', md: '3% 0', lg: '1% 0' } }}>
-                     <button className="buttonSubmit" type="submit" onClick={(e) => { enviar(e); }}>Registrar</button>
+                     <button className="buttonSubmit" type="submit" onClick={(e) => { send(e); }}>Registrar</button>
                  </Box>
              </Box>
              <Box sx={{ marginTop: { xs: '16%', md: '6%', lg: '1.5%' }, display: 'flex', justifyContent: 'center' }}>

@@ -44,7 +44,6 @@ export default function Reservations() {
     useEffect(() => {
         const authToken = async () => {
             const tokensito = await getToken();
-            console.log(tokensito);
             if (!tokensito) {
                 navigate("/login");
             };
@@ -109,7 +108,6 @@ export default function Reservations() {
                 },
                 body: JSON.stringify(cuerpo)
             });
-            console.log(res);
             const response = await res.json();
             setResponse(response);
             return response;
@@ -118,7 +116,6 @@ export default function Reservations() {
             alert("Error subiendo los datos de la reserva")
         }
     }
-console.log(response);
     useEffect(()=>{
         getReservations();
     },[response])

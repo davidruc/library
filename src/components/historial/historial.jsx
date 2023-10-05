@@ -45,7 +45,6 @@ export default function Historial() {
     useEffect(() => {
         const authToken = async () => {
             const tokensito = await getToken();
-            console.log(tokensito);
             if (!tokensito) {
                 navigate("/login");
             };
@@ -80,7 +79,6 @@ export default function Historial() {
             });
             if (res.status === 200) {
                 const response = await res.json();
-                console.log(response);
                 setDatos(response);
                 return response;
             }

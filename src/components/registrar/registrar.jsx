@@ -77,7 +77,6 @@ export default function SingUp(){
             home();
             setShowFormulary(false);
         } else {
-            console.log(info_res);
             if(info_res.mesaage){alert(info_res.mesaage)}
             else if(info_res.message){alert(info_res.message)}
             else {

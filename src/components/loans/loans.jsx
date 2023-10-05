@@ -80,7 +80,6 @@ export default function Loans() {
             
             if (res.status === 200) {
                 const response = await res.json();
-                console.log(response);
                 setDatos(response);
                 return response;
             }
@@ -112,7 +111,6 @@ export default function Loans() {
             });
             const response = await res.json();
             setResponse(response);
-            console.log(response);
             return response;
             
         } catch (error) {

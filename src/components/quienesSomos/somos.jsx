@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import "./somos.css";
 import libros from "../../assets/manosBooks.png";
-import { useToken } from '../tokenProvaider';
+import { useNavigate } from 'react-router-dom';
 
 export default function Somos() {
-    const { token} = useToken();
+    const navigate = useNavigate();
+    const handleNavigate = () =>{
+        navigate("/reservations")
+    }
     const [ info, setInfo] = useState({
         response: []   
     })
@@ -66,7 +69,7 @@ export default function Somos() {
                             )))
                         }
                         <Box sx={{display: 'flex', justifyContent: 'center'}}>
-                            <button className='buttonReservas' /* con esto navega a la pagina para hacer las reservas onClick={} */>Reserva ya</button>
+                            <button className='buttonReservas' onClick={handleNavigate}>Reserva ya</button>
                         </Box>
                     </Box>
                 </Box>

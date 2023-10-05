@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Josefin Sans';
+    src: url('./fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: 'Josefin Sans';
+}
+.titleReservation{
+    text-align: center;
+    font-size: 6vh;
+}
+.botonReservacion{
+    color: #F8F7FF;
+    border: none;
+    border-radius: 12px;
+    padding: 2%;
+    margin: 0 5%;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #9381FF;
+    box-shadow: 4px 4px 8px #6255aa;
+} 
+.tituloDeReservas{
+    font-size: 3vh;
+}
+.box h3{
+    margin-bottom: 3%;
+    font-size: 3vh;
+    font-style: italic;
+}
+.buttonGoBack{
+    color: black;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.titleR{
+    font-size: 3vh;
+}
+.inputReservas{
+    margin: 4% 0;
+  padding: 10%;
+  font-size: 16px;
+  width: 210px;
+  height: 15px;
+  border: none;
+  border-radius: 16px;
+  background-color: #B8B8FF;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.botonReserva{
+    color: #F8F7FF;
+    border: none;
+    border-radius: 12px;
+    padding: 7%;
+    margin: 0 5%;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background-color: #9381FF;
+    box-shadow: 4px 4px 8px #6255aa;
+}

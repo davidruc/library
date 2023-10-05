@@ -8,7 +8,11 @@ export default function Inicio(){
 
     const booksReservation = ()=>{
         //Se dirije a la página de reservación libros
-        navigate("/")   
+        navigate("/loans")   
+    }
+    const bookNavigate = ()=>{
+        //Se dirije a la página de reservación libros
+        navigate("/books")   
     }
     return(
         <div className='container'>
@@ -20,7 +24,7 @@ export default function Inicio(){
                     <p>No dudes en comenzar un nuevo libro, realiza de inmediato una nueva historia</p>
                     <Box className="reservation" sx={{display: 'flex', flexDirection: 'row', justifyContent:'center', mt:3.5}}>
                     <button className='boton' onClick={booksReservation}> !Pedir mi libro! </button>
-                    <button className='boton2'> Disponibilidad </button>
+                    <button className='boton2' onClick={bookNavigate}> Disponibilidad </button>
                     </Box>
                 </Box>
             </Box>

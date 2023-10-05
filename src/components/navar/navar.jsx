@@ -42,6 +42,15 @@ function ResponsiveAppBar() {
   const books = () => {
     navigate("/books")
   }
+  const reservations = () => {
+    navigate("/reservations")
+  }
+  const loans = ()=>{
+    navigate("/loans")
+  }
+  const returns = ()=>{
+    navigate("/returns")
+  }
   const home = ()=>{
     navigate("/")
   }
@@ -88,17 +97,17 @@ function ResponsiveAppBar() {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem  onClick={token === '' ? singIn : books}>
+                <MenuItem  onClick={books}>
                   <Typography key='books'  textAlign="center">Librería
                   </Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
-                  <Typography  key='us' textAlign="center">Nosotros</Typography>
+                <MenuItem onClick={returns}>
+                  <Typography  key='us' textAlign="center">Historial</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
+                <MenuItem onClick={reservations}>
                   <Typography key='reservations'  textAlign="center">Reservación</Typography>
                 </MenuItem>
-                <MenuItem onClick={handleCloseNavMenu}>
+                <MenuItem onClick={loans}>
                   <Typography key='loans'  textAlign="center">Prestamo</Typography>
                 </MenuItem>
 
@@ -110,25 +119,25 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, justifyContent: 'center' }}>
 
               <Button
-                onClick={token === '' ? singIn : books}
+                onClick={books}
                 sx={{ my: 2.3, color: 'white', display: 'block', textTransform: 'none' }}
               >
                 Librería
               </Button>
               <Button
-                onClick={handleCloseNavMenu}
+                onClick={returns}
                 sx={{ my: 2.3, color: 'white', display: 'block', textTransform: 'none' }}
               >
-                Nosotros
+                Historial
               </Button>
               <Button
-                onClick={handleCloseNavMenu}
+                onClick={reservations}
                 sx={{ my: 2.3, color: 'white', display: 'block', textTransform: 'none' }}
               >
                 Reservación
               </Button>
               <Button
-                onClick={handleCloseNavMenu}
+                onClick={loans}
                 sx={{ my: 2.3, color: 'white', display: 'block', textTransform: 'none' }}
               >
                 Prestamo
@@ -173,12 +182,6 @@ function ResponsiveAppBar() {
                     open={Boolean(anchorElUser)}
                     onClose={handleCloseUserMenu}
                   >
-                    <MenuItem key='Mis Reservas' onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">Mis Reservas</Typography>
-                    </MenuItem>
-                    <MenuItem key='Historial' onClick={handleCloseUserMenu}>
-                      <Typography textAlign="center">Historial</Typography>
-                    </MenuItem>
                     <MenuItem key='Cerrar sesion' onClick={handleCerrarSession}>
                       <Typography textAlign="center">Cerrar sesion</Typography>
                     </MenuItem>

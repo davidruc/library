@@ -101,9 +101,6 @@ class Users {
                   }
                 }
               ]).toArray()
-            //! ARREGLAR CONDICIONALES (En el servicio)
-            //?  SI existe usaurio y no reservaciones devuelve un json con que no se encontró ninguna reserva
-            //? No existe usuario manda un mensaje de que no se encontró ningún usuario con ese documento. 
              return result
         } catch (error) {
             throw error;

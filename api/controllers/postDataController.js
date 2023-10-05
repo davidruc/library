@@ -59,30 +59,35 @@ export const postUserController = async (req, res, next) => {
 
 /* 14. EndPoint que al hacer un post de una reservación, verifica si existe algún libro con ese titulo disponible. En caso de que haya alguno disponible realice el prestamo inmediatamente (y cambie la disponibilidad del libro).  Si no existe ningún libro disponible, busca el prestamo cuya entrega esté más proxima y le asigna esa fecha de entrega */
 
-export const postRealReservationController = async (req, res, next) => {
-    /* Cuerpo de la solicitud
-        {
-            "title_book": "The Origins of Species",
-            "user_name": "Luisa Pérez"
-        } 
-    */
+export const postRealReservationController = async (req, res, next) => {    
     try {
         const { title_book, user_name } = req.body;
         // Hago una búsqueda de disponibilidad
-        const aviability = await getServices.getBookByAviableTitleService(title_book);
+        const bookExistence = await getServices.getBookByTitleService(title_book);
+        if(bookExistence.length === 0) return res.status(404).send({message: 'No se encontró ninguna coincidencia de algún libro que pudiera llamarse similar a lo que ingresaste.'})
+        const titleBook = bookExistence[0].titulo;
+        const aviability = await getServices.getBookByAviableTitleService(titleBook);
         // Si no hay ningun libro disponible entra aquí
         if (!aviability[0]) {
             // Revisa cuando es la fecha de entrega más proxima para la entrega de un prestamo
-            const aproxDelivery = await getServices.getLoansNextOneActiveService(title_book);
-            const { titulo, fecha_entrega } = aproxDelivery[0];
+            const aproxDelivery = await getServices.getLoansNextOneActiveService(titleBook);
+            let fecha_entrega_nueva = '';
+            if (!aproxDelivery[0]) {
+                const fechaActual = new Date();
+                fecha_entrega_nueva = fechaActual.setDate(fechaActual.getDate() + 3)
+            } else {
+                fecha_entrega_nueva = aproxDelivery[0].fecha_entrega;
+
+            } 
+
             // Creo el cuerpo para realizar una reservación automática del libro
             const body = {
-                "title_book": titulo, "user_name": user_name, "expected_delivery": fecha_entrega
+                "title_book": titleBook, "user_name": user_name, "expected_delivery": fecha_entrega_nueva
             };
             // Envia los datos para la reservación al servicio
             const reservation = await service.postReservationEspecialService(body);
             // Envía un mensaje comentando de que se realizó la respectiva reservación del libro.
-            return res.status(201).send({ reservation: reservation, message: `Se realizó con éxito la reservación del libro ${titulo} para el día ${fecha_entrega}` })
+            return res.status(201).send({ reservation: reservation, message: `Se realizó con éxito la reservación del libro ${titleBook} para el día ${fecha_entrega_nueva}` })
         }
         // Si el libro está disponible
         else {
@@ -129,16 +134,19 @@ export const postLoanRealShitController = async (req, res, next) => {
         if (!data.reservation_code) {
             // Primero desestructuro los datos de entrada
             const { title_book, user_name } = data;
+            const bookExistence = await getServices.getBookByTitleService(title_book);
+            if(bookExistence.length === 0) return res.status(404).send({message: 'No se encontró ninguna coincidencia de algún libro que pudiera llamarse similar a lo que ingresaste.'})
+            const titleBook = bookExistence[0].titulo;
             // Hago una búsqueda de disponibilidad
-            const aviability = await getServices.getBookByAviableTitleService(title_book);
+            const aviability = await getServices.getBookByAviableTitleService(titleBook);
             // Si no hay ningun libro disponible entra aquí
             if (!aviability[0]) {
                 // Revisa cuando es la fecha de entrega más proxima para la entrega de un prestamo
-                const aproxDelivery = await getServices.getLoansNextOneActiveService(title_book);
+                const aproxDelivery = await getServices.getLoansNextOneActiveService(titleBook);
                 const { fecha_entrega } = aproxDelivery[0];
                 // Creo el cuerpo para realizar una reservación automática del libro
                 const body = {
-                    "title_book": title_book, "user_name": user_name, "expected_delivery": fecha_entrega
+                    "title_book": titleBook, "user_name": user_name, "expected_delivery": fecha_entrega
                 }
                 // Envia los datos para la reservación al servicio
                 const reservation = await service.postReservationEspecialService(body);

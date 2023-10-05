@@ -19,6 +19,46 @@ class Returns {
             throw error;
         }
     };
+    //
+    async getReturnsByUser(user) {
+        try {
+            const connect = await this.connection();
+            const result =  await connect.aggregate([
+            { $match: { "user": user } },
+            {
+                $addFields: {
+                    daysLate: {
+                        $divide: [
+                            { $subtract: ["$return_date", "$finish_loan"] },
+                            1000 * 60 * 60 * 24
+                        ]
+                    }
+                }
+            },
+            {
+                $lookup: {
+                    from: "Books",
+                    localField: "book_code",
+                    foreignField: "code",
+                    as: "book"
+                }
+            },
+            {
+                $project: {
+                    _id: 0,
+                    titulo: { $arrayElemAt: ["$book.title", 0] },
+                    imagen: { $arrayElemAt: ['$book.imagen', 0]},
+                    usuario: "$user",
+                    dias_retrasado: { $toInt: "$daysLate" },
+                    dia_entregada: "$return_date",
+                    dia_esperado: "$finish_loan"
+                }
+            }]).toArray()
+            return result
+        } catch (error) {
+            throw error;
+        }
+    };
     async postReturn(data) {
         try {
             const connect = await this.connection();

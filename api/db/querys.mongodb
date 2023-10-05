@@ -1,24 +1,35 @@
 use("library_project")
-db.Books.aggregate([
+db.returns.aggregate([
+  { $match: { "user": "David Andrés Rueda" } },
   {
-    $project: {
-      _id: 0,
-      codigo: "$code",
-      titulo: "$title",
-      author: "$author",
-      estado: "$status",
-      editorial: "$editorial",
-      categoria: "$category",
-      clasificacion_Dewey: "$dewey_clasification",
-      disponibilidad: "$aviability",
-      version: "$book_version",
-      ingreso: "$date_admission",
-      descripcion: "$descript",
-      ubicacion: "$location"
-    }
-  }
-])
-
+      $addFields: {
+          daysLate: {
+              $divide: [
+                  { $subtract: ["$return_date", "$finish_loan"] },
+                  1000 * 60 * 60 * 24
+              ]
+          }
+      }
+  },
+  {
+      $lookup: {
+          from: "Books",
+          localField: "book_code",
+          foreignField: "code",
+          as: "book"
+      }
+  },
+  {
+      $project: {
+          _id: 0,
+          titulo: { $arrayElemAt: ["$book.title", 0] },
+          imagen: { $arrayElemAt: ['$book.imagen', 0]},
+          usuario: "$user",
+          dias_retrasado: { $toInt: "$daysLate" },
+          dia_entregada: "$return_date",
+          dia_esperado: "$finish_loan"
+      }
+  }])
 /* 1. Endpoint que permita filtrar libros por titulo. */
 //! Busca por titulos del libro
 use("library_project")
@@ -1111,6 +1122,11 @@ db.loans.aggregate([
   {
     $match: {
       titulo: { $eq: "La ciudad y los perros"}
+    }
+  },
+  {
+    $match: {
+      fecha_entrega: { $gte: new Date() } // Filtra las fechas de entrega mayores o iguales a la fecha actual
     }
   },
   {

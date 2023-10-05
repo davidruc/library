@@ -12,6 +12,54 @@ La organización del trabajo se está realizando en el siguiente notion:
 ## Diagrama de la base de datos:
 ![imagenMer](uml/dataBase.png)
 
+
+# FrontEnd:
+
+* El frontend del proyecto da solución  la problemática planteada desde la interfaz de un usuario. Entre los entregable se encontraba realizar únicamente esta vista, sin embargo se espera seguir desarrollando la aplicación y contrar con vistas administrativas que permitan una gestión más profunda de la misma. 
+
+![imagenNav](uml/firstImg.png)
+
+En la vista de inicio se puede observar una navar que contiene librería, historial, reservaciones y prestamos, cada uno de ellos requiere estar logeado para poder acceder a dichas rutas. Al entrar por primera vez a la aplicación es necesario realizar un singUp, donde se guardarán datos relevantes del usuario en la base de datos para proximamente poderlos utilizar.
+
+![imagensimgip](uml/singUp.png)
+
+Cuando se ingresa por primera vez no hay necesidad de ingresar, la página genera automáticamente el token y lo utilizar. 
+
+Si ya tiene un usuario creado debe acceder por la ruta de login y poner su correo y contraseña registrada. automáticamente será redireccionado a home pero ya con todos los permisos requeridos.
+
+![login](uml/login.png)
+
+En la sección de libros se pueden observar por defecto todos los libros registrados en la base de datos, pero usando el botón de "ver todas las opciones" se despliega un modal que permite realizar otros filtros relacionado con los libros
+
+![libros](uml/libros.png)
+Al darle click se despliega este modal:
+![librosmodal](uml/librosmodal.png)
+En el se puede observar que es posible realizar una búsqueda por autor, titulo, referenciadas por editoriales, solo libros disponibles y el botón de últimos libros añadidos trae los libros añadidos a la biblioteca el 2023
+
+
+La sección de historial muestra todos los libros que el usuario ha pedidio y entregado, además muestra el tiempo de retraso (si lo tiene) en días en la entrega del libro. 
+![historial](uml/historial.png)
+
+La sección de reservas muestra todas las reservas activas del usuario. 
+
+![reservas](uml/reservas.png)
+
+Para realizar la reserva es necesario darle click en el botón de realizar una reserva, e ingresar el título del cual se espera realizar la reserva
+
+
+![NewReservas](uml/NewReserva.png)
+
+La página valida si el libro está disponible, en caso de estarlo no espera a hacer reservación e inmediatamente realiza el prestamo. En caso de que no esté disponible entonces mira cual es la fecha más proxima para la entrega y la pone automáticamente en la reserva. Si los prestamos asignados a esos libros están atrasados entonces lo que hace es poner la fecha actual más tres días. Para evitar algún problema.
+
+
+Para la sección de prestamos se muestran todos los prestamos activos y para realizar un nuevo prestamo se le debe dar click al botón.
+
+![prestamos](uml/prestamos.png)
+
+y al crear un nuevo prestamo va a validar si el libro está disponible que en caso de no estarlo lo envía a reservas. Y si lo está pues inmediatamente lo va a enviar. El estado de los libros cambia automáticamente también. 
+![newloan](uml/newloan.png)
+# BackEnd:
+ 
 ## Creación de un nuevo usuario (SingUp)
 
 Para la creación de un nuevo usuario en la base de datos se debe acceder a esta ruta: 
